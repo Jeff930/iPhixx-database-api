@@ -1,0 +1,67 @@
+[09-Oct-2018 21:40:57 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 20
+[09-Oct-2018 21:52:32 America/Denver] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 31
+[10-Oct-2018 02:45:01 America/Denver] PHP Catchable fatal error:  Argument 1 passed to Slim\App::map() must be of the type array, string given, called in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 23 and defined in /home/aeshairc/public_html/admin-booking/api/vendor/slim/slim/Slim/App.php on line 233
+[10-Oct-2018 03:37:52 America/Denver] PHP Fatal error:  Call to undefined function is_set() in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 21
+[10-Oct-2018 03:50:28 America/Denver] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 29
+[10-Oct-2018 03:59:03 America/Denver] PHP Warning:  Missing argument 1 for DBQuery::getCustomers(), called in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 26 and defined in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 19
+[10-Oct-2018 04:00:18 America/Denver] PHP Warning:  Missing argument 1 for DBQuery::getCustomers(), called in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 26 and defined in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 19
+[10-Oct-2018 04:02:54 America/Denver] PHP Warning:  Missing argument 1 for DBQuery::getCustomers(), called in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 26 and defined in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 19
+[10-Oct-2018 23:15:41 America/Denver] PHP Fatal error:  Call to undefined method Slim\Http\Request::params() in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 27
+[10-Oct-2018 23:17:02 America/Denver] PHP Fatal error:  Call to a member function get() on null in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 27
+[10-Oct-2018 23:19:32 America/Denver] PHP Fatal error:  Call to a member function request() on null in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 26
+[10-Oct-2018 23:19:55 America/Denver] PHP Fatal error:  Call to a member function Request() on null in /home/aeshairc/public_html/admin-booking/api/v1/customers/index.php on line 26
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'password' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 64
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'fullname' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'business_name' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'email' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'phone' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'address' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'username' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'address_2' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'city' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'state' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:23 America/Denver] PHP Warning:  Illegal string offset 'zip' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'password' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 64
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'fullname' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'business_name' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'email' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'phone' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'address' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'username' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'address_2' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'city' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'state' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:00:48 America/Denver] PHP Warning:  Illegal string offset 'zip' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'password' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 64
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'fullname' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'business_name' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'email' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'phone' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'address' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'username' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'address_2' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'city' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'state' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:01:52 America/Denver] PHP Warning:  Illegal string offset 'zip' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'password' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 64
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'fullname' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'business_name' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'email' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'phone' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'address' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'username' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'address_2' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'city' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'state' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:03:28 America/Denver] PHP Warning:  Illegal string offset 'zip' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'password' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 64
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'fullname' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'business_name' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'email' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'phone' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'address' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'username' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'address_2' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'city' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'state' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
+[11-Oct-2018 03:04:49 America/Denver] PHP Warning:  Illegal string offset 'zip' in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 65
