@@ -1,0 +1,4 @@
+[09-Oct-2018 21:44:36 America/Denver] PHP Fatal error:  Call to undefined method DBQuery::getBookings() in /home/aeshairc/public_html/admin-booking/api/v1/bookings/index.php on line 15
+[09-Oct-2018 21:55:15 America/Denver] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home/aeshairc/public_html/admin-booking/api/include/DBQuery/QueryPost.php on line 31
+[10-Oct-2018 03:09:44 America/Denver] PHP Catchable fatal error:  Argument 1 passed to Slim\App::map() must be of the type array, string given, called in /home/aeshairc/public_html/admin-booking/api/v1/bookings/index.php on line 26 and defined in /home/aeshairc/public_html/admin-booking/api/vendor/slim/slim/Slim/App.php on line 233
+[11-Oct-2018 00:30:04 America/Denver] PHP Fatal error:  Call to undefined method DBQuery::getBookingsByPage() in /home/aeshairc/public_html/admin-booking/api/v1/bookings/index.php on line 41
