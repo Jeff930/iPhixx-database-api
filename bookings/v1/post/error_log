@@ -1,0 +1,8 @@
+[09-Oct-2018 21:00:17 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:00:17 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:24 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:49 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:51 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:52 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:53 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
+[09-Oct-2018 21:01:54 America/Denver] PHP Fatal error:  Call to a member function getCustomers() on null in /home/aeshairc/public_html/admin-booking/api/v1/post/index.php on line 24
