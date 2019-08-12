@@ -273,7 +273,7 @@ class DBQuery
 	
 
 	public function getBookings() {
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
@@ -316,7 +316,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
+		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
@@ -328,7 +328,7 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
