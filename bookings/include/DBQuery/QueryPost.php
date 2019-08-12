@@ -19,6 +19,86 @@ class DBQuery
 		$this->db = $this->conn->mConnect();
 	}
 
+	public function getTax() {
+		$sql = "SELECT * FROM `tax`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
+	public function getOneTax($id) {
+		$sql = "SELECT * FROM `tax` WHERE `tax`.`tax_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
+	public function addTax($body){
+		$sql = "INSERT INTO `tax` (`tax_id`, `tax_name`, `tax_value`) VALUES (NULL, '{$body["tax_name"]}', '{$body["tax_value"]}')";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
+	public function updateTax($id , $body){
+		$sql = "UPDATE `tax` SET `tax_name` = '{$body["tax_name"]}', `tax_value` = '{$body["tax_value"]}' WHERE `tax`.`tax_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+
+		return $result;
+	}
+
+	public function deleteTax($id){
+		$sql = "DELETE FROM `tax` WHERE `tax`.`tax_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+	//End of Tax
+
+	public function getModels() {
+		$sql = "SELECT `phone_models`.`pmodel_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
+		FROM `phone_models`
+					INNER JOIN `phone_brands` ON `phone_models`.`phonebrand_id` = `phone_brands`.`phonebrand_id`
+					INNER JOIN `device_type` ON `phone_models`.`devtype_id` = `device_type`.`devtype_id`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+	public function getTabletModels() {
+		$sql = "SELECT `tablet_models`.`tmodel_name` FROM `tablet_models`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+	// getReminders() {
+	// 	$sql = "SELECT * FROM `tax`";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	// 	return $row;
+	// }
+
+	// public function addTax($body){
+	// 	$sql = "INSERT INTO `tax` (`tax_id`, `tax_name`, `tax_value`) VALUES (NULL, '{$body["tax_name"]}', '{$body["tax_value"]}')";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	return $result;
+	// }
+
+	// public function updateTax($id , $body){
+	// 	$sql = "UPDATE `tax` SET `tax_name` = '{$body["tax_name"]}', `tax_value` = '{$body["tax_value"]}' WHERE `tax`.`tax_id` = {$id}";
+	// 	$result = mysqli_query($this->db,$sql);
+
+	// 	return $result;
+	// }
+
+	// public function deleteTax($id){
+	// 	$sql = "DELETE FROM `tax` WHERE `tax`.`tax_id` = {$id}";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	return $result;
+	// }
+	//End of Tax
+
 	public function getCustomers(){
 		
 		$sql = "SELECT * FROM `customers`";
@@ -35,6 +115,47 @@ class DBQuery
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		// print_r($result);
 		return $row;
+	}
+
+	public function getCustomersCount(){
+		
+		$sql = "SELECT COUNT(*) FROM `customers`";
+		$result = mysqli_query($this->db,$sql);
+		$row = mysqli_fetch_row($result);
+		$items_number = $row[0];
+		// print_r($result);
+		return $items_number;
+	}
+
+	
+	public function getInvoicesCount(){
+		
+		$sql = "SELECT COUNT(*) FROM `invoices`";
+		$result = mysqli_query($this->db,$sql);
+		$row = mysqli_fetch_row($result);
+		$items_number = $row[0];
+		// print_r($result);
+		return $items_number;
+	}
+	
+	public function getTicketsCount(){
+		
+		$sql = "SELECT COUNT(*) FROM `invoices`";
+		$result = mysqli_query($this->db,$sql);
+		$row = mysqli_fetch_row($result);
+		$items_number = $row[0];
+		// print_r($result);
+		return $items_number;
+	}
+
+	public function getInventoryCount(){
+		
+		$sql = "SELECT COUNT(*) FROM `inventory`";
+		$result = mysqli_query($this->db,$sql);
+		$row = mysqli_fetch_row($result);
+		$items_number = $row[0];
+		// print_r($result);
+		return $items_number;
 	}
 
 
@@ -94,15 +215,13 @@ class DBQuery
 
 	public function addCustomer($body){
 		$password = md5($body["password"]);
-		$sql = "INSERT INTO `customers` (`customer_id`, `fullname`, `business_name`, `email`, `phone`, `created_at`, `address`, `username`, `password`, `address_2`, `city`, `state`, `zip`) VALUES (NULL, '{$body["fullname"]}', '{$body["business_name"]}', '{$body["email"]}', '{$body["phone"]}', CURRENT_TIMESTAMP, '{$body["address"]}', '{$body["username"]}', '{$password}', '{$body["address_2"]}', '{$body["city"]}', '{$body["state"]}', '{$body["zip"]}')";
+		$sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`, `birthdate`,  `address`,  `location`) VALUES (NULL, '{$body["customer_fname"]}', '{$body["customer_lname"]}' ,  '{$body["email"]}', '{$body["phone"]}', '{$body["birthdate"]}', '{$body["address"]}', '{$body["location"]}')";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function updateCustomer($id , $body){
-
-		
-		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `phone2` = '{$body["phone2"]}', `birthdate` = '{$body["birthdate"]}' WHERE `customers`.`customer_id` = {$id}";
+		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}', `birthdate` = '{$body["birthdate"]}' WHERE `customers`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
 		return $result;
@@ -110,7 +229,7 @@ class DBQuery
 
 	public function updateAgent($id , $body){
 		
-		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `agent_phone2` = '{$body["agent_phone2"]}', `store_assigned` = '{$body["store_assigned"]}',`agent_pin` = '{$body["agent_pin"]}',`agent_password` = '{$body["agent_password"]}' WHERE `agents`.`agent_id` = {$id}";
+		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `agent_location` = '{$body["agent_location"]}', `store_assigned` = '{$body["store_assigned"]}',`agent_pin` = '{$body["agent_pin"]}',`agent_password` = '{$body["agent_password"]}' WHERE `agents`.`agent_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
 		return $result;
@@ -119,14 +238,14 @@ class DBQuery
 	// public function updateCustomer($id , $body){
 
 		
-	// 	$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `phone2` = '{$body["phone2"]}',`address` = '{$body["address"]}', `username` = '{$body["username"]}', `password` = '{$body["password"]}', `address_2` = '{$body["address_2"]}', `city` = '{$body["city"]}', `state` = '{$body["state"]}', `zip` = '{$body["zip"]}' WHERE `customers`.`customer_id` = {$id}";
+	// 	$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}',`address` = '{$body["address"]}', `username` = '{$body["username"]}', `password` = '{$body["password"]}', `address_2` = '{$body["address_2"]}', `city` = '{$body["city"]}', `state` = '{$body["state"]}', `zip` = '{$body["zip"]}' WHERE `customers`.`customer_id` = {$id}";
 	// 	$result = mysqli_query($this->db,$sql);
 
 	// 	return $result;
 	// }
 
 	public function updateBooking($id , $body){
-		$sql = "UPDATE `dev_owner` INNER JOIN `bookings` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` SET `owner_name` = '{$body["fullname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `phone2` = '{$body["phone2"]}', `birthdate` = '{$body["birthdate"]}' WHERE `bookings`.`id` = {$id}";
+		$sql = "UPDATE `dev_owner` INNER JOIN `bookings` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` SET `owner_name` = '{$body["fullname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}', `birthdate` = '{$body["birthdate"]}' WHERE `bookings`.`id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
@@ -146,15 +265,15 @@ class DBQuery
 	}
 
 	public function deleteBooking($id){
-		$sql = "DELETE FROM `bookings` WHERE `bookings`.`id` = {$id}";
+		$sql = "DELETE FROM `bookings` WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 	
 	
 
-	public function getBookings(){
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
+	public function getBookings() {
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
 				`repair_statuses`.`rep_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
@@ -166,8 +285,10 @@ class DBQuery
 		return $row;
 	}
 
-	public function getOwner($id){
-		$sql = "SELECT `dev_owner`.`owner_id`,`dev_owner`.`owner_name`, `dev_owner`.`email`, `dev_owner`.`birthdate`, `dev_owner`.`phone`, `dev_owner`.`phone2`  FROM `bookings` INNER JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` WHERE `bookings`.`bookings_id` = {$id} ";
+	public function getOwner($id) {
+		$sql = "SELECT `customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,  `customers`.`location`,  `customers`.`email`, `customers`.`location`, `customers`.`phone`,  `customers`.`birthdate`, `customers`.`address` FROM `bookings` INNER JOIN `customers` 
+		ON `bookings`.`customer_id` = `customers`.`customer_id` 
+		WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
@@ -195,9 +316,10 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
+		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`location`,  `device_type`.`type`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
 				`repair_statuses`.`rep_status` FROM 
 				`bookings` 
+							LEFT JOIN `device_type` ON `bookings`.`devtype_id` = `device_type`.`devtype_id` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
@@ -207,9 +329,10 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`, `customers`.`location`, `device_type`.`type`,  `agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`,
 				`repair_statuses`.`rep_status` FROM 
 				`bookings` 
+							LEFT JOIN `device_type` ON `bookings`.`devtype_id` = `device_type`.`devtype_id` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
@@ -248,7 +371,7 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `payment_statuses`.`pstatus_name` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`paystatus_no` = `payment_statuses`.`paystatus_no` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `bookings`.`bookings_id`, `payment_statuses`.`pstatus_name` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`paystatus_no` = `payment_statuses`.`paystatus_no` LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['invoices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -259,7 +382,7 @@ class DBQuery
 
 	public function getTickets(){
 		$sql = "SELECT `tickets`.`ticket_no`,`dev_owner`.`owner_name`,`dev_owner`.`email`,
-							 `dev_owner`.`phone`,`dev_owner`.`phone2` 
+							 `dev_owner`.`phone`,`dev_owner`.`location` 
 					  FROM `bookings`  
 							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
 							LEFT JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` ";
@@ -275,13 +398,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`phone2` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` ";
+		$sql_count = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`phone2` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['tickets']=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -296,7 +419,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`,`repair_parts`.`part_name`,
+		$sql_count = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
 							 `phone_models`.`pmodel_name`,`phone_brands`.`phone_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
@@ -307,7 +430,7 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`,`repair_parts`.`part_name`,
+		$sql = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
 							 `phone_models`.`pmodel_name`,`phone_brands`.`phone_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
@@ -338,7 +461,7 @@ class DBQuery
 		// $row = mysqli_fetch_assoc($res);
 		// $status = $row['payment_status'];
 
-   		$sql = "UPDATE `dev_owner` SET `owner_name` = '{$body['owner_name']}', `birthdate` = '{$body['birthdate']}',`phone` = '{$body['phone']}',`email` = '{$body['email']}', `phone` = '{$body['phone2']}' WHERE `dev_owner`.`owner_id` = {$id}";
+   		$sql = "UPDATE `dev_owner` SET `owner_name` = '{$body['owner_name']}', `birthdate` = '{$body['birthdate']}',`phone` = '{$body['phone']}',`email` = '{$body['email']}', `phone` = '{$body['location']}' WHERE `dev_owner`.`owner_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
@@ -427,7 +550,7 @@ class DBQuery
 			$result1 = mysqli_query($this->db,$sql);
 		
 
-		$res  = mysqli_query($this->db,"SELECT `dev_owner`.`email` FROM `bookings` INNER JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` WHERE `bookings`.`bookings_id`='$id'");
+		$res  = mysqli_query($this->db,"SELECT `customers`.`email` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id` = {$id}");
 		$row = mysqli_fetch_assoc($res);
 		$userEmail = $row['email'];
 //$userEmail = 'paulcampbell.iphixx@gmail.com';
@@ -484,10 +607,10 @@ class DBQuery
 
 	public function addBooking($body){
 		
-		$sql = "INSERT INTO `bookings_old` (`id`, `fullname`, `birthdate`, `email`, `phone`, `phone2`, `created_at`, `status`, `device_pin`, `brand`, `model`, `color`, `network`, `repair`, `device`, `customer_id`, `upgrade_1`, `upgrade_2`, `phone_offer`, `total_price`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["phone2"]}', CURRENT_TIMESTAMP, '{$body["status"]}', '{$body["device_pin"]}', '{$body["brand"]}', '{$body["model"]}', '{$body["color"]}', '{$body["network"]}', '{$body["repair"]}', '{$body["device"]}', '{$body["customer_id"]}', '{$body["upgrade_1"]}', '{$body["upgrade_2"]}', '{$body["phone_offer"]}', '{$body["total"]}')";
+		$sql = "INSERT INTO `bookings_old` (`id`, `fullname`, `birthdate`, `email`, `phone`, `location`, `created_at`, `status`, `device_pin`, `brand`, `model`, `color`, `network`, `repair`, `device`, `customer_id`, `upgrade_1`, `upgrade_2`, `phone_offer`, `total_price`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}', CURRENT_TIMESTAMP, '{$body["status"]}', '{$body["device_pin"]}', '{$body["brand"]}', '{$body["model"]}', '{$body["color"]}', '{$body["network"]}', '{$body["repair"]}', '{$body["device"]}', '{$body["customer_id"]}', '{$body["upgrade_1"]}', '{$body["upgrade_2"]}', '{$body["phone_offer"]}', '{$body["total"]}')";
 		$result = mysqli_query($this->db,$sql);
 
-		$sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `phone2`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["phone2"]}')";
+		$sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
 		$result = mysqli_query($this->db,$sql);
 
 
@@ -596,8 +719,8 @@ class DBQuery
     //Recipients
     $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
     $mail->addAddress($body["email"]);     // Add a recipient
-    $mail->addAddress('ian08bulatao@gmail.com');               // Name is optional
-    $mail->addReplyTo('ian08bulatao@gmail.com', 'Information');
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
