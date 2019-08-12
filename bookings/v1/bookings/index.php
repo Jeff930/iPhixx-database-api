@@ -13,6 +13,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    header('Content-type: text/plain; charset=utf-8');
 }
 // Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -46,6 +47,123 @@ $app = new \Slim\App;
 		}
 		return json_encode($result);
 	});
+	$app->get('/tax', function (Request $request, Response $response, array $args) use($query) {
+	
+		 $result = $query->getTax();		
+		return json_encode($result);
+	});
+
+	$app->get('/get-tax/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		 $result = $query->getOneTax($id);		
+		return json_encode($result);
+	});	
+
+	$app->put('/edit-tax/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updateTax($id,$body);
+		return json_encode($body);
+	});
+
+	$app->post('/add-tax',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addTax($body);	
+		if($result){
+			return json_encode($body);
+		}
+		
+	});	
+
+	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
+	
+		 $result = $query->getModels();		
+		return json_encode($result);
+	});
+
+	$app->get('/tablet', function (Request $request, Response $response, array $args) use($query) {
+	
+		 $result = $query->getTabletModels();		
+		return json_encode($result);
+	});
+
+	$app->get('/invoices/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getInvoicesByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getInvoices();	
+		}
+		return json_encode($result);
+	});
+
+	$app->get('/invoicescount/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		$result = $query->getInvoicesCount();	
+		return json_encode($result);
+	});
+
+	$app->get('/inventorycount/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		$result = $query->getInventoryCount();	
+		return json_encode($result);
+	});
+
+	$app->get('/ticketcount/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		$result = $query->getTicketsCount();	
+		return json_encode($result);
+	});
+
+
+	$app->get('/tickets/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getTicketsByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getTickets();	
+		}
+		return json_encode($result);
+	});
+
+	$app->get('/inventory/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getInventoryByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getInventory();	
+		}
+		return json_encode($result);
+	});
+
+	$app->get('/owner/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getOwner($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->get('/repair/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getRepair($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
@@ -56,17 +174,68 @@ $app = new \Slim\App;
 		
 	});
 
-	$app->put('/{id}',function(Request $request, Response $response, array $args) use($query){
+	$app->put('/status/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
-		$result = $query->updateBooking($id);
+		$result = $query->updateBookingStatus($id);
 		if($result){
-			return json_encode($body);
+			return json_encode($result);
 		}
 	});
 
-	$app->delete('/',function(Request $request, Response $response, array $args){
+	$app->put('/edit-owner/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
 		$body = $request->getParsedBody();
+		$result = $query->editOwner($id,$body);
 		return json_encode($body);
+	});
+
+
+	$app->put('/cancel/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->cancelBooking($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->put('/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];
+		$body = $request->getParsedBody();	
+		$result = $query->updateBooking($id , $body);	
+		return json_encode($body);
+	});
+
+	$app->put('/payment/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->updatePaymentStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+	// $app->put('/send/{id}',function(Request $request, Response $response, array $args) use($query){
+	// 	$id = $args['id'];	
+	// 	$result = $query->sendMail($id);
+	// 	if($result){
+	// 		return json_encode($body);
+	// 	}
+	// });
+
+	$app->delete('/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];
+		$result = $query->deleteBooking($id);
+		if($result){
+			return json_encode($result);
+		}
+		return false;
+	});
+
+	$app->delete('/delete-tax/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];
+		$result = $query->deleteTax($id);
+		if($result){
+			return json_encode($result);
+		}
+		return false;
 	});
 
 $app->run();
