@@ -273,13 +273,14 @@ class DBQuery
 	
 
 	public function getBookings() {
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
 							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
-							LEFT JOIN  `phone_models` ON `bookings`.`phonemodel_id` = `phone_models`.`phonemodel_id`";
+							LEFT JOIN  `phone_models` ON `bookings`.`phonemodel_id` = `phone_models`.`phonemodel_id`
+							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -316,25 +317,27 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
-				`bookings` 
-							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
-							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
-							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
-							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
-							LEFT JOIN  `phone_models` ON `bookings`.`phonemodel_id` = `phone_models`.`phonemodel_id`";
-		$result_count = mysqli_query($this->db,$sql_count);
-	  	$total=mysqli_num_rows($result_count);
-		$row["total_page"] = ceil($total / $limit);
-		
-
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`,`customers`.`customer_lname`, `customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name` FROM 
+		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
 							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
 							LEFT JOIN  `phone_models` ON `bookings`.`phonemodel_id` = `phone_models`.`phonemodel_id`
+							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total_page"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `phone_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
+				`bookings` 
+							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
+							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
+							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
+							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
+							LEFT JOIN  `phone_models` ON `bookings`.`phonemodel_id` = `phone_models`.`phonemodel_id`
+							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
 							LIMIT 15 OFFSET {$offset}";
 
 		$result = mysqli_query($this->db,$sql);
