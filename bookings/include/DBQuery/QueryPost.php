@@ -615,8 +615,8 @@ class DBQuery
 		// $result = mysqli_query($this->db,$sql);
 
 
-		$sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
-		$result = mysqli_query($this->db,$sql);
+		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
+		// $result = mysqli_query($this->db,$sql);
 
 		// $sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
 		// $result = mysqli_query($this->db,$sql);
