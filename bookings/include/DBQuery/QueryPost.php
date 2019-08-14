@@ -621,8 +621,8 @@ class DBQuery
 		// $sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
 		// $result = mysqli_query($this->db,$sql);
 
-		$sql = "INSERT INTO `bookings` (`owner_id`, `customer_id`, `created_at`, `repstatus_no`, `invoice_no`,`paystatus_no`,`ticket_no`) VALUES ('3', '42', CURRENT_TIMESTAMP, '1','10568', '1','10003')";
-		$result = mysqli_query($this->db,$sql);
+		// $sql = "INSERT INTO `bookings` (`owner_id`, `customer_id`, `created_at`, `repstatus_no`, `invoice_no`,`paystatus_no`,`ticket_no`) VALUES ('3', '42', CURRENT_TIMESTAMP, '1','10568', '1','10003')";
+		// $result = mysqli_query($this->db,$sql);
 
 		$pdf = new FPDF();
 
