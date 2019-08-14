@@ -608,18 +608,18 @@ class DBQuery
 
 	public function addBooking($body){
 		
-		$sql = "INSERT INTO `bookings_old` (`id`, `fullname`, `birthdate`, `email`, `phone`, `location`, `created_at`, `status`, `device_pin`, `brand`, `model`, `color`, `network`, `repair`, `device`, `customer_id`, `upgrade_1`, `upgrade_2`, `phone_offer`, `total_price`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}', CURRENT_TIMESTAMP, '{$body["status"]}', '{$body["device_pin"]}', '{$body["brand"]}', '{$body["model"]}', '{$body["color"]}', '{$body["network"]}', '{$body["repair"]}', '{$body["device"]}', '{$body["customer_id"]}', '{$body["upgrade_1"]}', '{$body["upgrade_2"]}', '{$body["phone_offer"]}', '{$body["total"]}')";
-		$result = mysqli_query($this->db,$sql);
+		// $sql = "INSERT INTO `bookings_old` (`id`, `fullname`, `birthdate`, `email`, `phone`, `location`, `created_at`, `status`, `device_pin`, `brand`, `model`, `color`, `network`, `repair`, `device`, `customer_id`, `upgrade_1`, `upgrade_2`, `phone_offer`, `total_price`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}', CURRENT_TIMESTAMP, '{$body["status"]}', '{$body["device_pin"]}', '{$body["brand"]}', '{$body["model"]}', '{$body["color"]}', '{$body["network"]}', '{$body["repair"]}', '{$body["device"]}', '{$body["customer_id"]}', '{$body["upgrade_1"]}', '{$body["upgrade_2"]}', '{$body["phone_offer"]}', '{$body["total"]}')";
+		// $result = mysqli_query($this->db,$sql);
 
-		$sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
-		$result = mysqli_query($this->db,$sql);
+		// $sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
+		// $result = mysqli_query($this->db,$sql);
 
 
 		$sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
 		$result = mysqli_query($this->db,$sql);
 
-		$sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
-		$result = mysqli_query($this->db,$sql);
+		// $sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
+		// $result = mysqli_query($this->db,$sql);
 
 		$sql = "INSERT INTO `bookings` (`owner_id`, `customer_id`, `created_at`, `repstatus_no`, `invoice_no`,`paystatus_no`,`ticket_no`) VALUES ('3', '42', CURRENT_TIMESTAMP, '1','10568', '1','10003')";
 		$result = mysqli_query($this->db,$sql);
