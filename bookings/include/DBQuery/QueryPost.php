@@ -205,7 +205,7 @@ class DBQuery
 		
 		$password = md5($body["password"]);
 
-		$sql = "SELECT * FROM `agent_username` where `agent_email` = '{$body["email"]}' 
+		$sql = "SELECT `agent_username` FROM `agents` where `agent_email` = '{$body["email"]}' 
 		and `agent_password` = '{$password}'";
 		
 		$result = mysqli_query($this->db,$sql);
