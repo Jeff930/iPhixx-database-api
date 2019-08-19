@@ -213,11 +213,19 @@ class DBQuery
 		return $row;
 	}
 
+	// public function addCustomer($body){
+	// 	$password = md5($body["password"]);
+	// 	$sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`, `birthdate`,  `address`,  `location`) VALUES (NULL, '{$body["customer_fname"]}', '{$body["customer_lname"]}' ,  '{$body["email"]}', '{$body["phone"]}', '{$body["birthdate"]}', '{$body["address"]}', '{$body["location"]}')";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	return $result;
+	// }
+
 	public function addCustomer($body){
-		$password = md5($body["password"]);
-		$sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`, `birthdate`,  `address`,  `location`) VALUES (NULL, '{$body["customer_fname"]}', '{$body["customer_lname"]}' ,  '{$body["email"]}', '{$body["phone"]}', '{$body["birthdate"]}', '{$body["address"]}', '{$body["location"]}')";
-		$result = mysqli_query($this->db,$sql);
-		return $result;
+		echo $body;
+		return $body;
+		// $sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`, `birthdate`,  `address`) VALUES (NULL, '{$body["customer_fname"]}', '{$body["customer_lname"]}' ,  '{$body["email"]}', '{$body["phone"]}', '{$body["birthdate"]}', '{$body["address"]}', '{$body["location"]}')";
+		// $result = mysqli_query($this->db,$sql);
+		// return $result;
 	}
 
 	public function updateCustomer($id , $body){
