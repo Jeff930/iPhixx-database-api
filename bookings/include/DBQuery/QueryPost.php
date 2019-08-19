@@ -201,7 +201,7 @@ class DBQuery
 
 
 
-	public function logInCustomer($body){
+	public function logInAgent($body){
 		
 		$password = md5($body["password"]);
 

@@ -35,7 +35,7 @@ $app = new \Slim\App;
 
 	$app->post('/sign-in', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
-		$result = $query->logInCustomer($body);	
+		$result = $query->logInAgent($body);	
 		return json_encode($result);
 	});
 	$app->post('/',function(Request $request, Response $response, array $args) use($query){
