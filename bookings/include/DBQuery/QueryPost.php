@@ -626,6 +626,10 @@ class DBQuery
 		// $result = mysqli_query($this->db,$sql);
 
 
+		$sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
+		$result = mysqli_query($this->db,$sql);
+		
+
 		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
 		// $result = mysqli_query($this->db,$sql);
 
@@ -635,130 +639,130 @@ class DBQuery
 		// $sql = "INSERT INTO `bookings` (`owner_id`, `customer_id`, `created_at`, `repstatus_no`, `invoice_no`,`paystatus_no`,`ticket_no`) VALUES ('3', '42', CURRENT_TIMESTAMP, '1','10568', '1','10003')";
 		// $result = mysqli_query($this->db,$sql);
 
-		$pdf = new FPDF();
+		// $pdf = new FPDF();
 
-		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',16);
+		// $pdf->AddPage();
+		// $pdf->SetFont('Arial','B',16);
 
-		$w = array(120,50);
+		// $w = array(120,50);
 
-		$pdf->Cell(40,10,'Invoice');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Iphixx');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Name of Store: Walmart');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Name of Agent: Ryan Margolin');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Customer Details');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Full Name: '. $body["fullname"]);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Email: '. $body["email"]);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Device Details');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Device Model: '. $body["brand"]. " ". $body["model"]);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Color: '. $body["color"]);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Carrier: '. $body["network"]);
-		$pdf->Ln();
+		// $pdf->Cell(40,10,'Invoice');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Iphixx');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Name of Store: Walmart');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Name of Agent: Ryan Margolin');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Customer Details');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Full Name: '. $body["fullname"]);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Email: '. $body["email"]);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Device Details');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Device Model: '. $body["brand"]. " ". $body["model"]);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Color: '. $body["color"]);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Carrier: '. $body["network"]);
+		// $pdf->Ln();
 
-		define('EURO',chr(128));
+		// define('EURO',chr(128));
 
-		$selectedrepairs=array();
-		$repairstring=str_replace(array( '[', ']','"'), '', $body["repair"]);
-		for($i=0;$i<$body["repairlength"];$i++)
-			$selectedrepairs = explode(',',$repairstring);
+		// $selectedrepairs=array();
+		// $repairstring=str_replace(array( '[', ']','"'), '', $body["repair"]);
+		// for($i=0;$i<$body["repairlength"];$i++)
+		// 	$selectedrepairs = explode(',',$repairstring);
 
-		$prices=array();
-		$pricestring=str_replace(array( '[', ']','"'), '', $body["prices"]);
-		for($i=0;$i<$body["repairlength"];$i++)
-			$prices = explode(',',$pricestring);
+		// $prices=array();
+		// $pricestring=str_replace(array( '[', ']','"'), '', $body["prices"]);
+		// for($i=0;$i<$body["repairlength"];$i++)
+		// 	$prices = explode(',',$pricestring);
 
-		$header = array('Selected Repairs', 'Cost');
-		echo "this". $selectedrepairs[0];
-		echo "this". $selectedrepairs[1];
-		echo "this". $prices[0];
-		echo "this". $prices[1];
-		// echo "this2". $selectedrepairs[1];
-    	// Header
-    	for($i=0;$i<count($header);$i++)
-        	$pdf->Cell($w[$i],7,$header[$i],1,0,'C');
-    	$pdf->Ln();
+		// $header = array('Selected Repairs', 'Cost');
+		// echo "this". $selectedrepairs[0];
+		// echo "this". $selectedrepairs[1];
+		// echo "this". $prices[0];
+		// echo "this". $prices[1];
+		// // echo "this2". $selectedrepairs[1];
+  //   	// Header
+  //   	for($i=0;$i<count($header);$i++)
+  //       	$pdf->Cell($w[$i],7,$header[$i],1,0,'C');
+  //   	$pdf->Ln();
 
-    	for($i=0;$i<count($selectedrepairs);$i++){
-        	$pdf->Cell($w[0],7,$selectedrepairs[$i],1,0,'C');
-        	$pdf->Cell($w[1],7,$prices[$i]. " ".EURO,1,0,'C');
-    		$pdf->Ln();
-    }
-    $pdf->Ln();
-    	// Data
-    	// foreach($selectedrepairs as $row)
-    	// {
-     //    	$pdf->Cell($w[0],6,$row[0],'LR');
-     //    	$pdf->Cell($w[1],6,$row[1],'LR');
-     //    	$pdf->Ln();
-    	// }
-    	// Closing line
+  //   	for($i=0;$i<count($selectedrepairs);$i++){
+  //       	$pdf->Cell($w[0],7,$selectedrepairs[$i],1,0,'C');
+  //       	$pdf->Cell($w[1],7,$prices[$i]. " ".EURO,1,0,'C');
+  //   		$pdf->Ln();
+  //   }
+  //   $pdf->Ln();
+  //   	// Data
+  //   	// foreach($selectedrepairs as $row)
+  //   	// {
+  //    //    	$pdf->Cell($w[0],6,$row[0],'LR');
+  //    //    	$pdf->Cell($w[1],6,$row[1],'LR');
+  //    //    	$pdf->Ln();
+  //   	// }
+  //   	// Closing line
 
-    	$pdf->Cell($w[0],7,"Total Cost: ",'','','C');
-        $pdf->Cell($w[1],7,$body["total"]. ".00 ".EURO,'','','C');
+  //   	$pdf->Cell($w[0],7,"Total Cost: ",'','','C');
+  //       $pdf->Cell($w[1],7,$body["total"]. ".00 ".EURO,'','','C');
 		
-		$pdf->Ln();
-		$pdf->Cell(40,10,"Thank you for your business with iPhixx!");
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,"Thank you for your business with iPhixx!");
 		
-		$pdfdoc = $pdf->Output('', 'S');
+		// $pdfdoc = $pdf->Output('', 'S');
 
-		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+		// $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
-    //Server settings
-    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-    $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
-    $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
-    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port =  465;                                    // TCP port to connect to
-
-
+  //   //Server settings
+  //   $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+  //   $mail->isSMTP();                                      // Set mailer to use SMTP
+  //   $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
+  //   $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  //   $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
+  //   $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
+  //   $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+  //   $mail->Port =  465;                                    // TCP port to connect to
 
 
-    //Recipients
-    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
-    $mail->addAddress($body["email"]);     // Add a recipient
-    // $mail->addAddress('ellen@example.com');               // Name is optional
-    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
-    // $mail->addCC('cc@example.com');
-    // $mail->addBCC('bcc@example.com');
-
-    // //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-    $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
-
-    $mail->DKIM_domain = "admin.iphixx.com";
-    $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
-    $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
-    $mail->DKIM_passphrase = "";
-    $mail->DKIM_identifier = $mail->From;
-    $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
 
 
-    //Content
-    $mail->isHTML(true);                                  // Set email format to HTML
+  //   //Recipients
+  //   $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+  //   $mail->addAddress($body["email"]);     // Add a recipient
+  //   // $mail->addAddress('ellen@example.com');               // Name is optional
+  //   //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+  //   // $mail->addCC('cc@example.com');
+  //   // $mail->addBCC('bcc@example.com');
+
+  //   // //Attachments
+  //   // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+  //   // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+  //   $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
+
+  //   $mail->DKIM_domain = "admin.iphixx.com";
+  //   $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
+  //   $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
+  //   $mail->DKIM_passphrase = "";
+  //   $mail->DKIM_identifier = $mail->From;
+  //   $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
+
+
+  //   //Content
+  //   $mail->isHTML(true);                                  // Set email format to HTML
 
   
-    		$mail->Subject = 'Invoice';
-    			$mail->Body    = 'Here is your receipt';
-    			$mail->AltBody = 'Here is your receipt';
+  //   		$mail->Subject = 'Invoice';
+  //   			$mail->Body    = 'Here is your receipt';
+  //   			$mail->AltBody = 'Here is your receipt';
 
    
-    $mail->send();
+  //   $mail->send();
 
 		return $result;
 	}
