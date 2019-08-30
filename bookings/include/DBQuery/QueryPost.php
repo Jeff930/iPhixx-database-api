@@ -625,7 +625,11 @@ class DBQuery
 		// $sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
 		// $result = mysqli_query($this->db,$sql);
 
-		$result = $body["selectedRepair"];
+		$sample = $body['selectedRepair'];
+		$result = $sample;
+		echo $result['screenrep_selected'];
+		echo $sample['screenrep_selected'];
+
 
 		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
 		// $result = mysqli_query($this->db,$sql);
