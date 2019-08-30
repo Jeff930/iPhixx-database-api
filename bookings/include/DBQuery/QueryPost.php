@@ -625,10 +625,7 @@ class DBQuery
 		// $sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
 		// $result = mysqli_query($this->db,$sql);
 
-
-		$sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
-		$result = mysqli_query($this->db,$sql);
-		
+		$result = $body["selectedRepair"];
 
 		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
 		// $result = mysqli_query($this->db,$sql);
