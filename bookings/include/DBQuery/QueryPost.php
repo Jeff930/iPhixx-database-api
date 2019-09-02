@@ -625,10 +625,8 @@ class DBQuery
 		// $sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
 		// $result = mysqli_query($this->db,$sql);
 
-		$sample = $body['selectedRepair'];
-		$result = $sample;
-		echo $result['screenrep_selected'];
-		echo $sample['screenrep_selected'];
+		$sql = "INSERT INTO `selected_repairs`(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`, `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, `frontcamrep_selected`, `homerep_selected`, `microphone_selected`, `chargeport_selected`, `volumerep_selected`, `battrep_selected`, `signalrep_selected`, `backglassrep_selected`, `protector_selected`, `tempPhone_selected`) VALUES (NULL,$body['screenrep_selected'],$body['headrep_selected'],$body['earrep_selected'],$body['powerrep_selected'],$body['rearcamrep_selected'],$body['frontcamrep_selected'],$body['homerep_selected'],$body['microphone_selected'],$body['chargeport_selected'],$body['volumerep_selected'],$body['battrep_selected'],$body['signalrep_selected'],$body['backglassrep_selected'],$body['screenOffer'],$body['phoneOffer'])";
+		$result = mysqli_query($this->db,$sql);
 
 
 		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
