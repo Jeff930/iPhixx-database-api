@@ -637,12 +637,12 @@ class DBQuery
 
 		$result = mysqli_query($this->db,$sql);
 
-		// if ($result) {
-  //   		$row["id"] = mysqli_insert_id($this->db);
-		// 	} else {
-  //  				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
-		// 	}
-		// return $row;
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
 
 
 		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";

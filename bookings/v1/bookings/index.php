@@ -169,7 +169,7 @@ $app = new \Slim\App;
 		$body = $request->getParsedBody();
 		$result = $query->addBooking($body);	
 		if($result){
-			return json_encode($body);
+			return json_encode($result);
 		}
 		
 	});
