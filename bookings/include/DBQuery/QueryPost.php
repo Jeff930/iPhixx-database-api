@@ -410,13 +410,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` ";
+		$sql_count = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`ticket_no` != 'NULL'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `tickets`.`ticket_no`,`customers`.`customer_fname`,`customers`.`email`,`customers`.`customer_lname`, `customers`.`phone`,`customers`.`location` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`ticket_no` != 'NULL' LIMIT 15 OFFSET {$offset} ";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['tickets']=mysqli_fetch_all($result,MYSQLI_ASSOC);
