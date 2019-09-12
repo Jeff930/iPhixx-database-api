@@ -509,9 +509,6 @@ class DBQuery
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port =  465;                                    // TCP port to connect to
 
-
-
-
     //Recipients
     $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
     $mail->addAddress($userEmail);     // Add a recipient
@@ -618,8 +615,6 @@ class DBQuery
 
 
 	public function addBooking($body){
-		// $sql = "INSERT INTO `dev_owner` (`owner_id`, `owner_name`, `birthdate`, `email`, `phone`, `location`) VALUES (NULL, '{$body["fullname"]}', '{$body["birthdate"]}', '{$body["email"]}', '{$body["phone"]}', '{$body["location"]}')";
-		// $result = mysqli_query($this->db,$sql);
 
 		$sql1 = "INSERT INTO `selected_repairs`(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`, `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, `frontcamrep_selected`, `homerep_selected`, `microphone_selected`, `chargeport_selected`, `volumerep_selected`, `battrep_selected`, `signalrep_selected`, `backglassrep_selected`, `protector_selected`, `tempPhone_selected`) VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}')";
 
@@ -633,7 +628,7 @@ class DBQuery
 
 		$timestamp_id = mysqli_insert_id($this->db);
 
-		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `paystatus_no`, `phonebrand_id`, `phonemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,1,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,NULL,'{$body['total']}')";
+		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `paystatus_no`, `phonebrand_id`, `phonemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,1,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}')";
 
 		$result = mysqli_query($this->db,$sql);
 
