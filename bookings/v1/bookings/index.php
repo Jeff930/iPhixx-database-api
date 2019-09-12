@@ -198,6 +198,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->put('/transfer/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->transferLead($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->put('/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];
 		$body = $request->getParsedBody();	

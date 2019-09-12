@@ -547,6 +547,17 @@ class DBQuery
 		return true;	
 	}
 
+	public function transferLead($id){
+
+		$res  = mysqli_query($this->db,"SELECT `leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '$id'");
+		$row = mysqli_fetch_assoc($res);
+		$status = $row['leadstatus_no'];
+
+		
+    		$sql = "UPDATE `bookings` INNER JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` SET `bookings`.`leadstatus_no` = '2', `booking_timestamps`.`transfer_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
+			$result1 = mysqli_query($this->db,$sql);
+
+	}
 
 	public function  cancelBooking($id){
 
