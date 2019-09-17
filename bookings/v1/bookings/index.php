@@ -164,6 +164,38 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/check-lead-status/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->checkLeadStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->get('/check-repair-status/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->checkRepairStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->get('/check-ticket-status/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->checkTicketStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->get('/check-invoice-status/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->checkInvoiceStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
