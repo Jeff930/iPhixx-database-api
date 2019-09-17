@@ -421,7 +421,11 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function checkTicketStatus($id){
+		$sql = "SELECT `bookings`.`ticketstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 
 
 	public function getTicketsByPage($params){
