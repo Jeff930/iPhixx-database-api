@@ -403,6 +403,12 @@ class DBQuery
 		return $row;
 	}
 
+	public function checkLeadStatus($id){
+		$sql = "SELECT `bookings`.`leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 
 	public function getTicketsByPage($params){
 		$page = $params['page'];
