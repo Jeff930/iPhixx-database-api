@@ -206,6 +206,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->put('/start-repair/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->startRepair($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->put('/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];
 		$body = $request->getParsedBody();	
