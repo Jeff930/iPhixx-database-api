@@ -409,6 +409,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function checkRepairStatus($id){
+		$sql = "SELECT `bookings`.`repairstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 
 	public function getTicketsByPage($params){
 		$page = $params['page'];
