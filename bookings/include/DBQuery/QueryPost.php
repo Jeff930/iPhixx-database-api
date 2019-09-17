@@ -360,11 +360,11 @@ class DBQuery
 
 	public function getInvoices(){
 		$sql = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`,
-							 `dev_owner`.`owner_name`, `payment_statuses`.`pstatus_name` 
+							 `dev_owner`.`owner_name`, `invoice_statuses`.`invoice_status` 
 					  FROM `bookings`  
 							LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no`
 							LEFT JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` 
-							LEFT JOIN `payment_statuses` ON `bookings`.`paystatus_no` = `payment_statuses`.`paystatus_no` ";
+							LEFT JOIN `payment_statuses` ON `bookings`.`invoicestatus_no` = `invoice_statuses`.`invoicestatus_no` ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -377,13 +377,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `payment_statuses`.`pstatus_name` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`paystatus_no` = `payment_statuses`.`paystatus_no` ";
+		$sql_count = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `invoice_statuses`.`invoice_status` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`invoicestatus_no` = `invoice_statuses`.`invoicestatus_no` ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `bookings`.`bookings_id`, `payment_statuses`.`pstatus_name` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`paystatus_no` = `payment_statuses`.`paystatus_no` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `invoices`.`invoice_no`,`invoices`.`total_price`,`invoices`.`payment_Timestamp`, `customers`.`customer_fname`,`customers`.`customer_lname`, `bookings`.`bookings_id`, `invoice_statuses`.`invoice_status` FROM `bookings` LEFT JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` LEFT JOIN `payment_statuses` ON `bookings`.`invoicestatus_no` = `invoice_statuses`.`invoicestatus_no` LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['invoices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
