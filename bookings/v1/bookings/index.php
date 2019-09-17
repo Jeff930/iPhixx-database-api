@@ -222,6 +222,23 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->put('/update-repair-status/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->updateRepairStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->put('/update-invoice-status/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->updateInvoiceStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+
 	$app->put('/edit-owner/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
@@ -238,7 +255,7 @@ $app = new \Slim\App;
 		}
 	});
 
-	$app->put('/transfer/{id}',function(Request $request, Response $response, array $args) use($query){
+	$app->put('/transfer-lead/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->transferLead($id);
 		if($result){
