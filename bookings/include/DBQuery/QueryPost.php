@@ -594,7 +594,7 @@ class DBQuery
 		return $result;
 	}
 
-	public function  cancelBooking($id){
+	public function leadLost($id){
 
 		$res  = mysqli_query($this->db,"SELECT `leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '$id'");
 		$row = mysqli_fetch_assoc($res);
