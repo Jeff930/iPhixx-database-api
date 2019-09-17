@@ -182,6 +182,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->put('/update-ticket-status/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->updateTicketStatus($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->put('/edit-owner/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
