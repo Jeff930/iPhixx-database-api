@@ -576,16 +576,11 @@ class DBQuery
 	}
 
 	public function transferLead($id){
-
-		$res  = mysqli_query($this->db,"SELECT `leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '$id'");
-		$row = mysqli_fetch_assoc($res);
-		$status = $row['leadstatus_no'];
-
 		
     	$sql = "UPDATE `bookings` INNER JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` SET `bookings`.`leadstatus_no` = '2', `booking_timestamps`.`transfer_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
-		$sql2 = "INSERT INTO `tickets`(`ticket_no`, `ticketstatus_no`, `created_at`, `outbound_timestamp`,`ongoing_timestamp`,`inbound_timestamp`,`resolved_timestamp`) VALUES (NULL,'1',CURRENT_TIMESTAMP,NULL,NULL,NULL,NULL)";
+		$sql2 = "INSERT INTO `tickets`(`ticket_no`, `ticketstatus_no`, `created_at`, `outbound_timestamp`,`ongoing_timestamp`,`inbound_timestamp`,`resolved_timestamp`,cancelled_timestamp) VALUES (NULL,'1',CURRENT_TIMESTAMP,NULL,NULL,NULL,NULL,NULL)";
 
 		$tickets = mysqli_query($this->db,$sql2);
 
