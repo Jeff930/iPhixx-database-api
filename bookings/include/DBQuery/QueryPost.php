@@ -413,19 +413,22 @@ class DBQuery
 	public function checkRepairStatus($id){
 		$sql = "SELECT `bookings`.`repairstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+		$row=mysqli_fetch_assoc($result);
+		return $row;
 	}
 
 	public function checkInvoiceStatus($id){
 		$sql = "SELECT `bookings`.`invoicestatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+		$row=mysqli_fetch_assoc($result);
+		return $row;
 	}
 
 	public function checkTicketStatus($id){
 		$sql = "SELECT `bookings`.`ticketstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+		$row=mysqli_fetch_assoc($result);
+		return $row;
 	}
 
 
