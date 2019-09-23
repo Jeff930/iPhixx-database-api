@@ -586,7 +586,13 @@ class DBQuery
 
 		$ticket_id = mysqli_insert_id($this->db);
 
-			$sql = "UPDATE `bookings` SET `bookings`.`ticket_no` = '{$ticket_id}',`bookings`.`ticketstatus_no` = '1'  WHERE `bookings`.`bookings_id` = {$id}";
+		$sql3 = "INSERT INTO `invoices`(`invoice_no`, `tax_id`, `unsettled_timestamp`,`settled_timestamp`) VALUES (NULL,NULL,CURRENT_TIMESTAMP,NULL)";
+
+		$invoices = mysqli_query($this->db,$sql3);
+
+		$invoice_id = mysqli_insert_id($this->db);
+
+		$sql = "UPDATE `bookings` SET `bookings`.`ticket_no` = '{$ticket_id}',`bookings`.`ticketstatus_no` = '1',  WHERE `bookings`.`bookings_id` = {$id}";
 
 		$result = mysqli_query($this->db,$sql);
 
