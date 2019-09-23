@@ -580,13 +580,13 @@ class DBQuery
     	$sql = "UPDATE `bookings` INNER JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` SET `bookings`.`leadstatus_no` = '2', `booking_timestamps`.`transfer_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
-		$sql2 = "INSERT INTO `tickets`(`ticket_no`, `created_at`, `outbound_timestamp`,`ongoing_timestamp`,`inbound_timestamp`,`resolved_timestamp`,cancelled_timestamp) VALUES (NULL,CURRENT_TIMESTAMP,NULL,NULL,NULL,NULL,NULL)";
+		$sql2 = "INSERT INTO `tickets`(`ticket_no`, `created_at`, `outbound_timestamp`,`ongoing_timestamp`,`inbound_timestamp`,`resolved_timestamp`,`cancelled_timestamp`) VALUES (NULL,CURRENT_TIMESTAMP,NULL,NULL,NULL,NULL,NULL)";
 
 		$tickets = mysqli_query($this->db,$sql2);
 
 		$ticket_id = mysqli_insert_id($this->db);
 
-			$sql = "UPDATE `bookings` SET `bookings`.`ticket_no` = '{$ticket_id}' WHERE `bookings`.`bookings_id` = {$id}";
+			$sql = "UPDATE `bookings` SET `bookings`.`ticket_no` = '{$ticket_id}',`bookings`.`ticketstatus_no` = '1'  WHERE `bookings`.`bookings_id` = {$id}";
 
 		$result = mysqli_query($this->db,$sql);
 
