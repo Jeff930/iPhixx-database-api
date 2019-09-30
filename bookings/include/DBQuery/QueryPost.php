@@ -481,7 +481,7 @@ class DBQuery
 
 	public function  updatePaymentStatus($id){
 
-		$sql = "UPDATE `bookings` INNER JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` SET `bookings`.`invoicestatus_no` = '2' , `invoices`.`payment_Timestamp` = CURRENT_TIMESTAMP WHERE `invoices`.`invoice_no` = {$id}";
+		$sql = "UPDATE `bookings` INNER JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` SET `bookings`.`invoicestatus_no` = 2 , `invoices`.`settled_Timestamp` = CURRENT_TIMESTAMP WHERE `invoices`.`invoice_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
