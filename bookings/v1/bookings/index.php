@@ -77,7 +77,7 @@ $app = new \Slim\App;
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 	
-		 $result = $query->getModels();		
+		$result = $query->getModels();		
 		return json_encode($result);
 	});
 
@@ -203,7 +203,14 @@ $app = new \Slim\App;
 		if($result){
 			return json_encode($result);
 		}
-		
+	});
+
+	$app->post('/models',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		// $result = $query->addBooking($body);	
+		// if($result){
+			return json_encode($body);
+		//}
 	});
 
 	$app->put('/status/{id}',function(Request $request, Response $response, array $args) use($query){
