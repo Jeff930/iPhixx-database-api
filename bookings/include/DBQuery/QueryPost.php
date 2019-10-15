@@ -426,8 +426,8 @@ class DBQuery
 		return $row;
 	}
 
-	public function getModels($dev_id, $brand_id){
-		$sql = "SELECT * FROM `phone_models` WHERE `devtype_id` = '{$dev_id}' AND `phonebrand_id` = '{$brand_id}' ";
+	public function getModels($body){
+		$sql = "SELECT * FROM `phone_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
