@@ -205,7 +205,7 @@ $app = new \Slim\App;
 		}
 	});
 
-	$app->post('/models',function(Request $request, Response $response, array $args) use($query) {
+	$app->post('/models/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		// $result = $query->addBooking($body);	
 		// if($result){
