@@ -207,10 +207,10 @@ $app = new \Slim\App;
 
 	$app->post('/models/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
-		// $result = $query->addBooking($body);	
-		// if($result){
-			return json_encode($body);
-		//}
+		$result = $query->getModels($body);	
+		if($result){
+			return json_encode($result);
+		}
 	});
 
 	$app->put('/status/{id}',function(Request $request, Response $response, array $args) use($query){
