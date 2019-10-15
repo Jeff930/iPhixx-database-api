@@ -55,16 +55,17 @@ class DBQuery
 	}
 	//End of Tax
 
-	public function getModels() {
-		$sql = "SELECT `phone_models`.`pmodel_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
-		FROM `phone_models`
-					INNER JOIN `phone_brands` ON `phone_models`.`phonebrand_id` = `phone_brands`.`phonebrand_id`
-					INNER JOIN `device_type` ON `phone_models`.`devtype_id` = `device_type`.`devtype_id`";
-		$result = mysqli_query($this->db,$sql);
-		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
-		// print_r($result);
-		return $row;
-	}
+	// public function getModels() {
+	// 	$sql = "SELECT `phone_models`.`pmodel_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
+	// 	FROM `phone_models`
+	// 				INNER JOIN `phone_brands` ON `phone_models`.`phonebrand_id` = `phone_brands`.`phonebrand_id`
+	// 				INNER JOIN `device_type` ON `phone_models`.`devtype_id` = `device_type`.`devtype_id`";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	// 	// print_r($result);
+	// 	return $row;
+	// }
+	
 	public function getTabletModels() {
 		$sql = "SELECT `tablet_models`.`tmodel_name` FROM `tablet_models`";
 		$result = mysqli_query($this->db,$sql);
@@ -430,6 +431,7 @@ class DBQuery
 		$sql = "SELECT * FROM `phone_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
+		echo $row;
 		return $row;
 	}
 
