@@ -65,7 +65,7 @@ class DBQuery
 	// 	// print_r($result);
 	// 	return $row;
 	// }
-	
+
 	public function getTabletModels() {
 		$sql = "SELECT `tablet_models`.`tmodel_name` FROM `tablet_models`";
 		$result = mysqli_query($this->db,$sql);
@@ -431,7 +431,6 @@ class DBQuery
 		$sql = "SELECT * FROM `phone_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
-		echo $row;
 		return $row;
 	}
 
