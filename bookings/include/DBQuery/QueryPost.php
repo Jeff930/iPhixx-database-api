@@ -308,7 +308,7 @@ class DBQuery
 	}
 
 	public function getRepair($id){
-		$sql = "SELECT `device_type`.`type`,`phone_brands`.`phone_brand`, `device_models`.`model_name`, `device_models`.`pmodel_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`
+		$sql = "SELECT `device_type`.`type`,`phone_brands`.`phone_brand`, `device_models`.`model_name`, `device_models`.`model_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`
 			FROM `bookings` INNER JOIN `device_type` ON `bookings`.`devtype_id` = `device_type`.`devtype_id` 
 							INNER JOIN `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
 							INNER JOIN `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id` 
@@ -508,7 +508,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `devicemodel_id`, `model_name`, `pmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `device_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
+		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `device_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total"] = ceil($total / $limit);
