@@ -56,7 +56,7 @@ class DBQuery
 	//End of Tax
 
 	// public function getModels() {
-	// 	$sql = "SELECT `device_models`.`pmodel_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
+	// 	$sql = "SELECT `device_models`.`model_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
 	// 	FROM `device_models`
 	// 				INNER JOIN `phone_brands` ON `device_models`.`phonebrand_id` = `phone_brands`.`phonebrand_id`
 	// 				INNER JOIN `device_type` ON `device_models`.`devtype_id` = `device_type`.`devtype_id`";
@@ -285,7 +285,7 @@ class DBQuery
 	
 
 	public function getBookings() {
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
@@ -308,7 +308,7 @@ class DBQuery
 	}
 
 	public function getRepair($id){
-		$sql = "SELECT `device_type`.`type`,`phone_brands`.`phone_brand`, `device_models`.`pmodel_name`, `device_models`.`pmodel_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`
+		$sql = "SELECT `device_type`.`type`,`phone_brands`.`phone_brand`, `device_models`.`model_name`, `device_models`.`pmodel_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`
 			FROM `bookings` INNER JOIN `device_type` ON `bookings`.`devtype_id` = `device_type`.`devtype_id` 
 							INNER JOIN `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
 							INNER JOIN `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id` 
@@ -329,7 +329,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
+		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
@@ -342,7 +342,7 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`pmodel_name`,`lead_statuses`.`lead_status` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
@@ -471,7 +471,7 @@ class DBQuery
 		$start = $offset + 1;
 
 		$sql_count = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
-							 `device_models`.`pmodel_name`,`phone_brands`.`phone_brand` 
+							 `device_models`.`model_name`,`phone_brands`.`phone_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
 							LEFT JOIN `device_models` ON `inventory`.`devicemodel_id` = `device_models`.`devicemodel_id`
@@ -482,7 +482,7 @@ class DBQuery
 		
 
 		$sql = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
-							 `device_models`.`pmodel_name`,`phone_brands`.`phone_brand` 
+							 `device_models`.`model_name`,`phone_brands`.`phone_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
 							LEFT JOIN `device_models` ON `inventory`.`devicemodel_id` = `device_models`.`devicemodel_id`
@@ -508,7 +508,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `devicemodel_id`, `pmodel_name`, `pmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `device_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
+		$sql_count = "SELECT `devicemodel_id`, `model_name`, `pmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `device_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total"] = ceil($total / $limit);
