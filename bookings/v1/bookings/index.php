@@ -172,6 +172,13 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/tablet-list/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		$result = $query->getTabletList($params);			
+		return json_encode($result);
+	});
+
 	$app->get('/check-repair-status/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->checkRepairStatus($id);
