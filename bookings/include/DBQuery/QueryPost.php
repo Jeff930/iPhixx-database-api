@@ -502,6 +502,26 @@ class DBQuery
 		return $result;
 	}
 
+	public function getTabletList($params){
+		$tablet = $params['tablet'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT `phonemodel_id`, `pmodel_name`, `pmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `phone_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT `tabletmodel_id`, `tmodel_name`, `tmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `tablet_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}'";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
 	public function  editOwner($id,$body){
 
 		// $res  = mysqli_query($this->db,"SELECT `bookings`.`paystatus_no`,`invoices`. FROM bookings WHERE id='$id'");
