@@ -549,7 +549,8 @@ class DBQuery
 		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
 							
 		$result = mysqli_query($this->db,$sql);
-		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['devices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
 		// print_r($result);
 		return $row;
 	}
@@ -558,7 +559,8 @@ class DBQuery
 		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
 							
 		$result = mysqli_query($this->db,$sql);
-		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['devices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
 		// print_r($result);
 		return $row;
 	}

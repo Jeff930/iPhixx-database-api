@@ -100,6 +100,19 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/devices/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getAllModelsByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getAllModels();	
+		}
+		return json_encode($result);
+	});
+
 	$app->get('/invoicescount/', function (Request $request, Response $response, array $args) use($query) {
 	
 		$params = $request->getQueryParams();
