@@ -329,25 +329,26 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
+		$sql_count = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `device_brands`.`device_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
-							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
+							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
-							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`";
+							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
+							LIMIT 15 OFFSET {$offset}";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `device_brands`.`device_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
 							LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
-							LEFT JOIN  `phone_brands` ON `bookings`.`phonebrand_id` = `phone_brands`.`phonebrand_id` 
+							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
 							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
 							LIMIT 15 OFFSET {$offset}";
@@ -427,12 +428,12 @@ class DBQuery
 		return $row;
 	}
 
-	public function getModels($body){
-		$sql = "SELECT * FROM `device_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
-		$result = mysqli_query($this->db,$sql);
-		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
-		return $row;
-	}
+	// public function getModels($body){
+	// 	$sql = "SELECT * FROM `device_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
+	// 	$result = mysqli_query($this->db,$sql);
+	// 	$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	// 	return $row;
+	// }
 
 
 	public function getTicketsByPage($params){
@@ -471,22 +472,22 @@ class DBQuery
 		$start = $offset + 1;
 
 		$sql_count = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
-							 `device_models`.`model_name`,`phone_brands`.`phone_brand` 
+							 `device_models`.`model_name`,`device_brands`.`device_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
 							LEFT JOIN `device_models` ON `inventory`.`devicemodel_id` = `device_models`.`devicemodel_id`
-							LEFT JOIN `phone_brands` ON `inventory`.`phonebrand_id` = `phone_brands`.`phonebrand_id` ";
+							LEFT JOIN `device_brands` ON `inventory`.`devicebrand_id` = `device_brands`.`devicebrand_id` ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
 		$sql = "SELECT `inventory`.`item_no`,`inventory`.`quantity`,`inventory`.`last_restocked`, `inventory`.`cost`,`repair_parts`.`part_name`,
-							 `device_models`.`model_name`,`phone_brands`.`phone_brand` 
+							 `device_models`.`model_name`,`device_brands`.`device_brand` 
 					  FROM `inventory`  
 							LEFT JOIN `repair_parts` ON `inventory`.`part_no` = `repair_parts`.`part_no`
 							LEFT JOIN `device_models` ON `inventory`.`devicemodel_id` = `device_models`.`devicemodel_id`
-							LEFT JOIN `phone_brands` ON `inventory`.`phonebrand_id` = `phone_brands`.`phonebrand_id` LIMIT 15 OFFSET {$offset}";
+							LEFT JOIN `device_brands` ON `inventory`.`devicebrand_id` = `device_brands`.`devicebrand_id` LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['inventory']=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -502,24 +503,70 @@ class DBQuery
 		return $result;
 	}
 
-	public function getTabletList($params){
-		$tablet = $params['tablet'];
+
+
+	public function getModelsByPage($params){
+		$model = $params['model'];
 		$limit = 15;
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `device_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}' ";
+		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}' ";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `tabletmodel_id`, `tmodel_name`, `tmodel_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `phonebrand_id` FROM `tablet_models` WHERE `devtype_id` = '2' AND `tablet_brand`  = '{$params['brand_id']}'";
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}'";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		// print_r($result);
 		return $row;
+	}
+
+	public function getModels($params){
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}'";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
+	public function getAllModelsByPage($params){
+		$model = $params['model'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
+	public function getAllModels($params){
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
+	public function updatePrice($id , $body){
+		$sql = "UPDATE `device_models` SET `screenrep_price` = '{$body['screenrep_price']}', `headrep_price` = '{$body['headrep_price']}' , `earrep_price` = '{$body['earrep_price']}', `powerrep_price` = '{$body['powerrep_price']}', `rearcamrep_price` = '{$body['rearcamrep_price']}', `frontcamrep_price` = '{$body['frontcamrep_price']}', `homerep_price` = '{$body['homerep_price']}', `microphone_price` = '{$body['microphone_price']}', `chargeport_price` = '{$body['chargeport_price']}', `volumerep_price` = '{$body['volumerep_price']}', `battrep_price` = '{$body['battrep_price']}', `signalrep_price` = '{$body['signalrep_price']}', `backglass_price` = '{$body['backglass_price']}' WHERE `device_models`.`devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
 	}
 
 	public function  editOwner($id,$body){
@@ -706,7 +753,7 @@ class DBQuery
 
 		$timestamp_id = mysqli_insert_id($this->db);
 
-		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `phonebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
 
 		$result = mysqli_query($this->db,$sql);
 
