@@ -100,7 +100,7 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-	$app->get('/devices/', function (Request $request, Response $response, array $args) use($query) {
+	$app->get('/all-devices/', function (Request $request, Response $response, array $args) use($query) {
 	
 		$params = $request->getQueryParams();
 		if(count($params)){
@@ -109,6 +109,19 @@ $app = new \Slim\App;
 		else{	
 	
 		$result = $query->getAllModels();	
+		}
+		return json_encode($result);
+	});
+
+	$app->get('/devices/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getModelsByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getModels();	
 		}
 		return json_encode($result);
 	});
