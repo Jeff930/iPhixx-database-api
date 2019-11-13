@@ -555,7 +555,7 @@ class DBQuery
 		return $row;
 	}
 
-	public function getAllModels($params){
+	public function getAllModels(){
 		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models`";
 							
 		$result = mysqli_query($this->db,$sql);
