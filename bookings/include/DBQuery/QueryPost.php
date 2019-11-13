@@ -526,7 +526,7 @@ class DBQuery
 	}
 
 	public function getModels($params){
-		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}'";
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['devtype_id']}' AND `devicebrand_id`  = '{$params['phonebrand_id']}'";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
