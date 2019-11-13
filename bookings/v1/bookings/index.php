@@ -113,16 +113,17 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-	$app->get('/devices/', function (Request $request, Response $response, array $args) use($query) {
-	
-		$params = $request->getQueryParams();
-		if(count($params)){
-		 $result = $query->getModelsByPage($params);		
+	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addBooking($body);	
+		if($result){
+			return json_encode($result);
 		}
-		else{	
-	
-		$result = $query->getModels($params);	
-		}
+	});
+
+	$app->post('/devices/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->getModels($body);	
 		return json_encode($result);
 	});
 
@@ -230,13 +231,7 @@ $app = new \Slim\App;
 	});
 
 
-	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
-		$body = $request->getParsedBody();
-		$result = $query->addBooking($body);	
-		if($result){
-			return json_encode($result);
-		}
-	});
+	
 
 	$app->post('/models/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
