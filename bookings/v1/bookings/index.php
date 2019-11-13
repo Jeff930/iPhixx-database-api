@@ -121,7 +121,7 @@ $app = new \Slim\App;
 		}
 		else{	
 	
-		$result = $query->getModels();	
+		$result = $query->getModels($params);	
 		}
 		return json_encode($result);
 	});
