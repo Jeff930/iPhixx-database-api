@@ -506,7 +506,9 @@ class DBQuery
 	public function getLaptopPrices(){
 		$sql = "SELECT * FROM `laptop_price` WHERE 1";		
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
 	}
 
 	public function getModelsByPage($params){
