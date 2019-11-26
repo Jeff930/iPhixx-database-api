@@ -81,6 +81,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/laptop-prices', function (Request $request, Response $response, array $args) use($query) {
+	
+		$result = $query->getLaptopPrices();		
+		return json_encode($result);
+	});
+
 	$app->get('/tablet', function (Request $request, Response $response, array $args) use($query) {
 	
 		 $result = $query->getTabletModels();		
@@ -112,6 +118,8 @@ $app = new \Slim\App;
 		}
 		return json_encode($result);
 	});
+
+
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
