@@ -503,12 +503,10 @@ class DBQuery
 		return $result;
 	}
 
-	public function getLaptopPrices($params){
+	public function getLaptopPrices(){
 		$sql = "SELECT * FROM `laptop_price` WHERE 1";		
 		$result = mysqli_query($this->db,$sql);
-		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
-		// print_r($result);
-		return $row;
+		return $result;
 	}
 
 	public function getModelsByPage($params){
