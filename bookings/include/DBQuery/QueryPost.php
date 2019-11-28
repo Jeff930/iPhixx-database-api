@@ -577,6 +577,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function updateLaptopPrice($id , $body){
+		$sql = "UPDATE `device_models` SET `screenrep_price` = '{$body['screenrep_price']}', `headrep_price` = '{$body['headrep_price']}' , `earrep_price` = '{$body['earrep_price']}', `powerrep_price` = '{$body['powerrep_price']}', `rearcamrep_price` = '{$body['rearcamrep_price']}', `frontcamrep_price` = '{$body['frontcamrep_price']}', `homerep_price` = '{$body['homerep_price']}', `microphone_price` = '{$body['microphone_price']}', `chargeport_price` = '{$body['chargeport_price']}', `volumerep_price` = '{$body['volumerep_price']}', `battrep_price` = '{$body['battrep_price']}', `signalrep_price` = '{$body['signalrep_price']}', `backglass_price` = '{$body['backglass_price']}' WHERE `device_models`.`devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	public function  editOwner($id,$body){
 
 		// $res  = mysqli_query($this->db,"SELECT `bookings`.`paystatus_no`,`invoices`. FROM bookings WHERE id='$id'");
