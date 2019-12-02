@@ -135,6 +135,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/consoles/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->getConsoles($body);	
+		return json_encode($result);
+	});
+
 	$app->get('/invoicescount/', function (Request $request, Response $response, array $args) use($query) {
 	
 		$params = $request->getQueryParams();
