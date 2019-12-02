@@ -540,6 +540,15 @@ class DBQuery
 		return $row;
 	}
 
+	public function getConsoles($params){
+		$sql = "SELECT * FROM `device_models` WHERE `devtype_id` = '{$params['devtype_id']}'";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		// print_r($result);
+		return $row;
+	}
+
 	public function getAllModelsByPage($params){
 		$model = $params['model'];
 		$limit = 15;
