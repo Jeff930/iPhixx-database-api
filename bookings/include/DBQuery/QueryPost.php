@@ -55,17 +55,6 @@ class DBQuery
 	}
 	//End of Tax
 
-	// public function getModels() {
-	// 	$sql = "SELECT `device_models`.`model_name`, `phone_brands`.`phone_brand`, `device_type`.`type`
-	// 	FROM `device_models`
-	// 				INNER JOIN `phone_brands` ON `device_models`.`phonebrand_id` = `phone_brands`.`phonebrand_id`
-	// 				INNER JOIN `device_type` ON `device_models`.`devtype_id` = `device_type`.`devtype_id`";
-	// 	$result = mysqli_query($this->db,$sql);
-	// 	$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
-	// 	// print_r($result);
-	// 	return $row;
-	// }
-
 	public function getTabletModels() {
 		$sql = "SELECT `tablet_models`.`tmodel_name` FROM `tablet_models`";
 		$result = mysqli_query($this->db,$sql);
@@ -764,7 +753,7 @@ class DBQuery
 
 	public function addBooking($body){
 
-		$sql1 = "INSERT INTO `selected_repairs`(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`, `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, `frontcamrep_selected`, `homerep_selected`, `microphone_selected`, `chargeport_selected`, `volumerep_selected`, `battrep_selected`, `signalrep_selected`, `backglassrep_selected`, `protector_selected`, `tempPhone_selected`) VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}')";
+		$sql1 = "INSERT INTO `selected_repairs`(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`, `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, `frontcamrep_selected`, `homerep_selected`, `microphone_selected`, `chargeport_selected`, `volumerep_selected`, `battrep_selected`, `signalrep_selected`, `backglassrep_selected`, `protector_selected`, `tempPhone_selected`, `keyboardrep_selected`, `fanrep_selected`, `laptopcamrep_selected`,`laptopspeakerrep_selected`,`datarecovery`,`virusremoval`,`virusremoval_withsoftware`,`HDDHalfTeraWithDataTransfer`,`HDDTeraWithDataTransfer`,`	HDDHalfTera`,`HDDTera`,`SSDHalfTeraWithDataTransfer`,`SSDTeraWithDataTransfer`,`SSDHalfTera`,`SSDTera`,`hdmirep_selected`, `harddrive_selected`) VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}')";
 
 		$selectedrepairs = mysqli_query($this->db,$sql1);
 
