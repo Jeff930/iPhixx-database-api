@@ -197,6 +197,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/device/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getDevice($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/repair/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getRepair($id);
@@ -295,6 +303,12 @@ $app = new \Slim\App;
 		return json_encode($body);
 	});
 
+	$app->put('/edit-price/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updatePrice($id,$body);
+		return json_encode($body);
+	});
 
 	$app->put('/lead-lost/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
