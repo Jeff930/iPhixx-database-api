@@ -287,6 +287,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getDevice($id) {
+		$sql = "SELECT * FROM `device_models` WHERE `device_models`.`devicemodel_id` = '{$id}'";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	public function getOwner($id) {
 		$sql = "SELECT `customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,  `customers`.`location`,  `customers`.`email`, `customers`.`location`, `customers`.`phone`,  `customers`.`birthdate`, `customers`.`address` FROM `bookings` INNER JOIN `customers` 
 		ON `bookings`.`customer_id` = `customers`.`customer_id` 
@@ -753,7 +760,19 @@ class DBQuery
 
 	public function addBooking($body){
 
-		$sql1 = "INSERT INTO `selected_repairs`(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`, `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, `frontcamrep_selected`, `homerep_selected`, `microphone_selected`, `chargeport_selected`, `volumerep_selected`, `battrep_selected`, `signalrep_selected`, `backglassrep_selected`, `protector_selected`, `tempPhone_selected`, `keyboardrep_selected`, `fanrep_selected`, `laptopcamrep_selected`,`laptopspeakerrep_selected`,`datarecovery`,`virusremoval`,`virusremoval_withsoftware`,`HDDHalfTeraWithDataTransfer`,`HDDTeraWithDataTransfer`,`	HDDHalfTera`,`HDDTera`,`SSDHalfTeraWithDataTransfer`,`SSDTeraWithDataTransfer`,`SSDHalfTera`,`SSDTera`,`hdmirep_selected`, `harddrive_selected`) VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}','{$body['keyboardrep_selected']}','{$body['fanrep_selected']}','{$body['laptopcamrep_selected']}','{$body['laptopspeakerrep_selected']}','{$body['datarecovery']}','{$body['virusremoval']}','{$body['virusremoval_withsoftware']}','{$body['HDDHalfTeraWithDataTransfer']}','{$body['HDDTeraWithDataTransfer']}','{$body['HDDHalfTera']}','{$body['HDDTera']}','{$body['SSDHalfTeraWithDataTransfer']}','{$body['SSDTeraWithDataTransfer']}','{$body['SSDHalfTera']}','{$body['SSDTera']}','{$body['hdmirep_selected']}','{$body['harddrive_selected']}')";
+		$sql1 = "INSERT INTO `selected_repairs`
+			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
+			 `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, 
+			 `frontcamrep_selected`, `homerep_selected`, `microphone_selected`,
+			 `chargeport_selected`, `volumerep_selected`, `battrep_selected`, 
+			 `signalrep_selected`, `backglassrep_selected`, `protector_selected`, 
+			 `tempPhone_selected`, `keyboardrep_selected`, `fanrep_selected`, 
+			 `laptopcamrep_selected`,`laptopscreenrep_selected`,`laptopspeakerrep_selected`,`datarecovery`,
+			 `virusremoval`,`virusremoval_withsoftware`,`HDDHalfTeraWithDataTransfer`,
+			 `HDDTeraWithDataTransfer`,`HDDHalfTera`,`HDDTera`,
+			 `SSDHalfTeraWithDataTransfer`,`SSDTeraWithDataTransfer`,`SSDHalfTera`,
+			 `SSDTera`,`hdmirep_selected`, `harddrive_selected`)
+			 VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}','{$body['keyboardrep_selected']}','{$body['fanrep_selected']}','{$body['laptopcamrep_selected']}','{$body['laptopscreenrep_selected']}','{$body['laptopspeakerrep_selected']}','{$body['datarecovery']}','{$body['virusremoval']}','{$body['virusremoval_withsoftware']}','{$body['HDDHalfTeraWithDataTransfer']}','{$body['HDDTeraWithDataTransfer']}','{$body['HDDHalfTera']}','{$body['HDDTera']}','{$body['SSDHalfTeraWithDataTransfer']}','{$body['SSDTeraWithDataTransfer']}','{$body['SSDHalfTera']}','{$body['SSDTera']}','{$body['hdmirep_selected']}','{$body['harddrive_selected']}')";
 
 		$selectedrepairs = mysqli_query($this->db,$sql1);
 
@@ -776,141 +795,132 @@ class DBQuery
 			}
 		return $row;
 
-		// $sql = "INSERT INTO `invoices`(`total_price`) VALUES ({$body["total"]})";
-		// $result = mysqli_query($this->db,$sql);
+		$pdf = new FPDF();
 
-		// $sql = "INSERT INTO `tickets`(`ticket_no`) VALUES ('10002')";
-		// $result = mysqli_query($this->db,$sql);
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',16);
 
-		// $sql = "INSERT INTO `bookings` (`owner_id`, `customer_id`, `created_at`, `repstatus_no`, `invoice_no`,`paystatus_no`,`ticket_no`) VALUES ('3', '42', CURRENT_TIMESTAMP, '1','10568', '1','10003')";
-		// $result = mysqli_query($this->db,$sql);
+		$w = array(120,50);
 
-		// $pdf = new FPDF();
+		$pdf->Cell(40,10,'Invoice');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Iphixx');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Name of Store: Walmart');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Name of Agent: Ryan Margolin');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Customer Details');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Full Name: '. $body["fullname"]);
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Email: '. $body["email"]);
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Device Details');
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Device Model: '. $body["brand"]. " ". $body["model"]);
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Color: '. $body["color"]);
+		$pdf->Ln();
+		$pdf->Cell(40,10,'Carrier: '. $body["network"]);
+		$pdf->Ln();
 
-		// $pdf->AddPage();
-		// $pdf->SetFont('Arial','B',16);
+		define('EURO',chr(128));
 
-		// $w = array(120,50);
+		$selectedrepairs=array();
+		$repairstring=str_replace(array( '[', ']','"'), '', $body["repair"]);
+		for($i=0;$i<$body["repairlength"];$i++)
+			$selectedrepairs = explode(',',$repairstring);
 
-		// $pdf->Cell(40,10,'Invoice');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Iphixx');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Name of Store: Walmart');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Name of Agent: Ryan Margolin');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Customer Details');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Full Name: '. $body["fullname"]);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Email: '. $body["email"]);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Device Details');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Device Model: '. $body["brand"]. " ". $body["model"]);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Color: '. $body["color"]);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Carrier: '. $body["network"]);
-		// $pdf->Ln();
+		$prices=array();
+		$pricestring=str_replace(array( '[', ']','"'), '', $body["prices"]);
+		for($i=0;$i<$body["repairlength"];$i++)
+			$prices = explode(',',$pricestring);
 
-		// define('EURO',chr(128));
+		$header = array('Selected Repairs', 'Cost');
+		echo "this". $selectedrepairs[0];
+		echo "this". $selectedrepairs[1];
+		echo "this". $prices[0];
+		echo "this". $prices[1];
+		// echo "this2". $selectedrepairs[1];
+    	// Header
+    	for($i=0;$i<count($header);$i++)
+        	$pdf->Cell($w[$i],7,$header[$i],1,0,'C');
+    	$pdf->Ln();
 
-		// $selectedrepairs=array();
-		// $repairstring=str_replace(array( '[', ']','"'), '', $body["repair"]);
-		// for($i=0;$i<$body["repairlength"];$i++)
-		// 	$selectedrepairs = explode(',',$repairstring);
+    	for($i=0;$i<count($selectedrepairs);$i++){
+        	$pdf->Cell($w[0],7,$selectedrepairs[$i],1,0,'C');
+        	$pdf->Cell($w[1],7,$prices[$i]. " ".EURO,1,0,'C');
+    		$pdf->Ln();
+    }
+    $pdf->Ln();
+    	// Data
+    	// foreach($selectedrepairs as $row)
+    	// {
+     //    	$pdf->Cell($w[0],6,$row[0],'LR');
+     //    	$pdf->Cell($w[1],6,$row[1],'LR');
+     //    	$pdf->Ln();
+    	// }
+    	// Closing line
 
-		// $prices=array();
-		// $pricestring=str_replace(array( '[', ']','"'), '', $body["prices"]);
-		// for($i=0;$i<$body["repairlength"];$i++)
-		// 	$prices = explode(',',$pricestring);
-
-		// $header = array('Selected Repairs', 'Cost');
-		// echo "this". $selectedrepairs[0];
-		// echo "this". $selectedrepairs[1];
-		// echo "this". $prices[0];
-		// echo "this". $prices[1];
-		// // echo "this2". $selectedrepairs[1];
-  //   	// Header
-  //   	for($i=0;$i<count($header);$i++)
-  //       	$pdf->Cell($w[$i],7,$header[$i],1,0,'C');
-  //   	$pdf->Ln();
-
-  //   	for($i=0;$i<count($selectedrepairs);$i++){
-  //       	$pdf->Cell($w[0],7,$selectedrepairs[$i],1,0,'C');
-  //       	$pdf->Cell($w[1],7,$prices[$i]. " ".EURO,1,0,'C');
-  //   		$pdf->Ln();
-  //   }
-  //   $pdf->Ln();
-  //   	// Data
-  //   	// foreach($selectedrepairs as $row)
-  //   	// {
-  //    //    	$pdf->Cell($w[0],6,$row[0],'LR');
-  //    //    	$pdf->Cell($w[1],6,$row[1],'LR');
-  //    //    	$pdf->Ln();
-  //   	// }
-  //   	// Closing line
-
-  //   	$pdf->Cell($w[0],7,"Total Cost: ",'','','C');
-  //       $pdf->Cell($w[1],7,$body["total"]. ".00 ".EURO,'','','C');
+    	$pdf->Cell($w[0],7,"Total Cost: ",'','','C');
+        $pdf->Cell($w[1],7,$body["total"]. ".00 ".EURO,'','','C');
 		
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,"Thank you for your business with iPhixx!");
+		$pdf->Ln();
+		$pdf->Cell(40,10,"Thank you for your business with iPhixx!");
 		
-		// $pdfdoc = $pdf->Output('', 'S');
+		$pdfdoc = $pdf->Output('', 'S');
 
-		// $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
-  //   //Server settings
-  //   $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-  //   $mail->isSMTP();                                      // Set mailer to use SMTP
-  //   $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
-  //   $mail->SMTPAuth = true;                               // Enable SMTP authentication
-  //   $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
-  //   $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
-  //   $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-  //   $mail->Port =  465;                                    // TCP port to connect to
-
-
+    //Server settings
+    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
+    $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port =  465;                                    // TCP port to connect to
 
 
-  //   //Recipients
-  //   $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
-  //   $mail->addAddress($body["email"]);     // Add a recipient
-  //   // $mail->addAddress('ellen@example.com');               // Name is optional
-  //   //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
-  //   // $mail->addCC('cc@example.com');
-  //   // $mail->addBCC('bcc@example.com');
-
-  //   // //Attachments
-  //   // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-  //   // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-  //   $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
-
-  //   $mail->DKIM_domain = "admin.iphixx.com";
-  //   $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
-  //   $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
-  //   $mail->DKIM_passphrase = "";
-  //   $mail->DKIM_identifier = $mail->From;
-  //   $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
 
 
-  //   //Content
-  //   $mail->isHTML(true);                                  // Set email format to HTML
+    //Recipients
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+    $mail->addAddress('jefferson30.jdg@gmail.com');     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
+
+    $mail->DKIM_domain = "admin.iphixx.com";
+    $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
+    $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
+    $mail->DKIM_passphrase = "";
+    $mail->DKIM_identifier = $mail->From;
+    $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
+
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
 
   
-  //   		$mail->Subject = 'Invoice';
-  //   			$mail->Body    = 'Here is your receipt';
-  //   			$mail->AltBody = 'Here is your receipt';
+    		$mail->Subject = 'Invoice';
+    			$mail->Body    = 'Here is your receipt';
+    			$mail->AltBody = 'Here is your receipt';
 
    
-  //   $mail->send();
+    $mail->send();
 
-	//	return $result;
+		return $result;
 	}
 }
 	
