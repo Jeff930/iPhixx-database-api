@@ -875,6 +875,8 @@ class DBQuery
 
 		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
+		try{
+
     //Server settings
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -918,7 +920,13 @@ class DBQuery
     			$mail->AltBody = 'Here is your receipt';
 
    
+    //$mail->send();
+
     $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 
 		return $result;
 	}
