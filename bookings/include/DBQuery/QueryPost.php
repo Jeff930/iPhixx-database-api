@@ -759,8 +759,10 @@ class DBQuery
 
 
 	public function addBooking($body){
-		$res  = mysqli_query($this->db,"SELECT `customers`.`email` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id` = {$id}");
+		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
 		$row = mysqli_fetch_assoc($res);
+		$userFirstName = $row['customer_fname'];
+		$userLastName = $row['customer_lname'];
 		$userEmail = $row['email'];
 
 		$sql1 = "INSERT INTO `selected_repairs`
@@ -817,9 +819,9 @@ class DBQuery
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Customer Details');
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Full Name: '. $body["fullname"]);
+		$pdf->Cell(40,10,'Full Name: '. $userFirstName. " ". $userLastName);
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Email: '. $body["email"]);
+		$pdf->Cell(40,10,'Email: '. $userEmail);
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Device Details');
 		$pdf->Ln();
