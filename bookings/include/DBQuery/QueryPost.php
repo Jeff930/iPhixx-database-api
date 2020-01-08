@@ -765,6 +765,12 @@ class DBQuery
 		$userLastName = $row['customer_lname'];
 		$userEmail = $row['email'];
 
+		$res  = mysqli_query($this->db,"SELECT * FROM `agents` WHERE `agents`.`agent_id` = '{$body['agent_id']}'");
+		$row = mysqli_fetch_assoc($res);
+		$agentFirstName = $row['agent_fname'];
+		$agentLastName = $row['agent_lname'];
+		$agentStoreName = $row['store-assigned'];
+
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
 			 `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, 
@@ -811,9 +817,9 @@ class DBQuery
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Iphixx');
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Name of Store: Walmart');
+		$pdf->Cell(40,10,'Name of Store: '. $agentStoreName);
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Name of Agent: Ryan Margolin');
+		$pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
 		$pdf->Ln();
