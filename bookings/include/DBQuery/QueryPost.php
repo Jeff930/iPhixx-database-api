@@ -771,21 +771,16 @@ class DBQuery
 		$agentLastName = $row['agent_lname'];
 		$agentStoreName = $row['store_assigned'];
 
-		$brand = $body['brand'];
+		$res  = mysqli_query($this->db,"SELECT * FROM `device_brands` WHERE `devicebrand_id` = '{$body['brand']}'");
+		$row = mysqli_fetch_assoc($res);
+		$brand = $row['device_brand'];
 
-		switch ($brand) {
-    		case 1:
-        		code to be executed if n=label1;
-        	break;
-    		
-    		case 2:
-        		code to be executed if n=label2;
-        	break;
-    
-    		case 3:
-        		code to be executed if n=label3;
-        	break;
-		}
+		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
+		$row = mysqli_fetch_assoc($res);
+		$userFirstName = $row['customer_fname'];
+		$userLastName = $row['customer_lname'];
+		$userEmail = $row['email'];
+		
 
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
