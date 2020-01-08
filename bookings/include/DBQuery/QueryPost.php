@@ -759,6 +759,9 @@ class DBQuery
 
 
 	public function addBooking($body){
+		$res  = mysqli_query($this->db,"SELECT `customers`.`email` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id` = {$id}");
+		$row = mysqli_fetch_assoc($res);
+		$userEmail = $row['email'];
 
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
@@ -793,7 +796,7 @@ class DBQuery
 			} else {
    				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
 			}
-		return $row;
+		//return $row;
 
 		$pdf = new FPDF();
 
@@ -892,7 +895,7 @@ class DBQuery
 
     //Recipients
     $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
-    $mail->addAddress('jefferson30.jdg@gmail.com');     // Add a recipient
+    $mail->addAddress($userEmail);      // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
     // $mail->addCC('cc@example.com');
@@ -923,12 +926,12 @@ class DBQuery
     //$mail->send();
 
     $mail->send();
-    echo 'Message has been sent';
+    return 'Message has been sent';
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
-		return $result;
+		
 	}
 }
 	
