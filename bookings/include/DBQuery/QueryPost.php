@@ -775,11 +775,9 @@ class DBQuery
 		$row = mysqli_fetch_assoc($res);
 		$brand = $row['device_brand'];
 
-		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
+		$res  = mysqli_query($this->db,"SELECT * FROM `device_models` WHERE `devicemodel_id` = '{$body['model']}'");
 		$row = mysqli_fetch_assoc($res);
-		$userFirstName = $row['customer_fname'];
-		$userLastName = $row['customer_lname'];
-		$userEmail = $row['email'];
+		$model = $row['device_model'];
 		
 
 		$sql1 = "INSERT INTO `selected_repairs`
