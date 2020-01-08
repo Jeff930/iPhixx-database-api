@@ -769,7 +769,7 @@ class DBQuery
 		$row = mysqli_fetch_assoc($res);
 		$agentFirstName = $row['agent_fname'];
 		$agentLastName = $row['agent_lname'];
-		$agentStoreName = $row['store-assigned'];
+		$agentStoreName = $row['store_assigned'];
 
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
