@@ -771,6 +771,22 @@ class DBQuery
 		$agentLastName = $row['agent_lname'];
 		$agentStoreName = $row['store_assigned'];
 
+		$brand = $body['brand'];
+
+		switch ($brand) {
+    		case 1:
+        		code to be executed if n=label1;
+        	break;
+    		
+    		case 2:
+        		code to be executed if n=label2;
+        	break;
+    
+    		case 3:
+        		code to be executed if n=label3;
+        	break;
+		}
+
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
 			 `earrep_selected`, `powerrep_selected`, `rearcamrep_selected`, 
