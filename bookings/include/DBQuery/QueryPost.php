@@ -840,7 +840,7 @@ class DBQuery
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Device Details');
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Device Model: '. $body["brand"]. " ". $body["model"]);
+		$pdf->Cell(40,10,'Device Model: '. $brand. " ". $model);
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Color: '. $body["color"]);
 		$pdf->Ln();
