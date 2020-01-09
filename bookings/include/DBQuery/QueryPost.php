@@ -783,8 +783,9 @@ class DBQuery
 		$row = mysqli_fetch_assoc($res);
 		$color = $row['color_name'];
 
-		
-		
+		$res  = mysqli_query($this->db,"SELECT * FROM `carriers` WHERE `carrier_no` = '{$body['network']}'");
+		$row = mysqli_fetch_assoc($res);
+		$carrier = $row['carrier_name'];
 
 		$sql1 = "INSERT INTO `selected_repairs`
 			(`selectedrepair_no`, `screenrep_selected`, `headrep_selected`,
@@ -848,9 +849,9 @@ class DBQuery
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Device Model: '. $brand. " ". $model);
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Color: '. $body["color"]);
+		$pdf->Cell(40,10,'Color: '. $color);
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Carrier: '. $body["network"]);
+		$pdf->Cell(40,10,'Carrier: '. $carrier);
 		$pdf->Ln();
 
 		define('EURO',chr(128));
