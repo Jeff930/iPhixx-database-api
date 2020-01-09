@@ -777,7 +777,7 @@ class DBQuery
 
 		$res  = mysqli_query($this->db,"SELECT * FROM `device_models` WHERE `devicemodel_id` = '{$body['model']}'");
 		$row = mysqli_fetch_assoc($res);
-		$model = $row['device_model'];
+		$model = $row['model_name'];
 		
 
 		$sql1 = "INSERT INTO `selected_repairs`
@@ -795,6 +795,8 @@ class DBQuery
 			 VALUES (NULL,'{$body['screenrep_selected']}','{$body['headrep_selected']}','{$body['earrep_selected']}','{$body['powerrep_selected']}','{$body['rearcamrep_selected']}','{$body['frontcamrep_selected']}','{$body['homerep_selected']}','{$body['microphone_selected']}','{$body['chargeport_selected']}','{$body['volumerep_selected']}','{$body['battrep_selected']}','{$body['signalrep_selected']}','{$body['backglassrep_selected']}','{$body['screenOffer']}','{$body['phoneOffer']}','{$body['keyboardrep_selected']}','{$body['fanrep_selected']}','{$body['laptopcamrep_selected']}','{$body['laptopscreenrep_selected']}','{$body['laptopspeakerrep_selected']}','{$body['datarecovery']}','{$body['virusremoval']}','{$body['virusremoval_withsoftware']}','{$body['HDDHalfTeraWithDataTransfer']}','{$body['HDDTeraWithDataTransfer']}','{$body['HDDHalfTera']}','{$body['HDDTera']}','{$body['SSDHalfTeraWithDataTransfer']}','{$body['SSDTeraWithDataTransfer']}','{$body['SSDHalfTera']}','{$body['SSDTera']}','{$body['hdmirep_selected']}','{$body['harddrive_selected']}')";
 
 		$selectedrepairs = mysqli_query($this->db,$sql1);
+
+		return $selectedrepairs;
 
 		$repairs_id =  mysqli_insert_id($this->db);
 
@@ -893,60 +895,60 @@ class DBQuery
 		
 		$pdfdoc = $pdf->Output('', 'S');
 
-		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+// 		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
-		try{
+// 		try{
 
-    //Server settings
-    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-    $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
-    $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
-    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port =  465;                                    // TCP port to connect to
-
-
+//     //Server settings
+//     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+//     $mail->isSMTP();                                      // Set mailer to use SMTP
+//     $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
+//     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+//     $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
+//     $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
+//     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+//     $mail->Port =  465;                                    // TCP port to connect to
 
 
-    //Recipients
-    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
-    $mail->addAddress($userEmail);      // Add a recipient
-    // $mail->addAddress('ellen@example.com');               // Name is optional
-    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
-    // $mail->addCC('cc@example.com');
-    // $mail->addBCC('bcc@example.com');
-
-    // //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-    $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
-
-    $mail->DKIM_domain = "admin.iphixx.com";
-    $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
-    $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
-    $mail->DKIM_passphrase = "";
-    $mail->DKIM_identifier = $mail->From;
-    $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
 
 
-    //Content
-    $mail->isHTML(true);                                  // Set email format to HTML
+//     //Recipients
+//     $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+//     $mail->addAddress($userEmail);      // Add a recipient
+//     // $mail->addAddress('ellen@example.com');               // Name is optional
+//     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+//     // $mail->addCC('cc@example.com');
+//     // $mail->addBCC('bcc@example.com');
+
+//     // //Attachments
+//     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+//     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+//     $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
+
+//     $mail->DKIM_domain = "admin.iphixx.com";
+//     $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
+//     $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
+//     $mail->DKIM_passphrase = "";
+//     $mail->DKIM_identifier = $mail->From;
+//     $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
+
+
+//     //Content
+//     $mail->isHTML(true);                                  // Set email format to HTML
 
   
-    		$mail->Subject = 'Invoice';
-    			$mail->Body    = 'Here is your receipt';
-    			$mail->AltBody = 'Here is your receipt';
+//     		$mail->Subject = 'Invoice';
+//     			$mail->Body    = 'Here is your receipt';
+//     			$mail->AltBody = 'Here is your receipt';
 
    
-    //$mail->send();
+//     //$mail->send();
 
-    $mail->send();
-    return 'Message has been sent';
-} catch (Exception $e) {
-    return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+//     $mail->send();
+//     return 'Message has been sent';
+// } catch (Exception $e) {
+//     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+// }
 
 		
 	}
