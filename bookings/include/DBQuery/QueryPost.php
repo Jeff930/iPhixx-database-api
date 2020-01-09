@@ -778,6 +778,12 @@ class DBQuery
 		$res  = mysqli_query($this->db,"SELECT * FROM `device_models` WHERE `devicemodel_id` = '{$body['model']}'");
 		$row = mysqli_fetch_assoc($res);
 		$model = $row['model_name'];
+
+		$res  = mysqli_query($this->db,"SELECT * FROM `color` WHERE `color_no` = '{$body['color']}'");
+		$row = mysqli_fetch_assoc($res);
+		$color = $row['color_name'];
+
+		
 		
 
 		$sql1 = "INSERT INTO `selected_repairs`
