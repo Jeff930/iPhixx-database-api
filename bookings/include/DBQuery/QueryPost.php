@@ -833,13 +833,19 @@ class DBQuery
     	$pdf->SetFillColor(63,139,197);
     	$pdf->SetTextColor(255,255,255);
 
-		$pdf->Cell(190,15,'Iphixx',1,0,'C',1);
+		$pdf->Cell(190,15,'iPhixx',1,0,'C',1);
+		$pdf->Ln();
 		$pdf->Ln();
 
-		$pdf->SetFont('Arial','B',16);
-		$pdf->SetTextColor(255,255,255);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','B',14);
 		
-		$pdf->Cell(40,10,'Name of Store: '. $agentStoreName);
+		$pdf->Cell(90,10,'Billed By: ');
+		$pdf->Cell(90,10,'Billed To: ');
+		
+		$pdf->Ln();
+		$pdf->Cell(20,10,$agentStoreName);
+
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
 		$pdf->Ln();
