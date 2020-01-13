@@ -825,13 +825,12 @@ class DBQuery
 		$pdf = new FPDF();
 
 		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',16);
+		$pdf->SetFont('Arial','B',30);
 
 		$w = array(120,50);
 
-		$pdf->Cell(40,10,'Invoice');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Iphixx');
+		$pdf->Cell(180,15,'Iphixx',1,0,'C');
+
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Name of Store: '. $agentStoreName);
 		$pdf->Ln();
