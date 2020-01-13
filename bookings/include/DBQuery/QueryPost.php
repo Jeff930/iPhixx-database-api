@@ -829,42 +829,50 @@ class DBQuery
 
 		$w = array(120,60);
 
+
 		$pdf->SetDrawColor(63,139,197);
     	$pdf->SetFillColor(63,139,197);
     	$pdf->SetTextColor(255,255,255);
-
-		$pdf->Cell(190,15,'iPhixx',1,0,'C',1);
-		$pdf->Ln();
+		$pdf->Cell(190,20,'iPhixx',1,0,'C',1);
 		$pdf->Ln();
 
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','B',14);
-		
+		$pdf->Cell(60,10,'Booking Number: ');
+		$pdf->SetFont('Arial','',14);
+		$pdf->Cell(60,10,'123456789');
+		$pdf->Ln();
+		$pdf->Ln();
+
+		$pdf->SetTextColor(164, 171, 176);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(90,10,'Billed By: ');
 		$pdf->Cell(90,10,'Billed To: ');
-		
 		$pdf->Ln();
-		$pdf->Cell(20,10,$agentStoreName);
 
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','B',14);
+		$pdf->Cell(90,10,$agentStoreName);
+		$pdf->Cell(90,10,$userFirstName. " ". $userLastName);
 		$pdf->Ln();
-		$pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Repair Number Confirmation: 0123456789');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Customer Details');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Full Name: '. $userFirstName. " ". $userLastName);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Email: '. $userEmail);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Device Details');
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Device Model: '. $brand. " ". $model);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Color: '. $color);
-		$pdf->Ln();
-		$pdf->Cell(40,10,'Carrier: '. $carrier);
-		$pdf->Ln();
+
+		// $pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
+		// $pdf->Ln();
+		
+		// $pdf->Cell(40,10,'Customer Details');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Full Name: '. );
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Email: '. $userEmail);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Device Details');
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Device Model: '. $brand. " ". $model);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Color: '. $color);
+		// $pdf->Ln();
+		// $pdf->Cell(40,10,'Carrier: '. $carrier);
+		// $pdf->Ln();
 
 		define('EURO',chr(128));
 
