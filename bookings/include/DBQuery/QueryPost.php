@@ -838,47 +838,34 @@ class DBQuery
 
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','B',14);
-		$pdf->Cell(55,10,'Booking Number: ');
+		$pdf->Cell(55,15,'Booking Number: ');
 		$pdf->SetFont('Arial','',14);
-		$pdf->Cell(60,10,'123456789');
-		$pdf->Ln();
+		$pdf->Cell(60,15,'123456789');
 		$pdf->Ln();
 
 		$pdf->SetTextColor(164, 171, 176);
 		$pdf->SetFont('Arial','B',10);
-		$pdf->Cell(90,10,'Billed By: ');
-		$pdf->Cell(90,10,'Billed To: ');
+		$pdf->Cell(90,8,'Billed By: ');
+		$pdf->Cell(90,8,'Billed To: ');
+		$pdf->Ln();
+
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(90,8,$agentStoreName);
+		$pdf->Cell(90,8,$userFirstName. " ". $userLastName);
+		$pdf->Ln();
+
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(90,8,$agentFirstName. " ". $agentLastName);
+		$pdf->Cell(90,8,$userEmail);
+		$pdf->Ln();
 		$pdf->Ln();
 
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','B',14);
-		$pdf->Cell(90,10,$agentStoreName);
-		$pdf->Cell(90,10,$userFirstName. " ". $userLastName);
+		$pdf->Cell(180,10,$brand. " ". $model. " ". $color. " ".$carrier);
 		$pdf->Ln();
-
-		$pdf->SetTextColor(0,0,0);
-		$pdf->SetFont('Arial','B',14);
-		$pdf->Cell(90,10,$agentFirstName. " ". $agentLastName);
-		$pdf->Cell(90,10,$userEmail);
-		$pdf->Ln();
-
-		// $pdf->Cell(40,10,'Name of Agent: '. );
-		// $pdf->Ln();
-		
-		// $pdf->Cell(40,10,'Customer Details');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Full Name: '. );
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Email: '. );
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Device Details');
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Device Model: '. $brand. " ". $model);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Color: '. $color);
-		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Carrier: '. $carrier);
-		// $pdf->Ln();
 
 		define('EURO',chr(128));
 
