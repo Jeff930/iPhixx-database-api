@@ -825,13 +825,18 @@ class DBQuery
 		$pdf = new FPDF();
 
 		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',30);
+		$pdf->SetFont('Arial','B',50);
 
-		$w = array(120,50);
+		$w = array(120,60);
 
-		$pdf->Cell(180,15,'Iphixx',1,0,'C');
+		$pdf->SetDrawColor(63,139,197);
+    	$pdf->SetFillColor(63,139,197);
+    	$pdf->SetTextColor(255,255,255);
 
+		$pdf->Cell(190,15,'Iphixx',1,0,'C',1);
 		$pdf->Ln();
+
+		$pdf->SetFont('Arial','B',16);
 		$pdf->Cell(40,10,'Name of Store: '. $agentStoreName);
 		$pdf->Ln();
 		$pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
