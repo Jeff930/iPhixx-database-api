@@ -838,7 +838,7 @@ class DBQuery
 
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','B',14);
-		$pdf->Cell(60,10,'Booking Number: ');
+		$pdf->Cell(55,10,'Booking Number: ');
 		$pdf->SetFont('Arial','',14);
 		$pdf->Cell(60,10,'123456789');
 		$pdf->Ln();
@@ -856,14 +856,20 @@ class DBQuery
 		$pdf->Cell(90,10,$userFirstName. " ". $userLastName);
 		$pdf->Ln();
 
-		// $pdf->Cell(40,10,'Name of Agent: '. $agentFirstName. " ". $agentLastName);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','B',14);
+		$pdf->Cell(90,10,$agentFirstName. " ". $agentLastName);
+		$pdf->Cell(90,10,$userEmail);
+		$pdf->Ln();
+
+		// $pdf->Cell(40,10,'Name of Agent: '. );
 		// $pdf->Ln();
 		
 		// $pdf->Cell(40,10,'Customer Details');
 		// $pdf->Ln();
 		// $pdf->Cell(40,10,'Full Name: '. );
 		// $pdf->Ln();
-		// $pdf->Cell(40,10,'Email: '. $userEmail);
+		// $pdf->Cell(40,10,'Email: '. );
 		// $pdf->Ln();
 		// $pdf->Cell(40,10,'Device Details');
 		// $pdf->Ln();
