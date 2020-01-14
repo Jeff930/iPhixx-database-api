@@ -1015,9 +1015,9 @@ class DBQuery
     //Recipients
     $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
     $mail->addBCC($userEmail);      // Add a recipient
-    $mail->addBCC('ryan@iphixx.com');
-    $mail->addBCC('shealy@iphixx.com');
-    $mail->addBCC('sales@iphixx.com');
+    // $mail->addBCC('ryan@iphixx.com');
+    // $mail->addBCC('shealy@iphixx.com');
+    // $mail->addBCC('sales@iphixx.com');
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
     // $mail->addCC('cc@example.com');
