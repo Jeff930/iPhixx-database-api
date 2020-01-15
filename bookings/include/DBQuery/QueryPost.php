@@ -869,7 +869,7 @@ class DBQuery
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,'');
-		$pdf->Cell(90,8,);
+		$pdf->Cell(90,8,$timestamp);
 		$pdf->Ln();
 		$pdf->Ln();
 
