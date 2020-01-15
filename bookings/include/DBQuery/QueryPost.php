@@ -840,7 +840,7 @@ class DBQuery
 		$pdf->Cell(190,20,'iPhixx',1,0,'C',1);
 		$pdf->Ln();
 
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','B',14);
 		$pdf->Cell(55,15,'Booking Number: ');
 		$pdf->SetFont('Arial','',14);
@@ -853,26 +853,26 @@ class DBQuery
 		$pdf->Cell(90,8,'Billed To: ');
 		$pdf->Ln();
 
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,$agentStoreName);
 		$pdf->Cell(90,8,$userFirstName. " ". $userLastName);
 		$pdf->Ln();
 
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,$agentFirstName. " ". $agentLastName);
 		$pdf->Cell(90,8,$userEmail);
 		$pdf->Ln();
 
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,'');
 		$pdf->Cell(90,8,$timestamp);
 		$pdf->Ln();
 		$pdf->Ln();
 
-		$pdf->SetTextColor(0,0,0);
+		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','B',14);
 		$pdf->Cell(180,10,$brand. " ". $model. " ". $color. " ".$carrier);
 		$pdf->Ln();
@@ -902,7 +902,7 @@ class DBQuery
 
     	$pdf->SetDrawColor(220,220,220);
     	$pdf->SetFillColor(0);
-    	$pdf->SetTextColor(0);
+    	$pdf->SetTextColor(50,50,50);
     	$pdf->SetFont('Arial','',14);
 
     	if ($body["screenrep_selected"] == '1'){
