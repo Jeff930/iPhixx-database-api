@@ -889,7 +889,7 @@ class DBQuery
 		for($i=0;$i<$body["repairlength"];$i++)
 			$prices = explode(',',$pricestring);
 
-		$header = array('Selected Repairs', 'Cost');
+		$header = array('SELECTED REPAIRS', 'AMOUNT');
 		
     	// Header
     	for($i=0;$i<count($header);$i++)
