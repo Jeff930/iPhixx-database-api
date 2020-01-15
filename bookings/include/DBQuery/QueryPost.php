@@ -811,6 +811,10 @@ class DBQuery
 
 		$timestamp_id = mysqli_insert_id($this->db);
 
+		$res  = mysqli_query($this->db,"SELECT * FROM `booking_timestamps` WHERE `timestamp_no` = '$timestamp_id'");
+		$row = mysqli_fetch_assoc($res);
+		$timestamp = $row['created_at'];
+
 		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
 
 		$result = mysqli_query($this->db,$sql);
@@ -818,7 +822,7 @@ class DBQuery
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
 			} else {
-   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+   				 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
 			}
 		//return $row;
 
@@ -859,6 +863,13 @@ class DBQuery
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,$agentFirstName. " ". $agentLastName);
 		$pdf->Cell(90,8,$userEmail);
+		$pdf->Ln();
+		$pdf->Ln();
+
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(90,8,'');
+		$pdf->Cell(90,8,);
 		$pdf->Ln();
 		$pdf->Ln();
 
