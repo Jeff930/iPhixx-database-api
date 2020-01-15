@@ -900,7 +900,7 @@ class DBQuery
     	}	
     	$pdf->Ln();
 
-    	$pdf->SetDrawColor(0);
+    	$pdf->SetDrawColor(220,220,220);
     	$pdf->SetFillColor(0);
     	$pdf->SetTextColor(0);
     	$pdf->SetFont('Arial','',14);
