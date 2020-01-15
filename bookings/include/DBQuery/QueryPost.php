@@ -864,7 +864,6 @@ class DBQuery
 		$pdf->Cell(90,8,$agentFirstName. " ". $agentLastName);
 		$pdf->Cell(90,8,$userEmail);
 		$pdf->Ln();
-		$pdf->Ln();
 
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial','',12);
