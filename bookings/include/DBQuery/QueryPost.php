@@ -837,7 +837,7 @@ class DBQuery
 		$pdf->SetDrawColor(63,139,197);
     	$pdf->SetFillColor(63,139,197);
     	$pdf->SetTextColor(255,255,255);
-		$pdf->Cell(190,20,'IPHIXX PHONE REPAIR SERVICES',1,0,'C',1);
+		$pdf->Cell(190,15,'IPHIXX REPAIR SERVICES',1,0,'C',1);
 		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
@@ -907,92 +907,92 @@ class DBQuery
 
     	if ($body["screenrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Screen Replacement',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["screenrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["screenrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["headrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Headphone Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["headrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["headrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["earrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Earpiece Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["earrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["earrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["powerrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Power Button Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["powerrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["powerrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["rearcamrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Rear Camera Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["rearcamrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["rearcamrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["frontcamrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Front Camera Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["frontcamrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["frontcamrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["homerep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Home Button Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["homerep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["homerep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["microphone_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Microphone Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["microphone_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["microphone_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["chargeport_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Charging Port Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["chargeport_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["chargeport_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["volumerep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Volume Button Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["homerep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["homerep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["battrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Battery Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["battrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["battrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["signalrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Cellular Signal Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["signalrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["signalrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["backglassrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Back Glass Repair',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["backglassrep_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["backglassrep_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
     	if ($body["screenOffer"] == '1'){
     		$pdf->Cell($w[0],10,'Screen Protector',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["screenOffer_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["screenOffer_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
 
     	if ($body["phoneOffer"] == '1'){
     		$pdf->Cell($w[0],10,'Temporary Phone',1,0,'C');
-        	$pdf->Cell($w[1],10,$body["phoneOffer_price"]. " ".EURO,1,0,'C');
+        	$pdf->Cell($w[1],10,EURO.$body["phoneOffer_price"],1,0,'C');
     		$pdf->Ln();
     	}
 
