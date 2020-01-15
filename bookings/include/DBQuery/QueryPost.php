@@ -837,7 +837,7 @@ class DBQuery
 		$pdf->SetDrawColor(63,139,197);
     	$pdf->SetFillColor(63,139,197);
     	$pdf->SetTextColor(255,255,255);
-		$pdf->Cell(190,30,'iPhixx',1,0,'C',1);
+		$pdf->Cell(190,20,'IPHIXX PHONE REPAIR SERVICES',1,0,'C',1);
 		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
@@ -903,7 +903,7 @@ class DBQuery
     	$pdf->SetDrawColor(220,220,220);
     	$pdf->SetFillColor(0);
     	$pdf->SetTextColor(50,50,50);
-    	$pdf->SetFont('Arial','',14);
+    	$pdf->SetFont('Arial','',12);
 
     	if ($body["screenrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Screen Replacement',1,0,'C');
