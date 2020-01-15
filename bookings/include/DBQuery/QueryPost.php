@@ -831,7 +831,7 @@ class DBQuery
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','',35);
 
-		$w = array(120,60);
+		$w = array(125,65);
 
 
 		$pdf->SetDrawColor(63,139,197);
@@ -892,9 +892,18 @@ class DBQuery
 		$header = array('SELECTED REPAIRS', 'AMOUNT');
 		
     	// Header
-    	for($i=0;$i<count($header);$i++)
-        	$pdf->Cell($w[$i],7,$header[$i],1,0,'C');
+    	for($i=0;$i<count($header);$i++){
+    		$pdf->SetDrawColor(63,139,197);
+    		$pdf->SetFillColor(63,139,197);
+    		$pdf->SetTextColor(255,255,255);
+        	$pdf->Cell($w[$i],10,$header[$i],1,0,'C',1);
+    	}	
     	$pdf->Ln();
+
+    	$pdf->SetDrawColor(0);
+    	$pdf->SetFillColor(0);
+    	$pdf->SetTextColor(0);
+    	$pdf->SetFont('Arial','',14);
 
     	if ($body["screenrep_selected"] == '1'){
     		$pdf->Cell($w[0],7,'Screen Replacement',1,0,'C');
