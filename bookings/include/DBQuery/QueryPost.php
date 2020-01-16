@@ -1038,11 +1038,11 @@ class DBQuery
 
 
     //Recipients
-    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"iPhixx Phone Repair Services");
     $mail->addBCC($userEmail);      // Add a recipient
-    // $mail->addBCC('ryan@iphixx.com');
-    // $mail->addBCC('shealy@iphixx.com');
-    // $mail->addBCC('sales@iphixx.com');
+    $mail->addBCC('ryan@iphixx.com');
+    $mail->addBCC('shealy@iphixx.com');
+    $mail->addBCC('sales@iphixx.com');
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
     // $mail->addCC('cc@example.com');
@@ -1051,7 +1051,7 @@ class DBQuery
     // //Attachments
     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-    $mail->addStringAttachment($pdfdoc, 'my-doc.pdf');
+    $mail->addStringAttachment($pdfdoc, $userFirstName. " ". $userLastName." ".$brand. " ". $model. " ". $color. " ".$carrier.'.pdf');
 
     $mail->DKIM_domain = "admin.iphixx.com";
     $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
@@ -1065,9 +1065,9 @@ class DBQuery
     $mail->isHTML(true);                                  // Set email format to HTML
 
   
-    		$mail->Subject = 'Invoice';
-    			$mail->Body    = 'Here is your receipt';
-    			$mail->AltBody = 'Here is your receipt';
+    		$mail->Subject = 'IPhixx Repair Invoice';
+    			$mail->Body    = "Hi ".$userFirstName."! Thank you for your business with iPhixx. The attached file shall serve as your invoice.";
+    			$mail->AltBody = "Hi ".$userFirstName."! Thank you for your business with iPhixx. The attached file shall serve as your invoice.";
 
    
     //$mail->send();
