@@ -815,7 +815,13 @@ class DBQuery
 		$row = mysqli_fetch_assoc($res);
 		$timestamp = $row['created_at'];
 
-		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+		if ($body["device"] == '1' || $body["device"] == '2'){
+    		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+    	}else{
+    		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,NULL,NULL,NULL,NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+    	}
+
+		
 
 		$result = mysqli_query($this->db,$sql);
 
@@ -1040,9 +1046,9 @@ class DBQuery
     //Recipients
     $mail->setFrom('iphixxmail@admin.iphixx.com',"iPhixx Phone Repair Services");
     $mail->addBCC($userEmail);      // Add a recipient
-    $mail->addBCC('ryan@iphixx.com');
-    $mail->addBCC('shealy@iphixx.com');
-    $mail->addBCC('sales@iphixx.com');
+    // $mail->addBCC('ryan@iphixx.com');
+    // $mail->addBCC('shealy@iphixx.com');
+    // $mail->addBCC('sales@iphixx.com');
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
     // $mail->addCC('cc@example.com');
