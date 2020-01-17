@@ -1002,6 +1002,18 @@ class DBQuery
     		$pdf->Ln();
     	}
 
+    	if ($body["harddriverep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Hard Drive Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["harddrive_rep"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["hdmirep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'HDMI Port Replacement',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["hdmirep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
     $pdf->Ln();
     	// Data
     	// foreach($selectedrepairs as $row)
