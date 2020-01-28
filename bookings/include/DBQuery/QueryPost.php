@@ -1020,6 +1020,110 @@ class DBQuery
     		$pdf->Ln();
     	}
 
+
+
+
+    	if ($body["laptopscreenrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Screen Replacement',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["laptopscreenrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["laptopcamrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Headphone Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["laptopcamrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["keyboardrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Earpiece Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["keyboardrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["fanrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Power Button Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["fanrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["laptopspeakerrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Rear Camera Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["laptopspeakerrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["laptopchargeport_selectedd"] == '1'){
+    		$pdf->Cell($w[0],10,'Front Camera Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["laptopchargerep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["laptopbattrep_selected"] == '1'){
+    		$pdf->Cell($w[0],10,'Home Button Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["laptopbatteryrep_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["datarecovery"] == '1'){
+    		$pdf->Cell($w[0],10,'Microphone Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["datarecovery_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["virusremoval_withsoftware"] == '1'){
+    		$pdf->Cell($w[0],10,'Charging Port Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["virusremoval_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["HDDHalfTeraWithDataTransfer"] == '1'){
+    		$pdf->Cell($w[0],10,'Volume Button Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["HDDHalfTeraWithDataTransfer_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["HDDTeraWithDataTransfer"] == '1'){
+    		$pdf->Cell($w[0],10,'Battery Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["HDDTeraWithDataTransfer_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["HDDHalfTera"] == '1'){
+    		$pdf->Cell($w[0],10,'Cellular Signal Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["HDDHalfTera_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["HDDTera"] == '1'){
+    		$pdf->Cell($w[0],10,'Back Glass Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["HDDTera_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["SSDHalfTeraWithDataTransfer"] == '1'){
+    		$pdf->Cell($w[0],10,'Screen Protector',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["SSDHalfTeraWithDataTransfer_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+    	if ($body["SSDTeraWithDataTransfer"] == '1'){
+    		$pdf->Cell($w[0],10,'Temporary Phone',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["SSDTeraWithDataTransfer_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["SSDHalfTera"] == '1'){
+    		$pdf->Cell($w[0],10,'Hard Drive Repair',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["SSDHalfTera_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
+    	if ($body["SSDTera"] == '1'){
+    		$pdf->Cell($w[0],10,'HDMI Port Replacement',1,0,'C');
+        	$pdf->Cell($w[1],10,EURO. " ".$body["SSDTera_price"],1,0,'C');
+    		$pdf->Ln();
+    	}
+
     $pdf->Ln();
     	// Data
     	// foreach($selectedrepairs as $row)
