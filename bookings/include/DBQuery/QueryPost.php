@@ -818,9 +818,12 @@ class DBQuery
 		if ($body["device"] == '1' || $body["device"] == '2'){
     		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,'{$body['network']}',NULL,'{$body['color']}',NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
     	}else{
-    		$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,NULL,NULL,NULL,NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+    		 if ($body["device"] == '3'){
+    			$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,NULL,NULL,NULL,NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+    			}else{
+    				$sql = "INSERT INTO `bookings`(`bookings_id`, `carrier_no`, `other_carrier`, `color_no`, `other_color`, `customer_id`, `devtype_id`, `invoice_no`, `invoicestatus_no`, `devicebrand_id`, `devicemodel_id`, `other_phonebrand`, `other_phonemodel`, `tabletbrand_id`, `tabletmodel_id`, `other_tabletbrand`, `other_tabletmodel`, `ticket_no`, `leadstatus_no`, `timestamp_no`, `selectedrepair_no`, `consume_no`, `agent_id`, `total_price`,`repairstatus_no`,`ticketstatus_no`) VALUES (NULL,NULL,NULL,NULL,NULL,'{$body['customer_id']}','{$body['device']}',NULL,NULL,'{$body['brand']}','{$body['model']}',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1', '{$timestamp_id}','{$repairs_id}',NULL,'{$body['agent_id']}','{$body['total']}',NULL,NULL)";
+    			}
     	}
-
 		
 
 		$result = mysqli_query($this->db,$sql);
@@ -840,11 +843,7 @@ class DBQuery
 		$w = array(125,65);
 
 
-		$pdf->SetDrawColor(63,139,197);
-    	$pdf->SetFillColor(63,139,197);
-    	$pdf->SetTextColor(255,255,255);
-		$pdf->Cell(190,20,'IPHIXX REPAIR SERVICES',1,0,'C',1);
-		$pdf->Ln();
+		
 
 		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','B',14);
@@ -855,8 +854,8 @@ class DBQuery
 
 		$pdf->SetTextColor(164, 171, 176);
 		$pdf->SetFont('Arial','B',10);
-		$pdf->Cell(90,8,'Billed By: ');
-		$pdf->Cell(90,8,'Billed To: ');
+		$pdf->Cell(90,8,'Booked By: ');
+		$pdf->Cell(90,8,'Customer Details: ');
 		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
@@ -869,6 +868,13 @@ class DBQuery
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,$agentFirstName. " ". $agentLastName);
 		$pdf->Cell(90,8,$userEmail);
+		$pdf->Ln();
+
+		$pdf->SetTextColor(50,50,50);
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(90,8,'');
+		$pdf->Cell(90,8,$timestamp);
+		$pdf->Ln();
 		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
@@ -1091,7 +1097,7 @@ class DBQuery
     //$mail->send();
 
     $mail->send();
-    return 'Message has been sent';
+    return;
 } catch (Exception $e) {
     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
