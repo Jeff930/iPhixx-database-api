@@ -1038,7 +1038,7 @@ class DBQuery
 
     	$pdf->SetTextColor(0);
     	$pdf->SetFont('Arial','B',20);
-        $pdf->Cell(60,12,$body["total"]. ".00 ".EURO,'','','C');
+        $pdf->Cell(60,12,EURO. " ".$body["total"]. ".00 ",'','','C');
 		
 		$pdf->Ln();
 		
