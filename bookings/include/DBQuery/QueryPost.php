@@ -764,6 +764,7 @@ class DBQuery
 		$userFirstName = $row['customer_fname'];
 		$userLastName = $row['customer_lname'];
 		$userEmail = $row['email'];
+		$phoneNumber = $row['phone'];
 
 		$res  = mysqli_query($this->db,"SELECT * FROM `agents` WHERE `agents`.`agent_id` = '{$body['agent_id']}'");
 		$row = mysqli_fetch_assoc($res);
@@ -873,8 +874,7 @@ class DBQuery
 		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','',12);
 		$pdf->Cell(90,8,'');
-		$pdf->Cell(90,8,$timestamp);
-		$pdf->Ln();
+		$pdf->Cell(90,8,$phoneNumber);
 		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
