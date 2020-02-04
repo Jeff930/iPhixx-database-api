@@ -876,14 +876,8 @@ class DBQuery
 
 		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','',12);
-		$pdf->Cell(90,8,'');
-		$pdf->Cell(90,8,$phoneNumber);
-		$pdf->Ln();
-
-		$pdf->SetTextColor(50,50,50);
-		$pdf->SetFont('Arial','',12);
-		$pdf->Cell(90,8,'');
 		$pdf->Cell(90,8,$timestamp);
+		$pdf->Cell(90,8,$phoneNumber);
 		$pdf->Ln();
 		$pdf->Ln();
 
