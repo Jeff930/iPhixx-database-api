@@ -843,10 +843,9 @@ class DBQuery
 
 		$w = array(125,65);
 
-		$pdf->Image('https://booking.iphixx.com/assets/imgs/invoice.jpg',90,30,30,0,'JPG');
+		$pdf->Image('https://booking.iphixx.com/assets/imgs/invoice.jpg',10,10,60,0,'JPG');
 		
-		$pdf->Ln();
-		$pdf->Ln();
+		$pdf->Cell(60,15,'');
 		$pdf->Ln();
 		$pdf->Ln();
 
