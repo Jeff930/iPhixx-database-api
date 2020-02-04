@@ -843,8 +843,12 @@ class DBQuery
 
 		$w = array(125,65);
 
-		$pdf->Image('http://chart.googleapis.com/chart?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World',60,30,90,0,'PNG');
+		$pdf->Image('https://booking.iphixx.com/assets/imgs/invoice.jpg',90,30,30,0,'JPG');
 		
+		$pdf->Ln();
+		$pdf->Ln();
+		$pdf->Ln();
+		$pdf->Ln();
 
 		$pdf->SetTextColor(50,50,50);
 		$pdf->SetFont('Arial','B',14);
