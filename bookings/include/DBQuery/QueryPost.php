@@ -258,7 +258,7 @@ class DBQuery
 		$result = mysqli_query($this->db,$sql);
 
 		$sql1 = "DELETE FROM `customers` WHERE `customer_id` = {$id}";
-		$result1 = mysqli_query($this->db,$sql);
+		$result1 = mysqli_query($this->db,$sql1);
 		return $result1;
 	}
 
