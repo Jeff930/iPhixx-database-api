@@ -254,9 +254,12 @@ class DBQuery
 
 
 	public function deleteCustomer($id){
-		$sql = "DELETE FROM `customers` WHERE `customers`.`customer_id` = {$id}";
+		$sql = "DELETE FROM `bookings` WHERE `bookings`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+
+		$sql1 = "DELETE FROM `customers` WHERE `customer_id` = {$id}";
+		$result1 = mysqli_query($this->db,$sql);
+		return $result1;
 	}
 
 	public function deleteAgent($id){
