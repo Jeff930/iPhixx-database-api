@@ -812,6 +812,14 @@ class DBQuery
 
 		$timestamp_id = mysqli_insert_id($this->db);
 
+		$sql3 = "INSERT INTO `invoices`(`invoice_no`, `tax_id`, `unsettled_timestamp`, `settled_timestamp`) VALUES (NULL,NULL,CURRENT_TIMESTAMP,NULL)";
+
+		$invoice = mysqli_query($this->db,$sql3);
+
+		$invoice_id = mysqli_insert_id($this->db);
+
+		return $invoice_id;
+
 		$res  = mysqli_query($this->db,"SELECT * FROM `booking_timestamps` WHERE `timestamp_no` = '$timestamp_id'");
 		$row = mysqli_fetch_assoc($res);
 		$timestamp = $row['created_at'];
