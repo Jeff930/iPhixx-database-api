@@ -246,7 +246,7 @@ class DBQuery
 	// }
 
 	public function updateBooking($id , $body){
-		$sql = "UPDATE `dev_owner` INNER JOIN `bookings` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` SET `owner_name` = '{$body["fullname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}', `birthdate` = '{$body["birthdate"]}' WHERE `bookings`.`id` = {$id}";
+		$sql = "UPDATE `dev_owner` INNER JOIN `bookings` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` SET `owner_name` = '{$body["fullname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}', `birthdate` = '{$body["birthdate"]}',`location_id` = '{$body["location_id"]}' WHERE `bookings`.`id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
