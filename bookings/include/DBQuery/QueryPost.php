@@ -211,7 +211,7 @@ class DBQuery
 	// }
 
 	public function addCustomer($body){
-		$sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`,`altPhone`, `birthdate`,`address`,`location_id`) VALUES (NULL, '{$body["firstName"]}', '{$body["lastName"]}' ,  '{$body["email"]}', '{$body["mobile"]}','{$body["phone"]}', '{$body["birthdate"]}','{$body["address"]}','{$body["location_id"]}')";
+		$sql = "INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname` , `email`, `phone`,`altPhone`, `birthdate`,`address`,`location_id`,`smsOption`) VALUES (NULL, '{$body["firstName"]}', '{$body["lastName"]}' ,  '{$body["email"]}', '{$body["mobile"]}','{$body["phone"]}', '{$body["birthdate"]}','{$body["address"]}','{$body["location_id"]}','{$body["smsOption"]}')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -224,12 +224,10 @@ class DBQuery
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `location` = '{$body["location"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
-
 		return $result;
 	}
 
 	public function updateAgent($id , $body){
-		
 		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `agent_location` = '{$body["agent_location"]}', `store_assigned` = '{$body["store_assigned"]}',`agent_pin` = '{$body["agent_pin"]}',`agent_password` = '{$body["agent_password"]}' WHERE `agents`.`agent_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
