@@ -761,6 +761,12 @@ class DBQuery
 		return $result;	
 	}
 
+	// public function updateCustomer($id , $body){
+	
+	// 	return $client;
+	// }
+
+
 	public function addBooking($body){
 		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
 		$row = mysqli_fetch_assoc($res);
@@ -847,6 +853,8 @@ class DBQuery
 			}
 		//return $row;
 
+		
+		
 		
 
 		$pdf = new FPDF();
@@ -1029,9 +1037,6 @@ class DBQuery
         	$pdf->Cell($w[1],10,EURO. " ".$body["hdmirep_price"],1,0,'C');
     		$pdf->Ln();
     	}
-
-
-
 
     	if ($body["laptopscreenrep_selected"] == '1'){
     		$pdf->Cell($w[0],10,'Laptop Screen Replacement',1,0,'C');
