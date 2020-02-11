@@ -1,9 +1,11 @@
 <?php
 
 require_once '../../include/DBOps/DBConnection.php';
+require __DIR__ . '/twilio-php-master/src/Twilio/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Twilio\Rest\Client;
 
 require 'vendor/autoload.php';
 require 'fpdf181/fpdf.php';
@@ -220,6 +222,7 @@ class DBQuery
 			}
 		return $row;
 	}
+
 
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
@@ -758,7 +761,6 @@ class DBQuery
 		return $result;	
 	}
 
-
 	public function addBooking($body){
 		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
 		$row = mysqli_fetch_assoc($res);
@@ -766,6 +768,8 @@ class DBQuery
 		$userLastName = $row['customer_lname'];
 		$userEmail = $row['email'];
 		$phoneNumber = $row['phone'];
+		$smsOption = $row['smsOption'];
+
 
 		$res  = mysqli_query($this->db,"SELECT * FROM `agents` WHERE `agents`.`agent_id` = '{$body['agent_id']}'");
 		$row = mysqli_fetch_assoc($res);
@@ -842,6 +846,8 @@ class DBQuery
    				 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
 			}
 		//return $row;
+
+		
 
 		$pdf = new FPDF();
 
