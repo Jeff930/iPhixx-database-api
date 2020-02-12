@@ -707,10 +707,14 @@ class DBQuery
 			$result1 = mysqli_query($this->db,$sql);
 		
 
-		$res  = mysqli_query($this->db,"SELECT `customers`.`email` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id` = {$id}");
+		$res  = mysqli_query($this->db,"SELECT `customers`.`email`,`customers`.`smsOption` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id` = {$id}");
 		$row = mysqli_fetch_assoc($res);
 		$userEmail = $row['email'];
+		$smsOption = $row['smsOption'];
 //$userEmail = 'paulcampbell.iphixx@gmail.com';
+
+
+		
 
 		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
@@ -728,7 +732,7 @@ class DBQuery
 
 
     //Recipients
-    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"iPhixx Phone Repair Services");
     $mail->addAddress($userEmail);     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
