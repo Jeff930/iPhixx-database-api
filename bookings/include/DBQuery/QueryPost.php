@@ -299,7 +299,7 @@ class DBQuery
 	}
 
 	public function getOwner($id) {
-		$sql = "SELECT `customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,  `customers`.`location`,  `customers`.`email`, `customers`.`location`, `customers`.`phone`,  `customers`.`birthdate`, `customers`.`address` FROM `bookings` INNER JOIN `customers` 
+		$sql = "SELECT `customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,  `customers`.`location`,  `customers`.`email`, `customers`.`location_id`, `customers`.`phone`,  `customers`.`birthdate`, `customers`.`address`,`customers`.`smsOption` FROM `bookings` INNER JOIN `customers` 
 		ON `bookings`.`customer_id` = `customers`.`customer_id` 
 		WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
