@@ -197,6 +197,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/invoice/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getInvoice($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/device/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getDevice($id);
