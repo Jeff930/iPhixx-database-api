@@ -308,12 +308,11 @@ class DBQuery
 	}
 
 	public function getInvoice($id) {
-		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `device_brands`.`device_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM `bookings` LEFT JOIN `agents` ON `bookings`.`agent_id` = `agents`.`agent_id`
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id` FROM `bookings` 
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
-							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
                             LEFT JOIN  `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no`
                             WHERE `invoices`.`invoice_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
