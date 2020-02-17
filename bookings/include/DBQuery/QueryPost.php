@@ -456,7 +456,7 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
+		$sql_count = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
 					  FROM `bookings`  
 					  		INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
 							INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
@@ -466,7 +466,7 @@ class DBQuery
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
+		$sql = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
 					  FROM `bookings`  
 					  		INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
 							INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
