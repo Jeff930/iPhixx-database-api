@@ -458,9 +458,9 @@ class DBQuery
 
 		$sql_count = "SELECT `tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
 					  FROM `bookings`  
-					  		LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
-							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
-							LEFT JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no`";
+					  		INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
+							INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
+							INNER JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no`";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
@@ -468,9 +468,9 @@ class DBQuery
 
 		$sql = "SELECT `tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
 					  FROM `bookings`  
-					  		LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
-							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
-							LEFT JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no` LIMIT 15 OFFSET {$offset} ";
+					  		INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id`
+							INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
+							INNER JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no` LIMIT 15 OFFSET {$offset} ";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['tickets']=mysqli_fetch_all($result,MYSQLI_ASSOC);
