@@ -704,7 +704,7 @@ class DBQuery
 			$result = mysqli_query($this->db,$sql);
 		}
 
-		$res  = mysqli_query($this->db,"SELECT `dev_owner`.`email` FROM `bookings` INNER JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` WHERE `bookings`.`bookings_id`='$id'");
+		$res  = mysqli_query($this->db,"SELECT `customers`.`email` FROM `bookings` INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` WHERE `bookings`.`bookings_id`='$id'");
 		$row = mysqli_fetch_assoc($res);
 		$userEmail = $row['email'];
 //$userEmail = 'paulcampbell.iphixx@gmail.com';
