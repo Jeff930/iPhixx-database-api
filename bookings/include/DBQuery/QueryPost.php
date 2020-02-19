@@ -619,7 +619,6 @@ class DBQuery
 
 
 	public function  updateBookingStatus($id){
-
 		$res  = mysqli_query($this->db,"SELECT `repstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '$id'");
 		$row = mysqli_fetch_assoc($res);
 		$status = $row['repstatus_no'];
@@ -629,6 +628,79 @@ class DBQuery
 			$result = mysqli_query($this->db,$sql);
 		} elseif ($status == 2) {
 			$sql = "UPDATE `bookings` INNER JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` SET `bookings`.`repstatus_no` = '3', `booking_timestamps`.`resolved_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
+			$result = mysqli_query($this->db,$sql);
+		}
+
+		$res  = mysqli_query($this->db,"SELECT `dev_owner`.`email` FROM `bookings` INNER JOIN `dev_owner` ON `bookings`.`owner_id` = `dev_owner`.`owner_id` WHERE `bookings`.`bookings_id`='$id'");
+		$row = mysqli_fetch_assoc($res);
+		$userEmail = $row['email'];
+//$userEmail = 'paulcampbell.iphixx@gmail.com';
+
+		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    //Server settings
+    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
+    $mail->Password = '{Ae,E$R};!M)';                           // SMTP password
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port =  465;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+    $mail->addAddress($userEmail);     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    $mail->DKIM_domain = "admin.iphixx.com";
+    $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
+    $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
+    $mail->DKIM_passphrase = "";
+    $mail->DKIM_identifier = $mail->From;
+    $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
+
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+
+    if ($status == 1) {
+    		$mail->Subject = 'In Progress';
+    			$mail->Body    = 'Your repair is now in progress';
+    			$mail->AltBody = 'Your repair is now in progress';
+		} elseif ($status == 2) {
+    		$mail->Subject = 'Completed';
+    			$mail->Body    = 'Your repair has been completed';
+    			$mail->AltBody = 'Your repair has been completed';
+		}
+   
+    $mail->send();
+
+		return true;	
+	}
+
+	public function  updateTicketStatus($id){
+		$res  = mysqli_query($this->db,"SELECT `ticketstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '$id'");
+		$row = mysqli_fetch_assoc($res);
+		$status = $row['ticketstatus_no'];
+
+		if ($status == 1) {
+    		$sql = "UPDATE `bookings` INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` SET `bookings`.`ticketstatus_no` = '2', `tickets`.`outbound_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
+			$result = mysqli_query($this->db,$sql);
+		} elseif ($status == 2) {
+			$sql = "UPDATE `bookings` INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` SET `bookings`.`ticketstatus_no` = '3', `tickets`.`ongoing_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
+			$result = mysqli_query($this->db,$sql);
+		} elseif ($status == 3) {
+			$sql = "UPDATE `bookings` INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` SET `bookings`.`ticketstatus_no` = '4', `tickets`.`inbound_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
+			$result = mysqli_query($this->db,$sql);
+		} elseif ($status == 4) {
+			$sql = "UPDATE `bookings` INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` SET `bookings`.`ticketstatus_no` = '5', `tickets`.`resolved_Timestamp` = CURRENT_TIMESTAMP WHERE `bookings`.`bookings_id` = {$id}";
 			$result = mysqli_query($this->db,$sql);
 		}
 
