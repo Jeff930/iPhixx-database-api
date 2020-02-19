@@ -744,13 +744,25 @@ class DBQuery
     $mail->isHTML(true);                                  // Set email format to HTML
 
     if ($status == 1) {
-    		$mail->Subject = 'In Progress';
-    			$mail->Body    = 'Your repair is now in progress';
-    			$mail->AltBody = 'Your repair is now in progress';
+    		$mail->Subject = 'Ticket Creation';
+    			$mail->Body    = 'The ticket for your repair has been created.';
+    			$mail->AltBody = 'The ticket for your repair has been created.';
 		} elseif ($status == 2) {
-    		$mail->Subject = 'Completed';
-    			$mail->Body    = 'Your repair has been completed';
-    			$mail->AltBody = 'Your repair has been completed';
+    		$mail->Subject = 'Repair Outbound';
+    			$mail->Body    = 'Your device for repair is now being delivered to the repair hub.';
+    			$mail->AltBody = 'Your device for repair is now being delivered to the repair hub.';
+		} elseif ($status == 3) {
+    		$mail->Subject = 'Repair Ongoing';
+    			$mail->Body    = 'Your device for repair has arrived to the repair center and is now for repair.';
+    			$mail->AltBody = 'Your device for repair has arrived to the repair center and is now for repair.';
+		} elseif ($status == 4) {
+    		$mail->Subject = 'Repair Outbound';
+    			$mail->Body    = 'The repair for your device is finished and is now being delivered back to the repair center.';
+    			$mail->AltBody = 'The repair for your device is finished and is now being delivered back to the repair center.';
+		} elseif ($status == 5) {
+    		$mail->Subject = 'Repair Resolved';
+    			$mail->Body    = 'Your repaired device is now available for collection. Thank you for your business with iPhixx.';
+    			$mail->AltBody = 'Your repaired device is now available for collection. Thank you for your business with iPhixx.';
 		}
    
     $mail->send();
