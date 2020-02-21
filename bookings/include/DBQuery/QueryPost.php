@@ -321,13 +321,13 @@ class DBQuery
 	}
 
 	public function getTicket($id) {
-		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone` FROM `bookings` 
-							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
+		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`tickets`.`outbound_timestamp`,`tickets`.`ongoing_timestamp`,`tickets`.`inbound_timestamp`,`tickets`.`resolved_timestamp` FROM `bookings` 
+							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` 
+							LEFT JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
-                            LEFT JOIN  `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no`
-                            WHERE `invoices`.`invoice_no` = {$id}";
+                            WHERE `tickets`.`ticket_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
