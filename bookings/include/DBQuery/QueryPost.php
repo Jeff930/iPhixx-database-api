@@ -320,6 +320,19 @@ class DBQuery
 		return $row;
 	}
 
+	public function getTicket($id) {
+		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone` FROM `bookings` 
+							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
+							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
+							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
+							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
+                            LEFT JOIN  `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no`
+                            WHERE `invoices`.`invoice_no` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	public function getRepair($id){
 		$sql = "SELECT `device_type`.`type`,`bookings`.`devtype_id`,`device_brands`.`device_brand`, `device_models`.`model_name`, `device_models`.`model_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`,`selected_repairs`.`protector_selected`,`selected_repairs`.`tempPhone_selected`,`selected_repairs`.`keyboardrep_selected`,`selected_repairs`.`fanrep_selected`,`selected_repairs`.`laptopcamrep_selected`,`selected_repairs`.`laptopscreenrep_selected`,`selected_repairs`.`laptopspeakerrep_selected`,`selected_repairs`.`datarecovery`,`selected_repairs`.`virusremoval`,`selected_repairs`.`virusremoval_withsoftware`,`selected_repairs`.`HDDHalfTeraWithDataTransfer`,`selected_repairs`.`HDDTeraWithDataTransfer`,`selected_repairs`.`HDDHalfTera`,`selected_repairs`.`HDDTera`,`selected_repairs`.`SSDHalfTeraWithDataTransfer`,`selected_repairs`.`SSDTeraWithDataTransfer`,`selected_repairs`.`SSDHalfTera`,`selected_repairs`.`SSDTera`,`selected_repairs`.`hdmirep_selected`,`selected_repairs`.`harddrive_selected`
 
@@ -725,7 +738,7 @@ class DBQuery
     $mail->Port =  465;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('iphixxmail@admin.iphixx.com',"Mailer");
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"iPhixx Phone Repair Services");
     $mail->addAddress($userEmail);     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
@@ -771,7 +784,8 @@ class DBQuery
    
     $mail->send();
 
-		return true;	
+	return true;	
+	
 	}
 
 	public function transferLead($id){
@@ -1322,7 +1336,7 @@ class DBQuery
     //$mail->send();
 
     $mail->send();
-    return;
+    return $mail;
 } catch (Exception $e) {
     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
