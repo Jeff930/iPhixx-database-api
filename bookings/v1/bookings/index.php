@@ -205,6 +205,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/ticket/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getTicket($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/device/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getDevice($id);
