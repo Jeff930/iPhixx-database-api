@@ -647,19 +647,52 @@ class DBQuery
 		else
 			$homerep_price = null;
 
-		if ({$body['frontcamrep_price']} != 'null')
-			$frontcamrep_price = $body['frontcamrep_price'];
+		if ({$body['microphone_price']} != 'null')
+			$microphone_price = $body['microphone_price'];
 		else
-			$frontcamrep_price = null;
+			$microphone_price = null;
 
-		if ({$body['frontcamrep_price']} != 'null')
-			$frontcamrep_price = $body['frontcamrep_price'];
+		if ({$body['chargeport_price']} != 'null')
+			$chargeport_price = $body['chargeport_price'];
 		else
-			$frontcamrep_price = null;
-		
-			
+			$chargeport_price = null;
 
-		$sql = "UPDATE `device_models` SET `screenrep_price` = '{$screenrep_price}', `headrep_price` = '{$headrep_price}' , `earrep_price` = '{$earrep_price}', `powerrep_price` = '{$powerrep_price}', `rearcamrep_price` = '{$rearcamrep_price}', `frontcamrep_price` = '{$frontcamrep_price}', `homerep_price` = '{$homerep_price}', `microphone_price` = '{$body['microphone_price']}', `chargeport_price` = '{$body['chargeport_price']}', `volumerep_price` = '{$body['volumerep_price']}', `battrep_price` = '{$body['battrep_price']}', `signalrep_price` = '{$body['signalrep_price']}', `backglass_price` = '{$body['backglass_price']}' WHERE `device_models`.`devicemodel_id` = {$id}";
+		if ({$body['volumerep_price']} != 'null')
+			$volumerep_price = $body['volumerep_price'];
+		else
+			$volumerep_price = null;
+
+		if ({$body['battrep_price']} != 'null')
+			$battrep_price = $body['battrep_price'];
+		else
+			$battrep_price = null;
+
+		if ({$body['signalrep_price']} != 'null')
+			$signalrep_price = $body['signalrep_price'];
+		else
+			$signalrep_price = null;
+
+		if ({$body['backglass_price']} != 'null')
+			$backglass_price = $body['backglass_price'];
+		else
+			$backglass_price = null;
+
+		if ({$body['trackpad_price']} != 'null')
+			$trackpad_price = $body['trackpad_price'];
+		else
+			$trackpad_price = null;
+
+		if ({$body['hdmirep_price']} != 'null')
+			$hdmirep_price = $body['hdmirep_price'];
+		else
+			$hdmirep_price = null;
+
+		if ({$body['harddrive_rep']} != 'null')
+			$harddrive_rep = $body['harddrive_rep'];
+		else
+			$harddrive_rep = null;
+
+		$sql = "UPDATE `device_models` SET `screenrep_price` = '{$screenrep_price}', `headrep_price` = '{$headrep_price}' , `earrep_price` = '{$earrep_price}', `powerrep_price` = '{$powerrep_price}', `rearcamrep_price` = '{$rearcamrep_price}', `frontcamrep_price` = '{$frontcamrep_price}', `homerep_price` = '{$homerep_price}', `microphone_price` = '{$microphone_price}', `chargeport_price` = '{$chargeport_price}', `volumerep_price` = '{$volumerep_price}', `battrep_price` = '{$battrep_price}', `signalrep_price` = '{$signalrep_price}', `backglass_price` = '{$backglass_price}', `hdmirep_price` = '{$hdmirep_price}', `trackpad_price` = '{$trackpad_price}', `harddrive_rep` = '{$harddrive_rep}' WHERE `device_models`.`devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
