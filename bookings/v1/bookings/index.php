@@ -326,6 +326,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->put('/edit-laptop-price/',function(Request $request, Response $response, array $args) use($query){
+		$body = $request->getParsedBody();
+		$result = $query->updateLaptopPrice($body);
+		return json_encode($result);
+	});
+
 	$app->put('/lead-lost/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->leadLost($id);
