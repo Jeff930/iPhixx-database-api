@@ -106,6 +106,19 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/logistics/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getLogisticsByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getLogistics();	
+		}
+		return json_encode($result);
+	});
+
 	$app->get('/all-devices/', function (Request $request, Response $response, array $args) use($query) {
 	
 		$params = $request->getQueryParams();
