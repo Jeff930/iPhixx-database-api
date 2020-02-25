@@ -612,121 +612,123 @@ class DBQuery
 	}
 
 	public function updatePrice($id , $body){
+
+		$sql = "UPDATE `device_models` SET "; 
 		if ($body['screenrep_price'] != 'null'){
-			(string) $screenrep_price = $body['screenrep_price'];
+			$sql = $sql."`screenrep_price` = '{$body['screenrep_price']}',";
 		}
 		else{
-			$screenrep_price = null;
+			$sql = $sql."`screenrep_price` = NULL,";
 		}
 
 		if ($body['headrep_price'] != 'null'){
-			(string) $headrep_price = $body['headrep_price'];
+			$sql = $sql."`headrep_price` = '{$body['headrep_price']}',";
 		}
 		else{
-			$headrep_price = null;
+			$sql = $sql."`headrep_price` = NULL,";
 		}
 
 		if ($body['earrep_price'] != 'null'){
-			(string) $earrep_price = $body['earrep_price'];
+			$sql = $sql."`earrep_price` = '{$body['earrep_price']}',";
 		}
 		else{
-			$earrep_price = null;
+			$sql = $sql."`earrep_price` = NULL,";
 		}
 
+
 		if ($body['powerrep_price'] != 'null'){
-			(string) $powerrep_price = $body['powerrep_price'];
+			$sql = $sql."`powerrep_price` = '{$body['powerrep_price']}',";
 		}
 		else{
-			$powerrep_price = null;
+			$sql = $sql."`powerrep_price` = NULL,";
 		}
 
 		if ($body['rearcamrep_price'] != 'null'){
-			(string) $rearcamrep_price = $body['rearcamrep_price'];
+			$sql = $sql."`rearcamrep_price` = '{$body['rearcamrep_price']}',";
 		}
 		else{
-			$rearcamrep_price = null;
+			$sql = $sql."`rearcamrep_price` = NULL,";
 		}
 
 		if ($body['frontcamrep_price'] != 'null'){
-			(string) $frontcamrep_price = $body['frontcamrep_price'];
+			$sql = $sql."`frontcamrep_price` = '{$body['frontcamrep_price']}',";
 		}
 		else{
-			$frontcamrep_price = null;
+			$sql = $sql."`frontcamrep_price` = NULL,";
 		}
 
 		if ($body['homerep_price'] != 'null'){
-			(string) $homerep_price = $body['homerep_price'];
+			$sql = $sql."`homerep_price` = '{$body['homerep_price']}',";
 		}
 		else{
-			$homerep_price = null;
+			$sql = $sql."`homerep_price` = NULL,";
 		}
 
 		if ($body['microphone_price'] != 'null'){
-			(string) $microphone_price = $body['microphone_price'];
+			$sql = $sql."`microphone_price` = '{$body['microphone_price']}',";
 		}
 		else{
-			$microphone_price = null;
+			$sql = $sql."`microphone_price` = NULL,";
 		}
 
 		if ($body['chargeport_price'] != 'null'){
-			(string) $chargeport_price = $body['chargeport_price'];
+			$sql = $sql."`chargeport_price` = '{$body['chargeport_price']}',";
 		}
 		else{
-			$chargeport_price = null;
+			$sql = $sql."`chargeport_price` = NULL,";
 		}
 
 		if ($body['volumerep_price'] != 'null'){
-			(string) $volumerep_price = $body['volumerep_price'];
+			$sql = $sql."`volumerep_price` = '{$body['volumerep_price']}',";
 		}
 		else{
-			$volumerep_price = null;
+			$sql = $sql."`volumerep_price` = NULL,";
 		}
 
 		if ($body['battrep_price'] != 'null'){
-			(string) $battrep_price = $body['battrep_price'];
+			$sql = $sql."`battrep_price` = '{$body['battrep_price']}',";
 		}
 		else{
-			$battrep_price = null;
+			$sql = $sql."`battrep_price` = NULL,";
 		}
 
 		if ($body['signalrep_price'] != 'null'){
-			(string) $signalrep_price = $body['signalrep_price'];
+			$sql = $sql."`signalrep_price` = '{$body['signalrep_price']}',";
 		}
 		else{
-			$signalrep_price = null;
+			$sql = $sql."`signalrep_price` = NULL,";
 		}
 
 		if ($body['backglass_price'] != 'null'){
-			(string) $backglass_price = $body['backglass_price'];
+			$sql = $sql."`backglass_price` = '{$body['backglass_price']}',";
 		}
 		else{
-			$backglass_price = null;
+			$sql = $sql."`backglass_price` = NULL,";
 		}
 
 		if ($body['trackpad_price'] != 'null'){
-			(string) $trackpad_price = $body['trackpad_price'];
+			$sql = $sql."`trackpad_price` = '{$body['trackpad_price']}',";
 		}
 		else{
-			$trackpad_price = null;
+			$sql = $sql."`trackpad_price` = NULL,";
 		}
 
 		if ($body['hdmirep_price'] != 'null'){
-			(string) $hdmirep_price = $body['hdmirep_price'];
+			$sql = $sql."`hdmirep_price` = '{$body['hdmirep_price']}',";
 		}
 		else{
-			$hdmirep_price = NULL;
+			$sql = $sql."`hdmirep_price` = NULL,";
 		}
 
 		if ($body['harddrive_rep'] != 'null'){
-			(string) $harddrive_rep = $body['harddrive_rep'];
+			$sql = $sql."`harddrive_rep` = '{$body['harddrive_rep']}',";
 		}
 		else{
-			$harddrive_rep = NULL;
+			$sql = $sql."`harddrive_rep` = NULL ";
 		}
 
-		$sql = "UPDATE `device_models` SET `screenrep_price` = $screenrep_price, `headrep_price` = $headrep_price , `earrep_price` = $earrep_price, `powerrep_price` = $powerrep_price, `rearcamrep_price` = $rearcamrep_price, `frontcamrep_price` = $frontcamrep_price, `homerep_price` = $homerep_price, `microphone_price` = $microphone_price, `chargeport_price` = $chargeport_price, `volumerep_price` = $volumerep_price, `battrep_price` = $battrep_price, `signalrep_price` = $signalrep_price, `backglass_price` = $backglass_price, `hdmirep_price` = $hdmirep_price, `trackpad_price` = $trackpad_price, `harddrive_rep` = $harddrive_rep WHERE `device_models`.`devicemodel_id` = {$id}";
-
-		return $sql;
+		$sql = $sql." WHERE `device_models`.`devicemodel_id` = {$id}";
+		
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
