@@ -439,7 +439,7 @@ class DBQuery
 		$sql = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`bookings`.`leadstatus_no`, `bookings`.`ticketstatus_no`,`locations`.`location_name` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `locations` ON `bookings`.`location_id` = `locations`.`location_id` LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
-		$row['invoices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['logistics']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
 		// print_r($result);
 		return $row;
