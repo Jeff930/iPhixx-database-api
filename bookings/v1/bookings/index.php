@@ -323,7 +323,7 @@ $app = new \Slim\App;
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
 		$result = $query->updatePrice($id,$body);
-		return json_encode($body);
+		return json_encode($result);
 	});
 
 	$app->put('/lead-lost/{id}',function(Request $request, Response $response, array $args) use($query){
