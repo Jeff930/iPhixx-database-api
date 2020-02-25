@@ -416,6 +416,35 @@ class DBQuery
 		return $row;
 	}
 
+	public function getLogistics(){
+		$sql = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`bookings`.`leadstatus_no`, `bookings`.`ticketstatus_no`,`locations`.`location_name` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `locations` ON `bookings`.`location_id` = `locations`.`location_id`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
+
+	public function getLogisticsByPage($params){
+		$page = $params['page'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`bookings`.`leadstatus_no`, `bookings`.`ticketstatus_no`,`locations`.`location_name` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `locations` ON `bookings`.`location_id` = `locations`.`location_id` ";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total_page"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT `bookings`.`bookings_id`,`tickets`.`ticket_no`,`bookings`.`leadstatus_no`, `bookings`.`ticketstatus_no`,`locations`.`location_name` FROM `bookings` LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` LEFT JOIN `locations` ON `bookings`.`location_id` = `locations`.`location_id` LIMIT 15 OFFSET {$offset}";
+							
+		$result = mysqli_query($this->db,$sql);
+		$row['invoices']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
+		// print_r($result);
+		return $row;
+	}
+
 	public function getTickets(){
 		$sql = "SELECT `tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`customers`.`customer_fname`,`customers`.`customer_lname`
 					  FROM `bookings`  
