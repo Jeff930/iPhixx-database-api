@@ -320,6 +320,19 @@ class DBQuery
 		return $row;
 	}
 
+	public function getLogistic($id) {
+		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`customer_id`,`booking_timestamps`.`created_at`,`booking_timestamps`.`transfer_timestamp`,`booking_timestamps`.`cancelled_timestamp`,`tickets`.`ticket_no`, `tickets`.`created_at`, `tickets`.`outbound_timestamp`, `tickets`.`ongoing_timestamp`, `tickets`.`inbound_timestamp`, `tickets`.`resolved_timestamp`, `tickets`.`cancelled_timestamp` FROM `bookings` 
+							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
+							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
+							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
+							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
+                            LEFT JOIN  `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
+                            WHERE `bookings`.`bookings_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	public function getTicket($id) {
 		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`tickets`.`outbound_timestamp`,`tickets`.`ongoing_timestamp`,`tickets`.`inbound_timestamp`,`tickets`.`resolved_timestamp` FROM `bookings` 
 							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` 
