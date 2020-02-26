@@ -218,6 +218,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/logistics/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getLogistics($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/ticket/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getTicket($id);
