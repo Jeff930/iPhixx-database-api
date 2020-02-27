@@ -107,7 +107,6 @@ $app = new \Slim\App;
 	});
 
 	$app->get('/logistics/', function (Request $request, Response $response, array $args) use($query) {
-	
 		$params = $request->getQueryParams();
 		if(count($params)){
 		 $result = $query->getLogisticsByPage($params);		
@@ -218,7 +217,7 @@ $app = new \Slim\App;
 		}
 	});
 
-	$app->get('/logistics/{id}', function (Request $request, Response $response, array $args) use($query) {
+	$app->get('/logistic/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getLogistic($id);
 		if($result){
