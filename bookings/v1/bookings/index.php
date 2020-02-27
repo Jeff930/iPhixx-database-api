@@ -220,7 +220,7 @@ $app = new \Slim\App;
 
 	$app->get('/logistics/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
-		$result = $query->getLogistics($id);
+		$result = $query->getLogistic($id);
 		if($result){
 			return json_encode($result);
 		}
