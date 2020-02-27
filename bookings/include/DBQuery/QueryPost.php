@@ -320,7 +320,7 @@ class DBQuery
 		return $row;
 	}
 
-	public function getLogistic($id) {
+	public function getLogistics($id) {
 		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`customer_id`,`booking_timestamps`.`created_at`,`booking_timestamps`.`transfer_timestamp`,`booking_timestamps`.`cancelled_timestamp`,`tickets`.`ticket_no`, `tickets`.`created_at`, `tickets`.`outbound_timestamp`, `tickets`.`ongoing_timestamp`, `tickets`.`inbound_timestamp`, `tickets`.`resolved_timestamp`, `tickets`.`cancelled_timestamp` FROM `bookings` 
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
