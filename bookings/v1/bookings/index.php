@@ -217,6 +217,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/stock/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getStock($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/logistic/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getLogistic($id);

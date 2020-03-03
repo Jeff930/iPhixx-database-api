@@ -346,6 +346,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getStock($id) {
+		$sql = "SELECT `quantity`,`item_no` FROM `inventory` WHERE `item_no` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	public function getRepair($id){
 		$sql = "SELECT `device_type`.`type`,`bookings`.`devtype_id`,`device_brands`.`device_brand`, `device_models`.`model_name`, `device_models`.`model_number`, `carriers`.`carrier_name`, `color`.`color_name`,`selected_repairs`.`screenrep_selected`,`selected_repairs`.`headrep_selected`,`selected_repairs`.`earrep_selected`,`selected_repairs`.`powerrep_selected`,`selected_repairs`.`rearcamrep_selected`,`selected_repairs`.`frontcamrep_selected`,`selected_repairs`.`homerep_selected`,`selected_repairs`.`microphone_selected`,`selected_repairs`.`chargeport_selected`,`selected_repairs`.`volumerep_selected`,`selected_repairs`.`battrep_selected`,`selected_repairs`.`signalrep_selected`,`selected_repairs`.`backglassrep_selected`,`selected_repairs`.`protector_selected`,`selected_repairs`.`tempPhone_selected`,`selected_repairs`.`keyboardrep_selected`,`selected_repairs`.`fanrep_selected`,`selected_repairs`.`laptopcamrep_selected`,`selected_repairs`.`laptopscreenrep_selected`,`selected_repairs`.`laptopspeakerrep_selected`,`selected_repairs`.`datarecovery`,`selected_repairs`.`virusremoval`,`selected_repairs`.`virusremoval_withsoftware`,`selected_repairs`.`HDDHalfTeraWithDataTransfer`,`selected_repairs`.`HDDTeraWithDataTransfer`,`selected_repairs`.`HDDHalfTera`,`selected_repairs`.`HDDTera`,`selected_repairs`.`SSDHalfTeraWithDataTransfer`,`selected_repairs`.`SSDTeraWithDataTransfer`,`selected_repairs`.`SSDHalfTera`,`selected_repairs`.`SSDTera`,`selected_repairs`.`hdmirep_selected`,`selected_repairs`.`harddrive_selected`
 
