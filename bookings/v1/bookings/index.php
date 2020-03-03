@@ -347,6 +347,13 @@ $app = new \Slim\App;
 		return json_encode($body);
 	});
 
+	$app->put('/update-stock/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updateStock($id,$body);
+		return json_encode($body);
+	});
+
 	$app->put('/edit-price/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();

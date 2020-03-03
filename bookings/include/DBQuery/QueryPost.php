@@ -789,7 +789,13 @@ class DBQuery
 		return $result;
 	}
 
-	public function  editOwner($id,$body){
+	public function updateStock($id,$body){
+   		$sql = "UPDATE `inventory` SET `quantity` = '{$body['quantity']}' WHERE `item_no` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
+	public function editOwner($id,$body){
 
 		// $res  = mysqli_query($this->db,"SELECT `bookings`.`paystatus_no`,`invoices`. FROM bookings WHERE id='$id'");
 		// $row = mysqli_fetch_assoc($res);
