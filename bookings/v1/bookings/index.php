@@ -122,11 +122,10 @@ $app = new \Slim\App;
 	
 		$params = $request->getQueryParams();
 		if(count($params)){
-		 $result = $query->getAllModelsByPage($params);		
+		 	$result = $query->getAllModelsByPage($params);		
 		}
 		else{	
-	
-		$result = $query->getAllModels();	
+			$result = $query->getAllModels();	
 		}
 		return json_encode($result);
 	});
