@@ -222,7 +222,7 @@ class DBQuery
 	}
 
 	public function updateAgent($id , $body){
-		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `agent_location` = '{$body["agent_location"]}', `store_assigned` = '{$body["store_assigned"]}',`agent_pin` = '{$body["agent_pin"]}',`agent_password` = '{$body["agent_password"]}' WHERE `agents`.`agent_id` = {$id}";
+		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}',`agent_username` = '{$body["agent_username"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `location_id` = '{$body["location_id"]}' WHERE `agents`.`agent_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 
 		return $result;
