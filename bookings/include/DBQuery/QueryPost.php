@@ -100,15 +100,6 @@ class DBQuery
 		return $row;
 	}
 
-	public function getAgents(){
-		
-		$sql = "SELECT * FROM `agents`";
-		$result = mysqli_query($this->db,$sql);
-		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
-		// print_r($result);
-		return $row;
-	}
-
 	public function getCustomersCount(){
 		
 		$sql = "SELECT COUNT(*) FROM `customers`";
