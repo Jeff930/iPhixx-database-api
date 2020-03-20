@@ -168,13 +168,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`  FROM `agents`";
+		$sql_count = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`, `location_id`  FROM `agents`";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`  FROM `agents` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`, `location_id`  FROM `agents` LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
 		$row['agents']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
@@ -406,7 +406,7 @@ class DBQuery
 	}
 
 	public function getAgents(){
-		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`  FROM `agents`";
+		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`,`location_id` FROM `agents`";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -496,6 +496,13 @@ class DBQuery
 
 	public function checkTicketStatus($id){
 		$sql = "SELECT `bookings`.`ticketstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
+	public function getAgent($id){
+		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`,`location_id`,`agent_phone`,`agent_created_at`,`agent_address`,`agent_status`,`location_id` FROM `agents` WHERE `agents`.`agent_id` = {$id} ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
