@@ -320,14 +320,6 @@ class DBQuery
 		return $row;
 	}
 
-	public function getAgent($id) {
-		$sql = "SELECT `agent_id`,`agent_fname`,`agent_lname`,`agent_username`,`agent_email`,`agent_address`, `store_assigned`,`agent_pin`,`agent_phone`,`agent_created_at`, `location_id`, `agent_status` FROM `agents`
-                            WHERE `invoices`.`invoice_no` = {$id}";
-		$result = mysqli_query($this->db,$sql);
-		$row=mysqli_fetch_assoc($result);
-		return $row;
-	}
-
 	public function getLogistic($id) {
 		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`leadstatus_no`,`bookings`.`ticketstatus_no`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`customer_id`,`booking_timestamps`.`created_at`,`booking_timestamps`.`transfer_timestamp`,`booking_timestamps`.`cancelled_timestamp` AS lost_timestamp,`tickets`.`ticket_no`, `tickets`.`created_at` AS ticket_create, `tickets`.`outbound_timestamp`, `tickets`.`ongoing_timestamp`, `tickets`.`inbound_timestamp`, `tickets`.`resolved_timestamp`, `tickets`.`cancelled_timestamp` FROM `bookings` 
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
