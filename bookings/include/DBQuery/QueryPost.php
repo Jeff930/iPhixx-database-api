@@ -208,7 +208,7 @@ class DBQuery
 	}
 
 	public function addAgent($body){
-		$sql = "INSERT INTO `agents` (`customer_id`, `agent_fname`, `agent_lname` , `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '{$body["password"]}',NULL)";
+		$sql = "INSERT INTO `agents` (`agent_id`, `agent_fname`, `agent_lname` , `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`, `location_id`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["agent_username"]}', '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '{$body["password"]}',NULL, '1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
