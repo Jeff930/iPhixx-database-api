@@ -72,11 +72,17 @@ $app = new \Slim\App;
 		if($result){
 			return json_encode($body);
 		}
-		
+	});	
+
+	$app->post('/add-agent',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addAgent($body);	
+		if($result){
+			return json_encode($body);
+		}
 	});	
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
-	
 		$result = $query->getModels();		
 		return json_encode($result);
 	});
