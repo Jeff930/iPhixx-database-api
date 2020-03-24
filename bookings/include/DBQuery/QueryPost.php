@@ -1060,12 +1060,6 @@ class DBQuery
 		return $result;	
 	}
 
-	// public function updateCustomer($id , $body){
-	
-	// 	return $client;
-	// }
-
-
 	public function addBooking($body){
 		$res  = mysqli_query($this->db,"SELECT * FROM `customers` WHERE `customers`.`customer_id` = '{$body['customer_id']}'");
 		$row = mysqli_fetch_assoc($res);
