@@ -1491,9 +1491,9 @@ class DBQuery
     $mail->addBCC('shealy@iphixx.com');
     $mail->addBCC('sales@iphixx.com');
     // $mail->addAddress('ellen@example.com');               // Name is optional
-    //$mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
-    // $mail->addCC('cc@example.com');
-    // $mail->addBCC('bcc@example.com');
+    $mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+    $mail->addCC('cc@example.com');
+    $mail->addBCC('bcc@example.com');
 
     // //Attachments
     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -1512,9 +1512,9 @@ class DBQuery
     $mail->isHTML(true);                                  // Set email format to HTML
 
   
-    		$mail->Subject = 'IPhixx Repair Invoice';
-    			$mail->Body    = "Hi ".$userFirstName."! Thank you for your business with iPhixx. The attached file shall serve as your invoice.";
-    			$mail->AltBody = "Hi ".$userFirstName."! Thank you for your business with iPhixx. The attached file shall serve as your invoice.";
+    		$mail->Subject = 'Thank you for choosing iPhixx. Booking Number ';
+    			$mail->Body    = "Hi ".$userFirstName."! Thank you for booking in with iPhixx. Your booking reference number is .Once we receive your device in to our repair center, we will contact you with an update on your device. If you have any questions in the mean time, you can contact us via email on ifo@iphixx.com or by calling us on 1.800.938.825";
+    			$mail->AltBody = "Hi ".$userFirstName."! Thank you for booking in with iPhixx. Your booking reference number is .Once we receive your device in to our repair center, we will contact you with an update on your device. If you have any questions in the mean time, you can contact us via email on ifo@iphixx.com or by calling us on 1.800.938.825";
 
    
     //$mail->send();
