@@ -371,6 +371,13 @@ $app = new \Slim\App;
 		return json_encode($body);
 	});
 
+	$app->put('/deactivate-agent/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->deactivateAgent($id);
+		return json_encode($body);
+	});
+
+
 	$app->put('/update-stock/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
