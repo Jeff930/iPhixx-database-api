@@ -377,6 +377,11 @@ $app = new \Slim\App;
 		return json_encode($body);
 	});
 
+	$app->put('/activate-agent/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->activateAgent($id);
+		return json_encode($body);
+	});
 
 	$app->put('/update-stock/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
