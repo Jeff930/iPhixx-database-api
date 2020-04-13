@@ -238,6 +238,13 @@ class DBQuery
 		return $result;
 	}
 
+	public function activateAgent($id){
+		$sql = "UPDATE `agents` SET `agent_status` = 1' WHERE `agents`.`agent_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+
+		return $result;
+	}
+
 
 	// public function updateCustomer($id , $body){
 
