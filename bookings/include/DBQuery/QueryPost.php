@@ -1156,8 +1156,9 @@ class DBQuery
 
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
-			} else {
-   				 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			} 
+		else {
+   			 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
 			}
 		//return $row;
 
@@ -1520,8 +1521,9 @@ class DBQuery
     //$mail->send();
 
     $mail->send();
-    return $mail;
+    return $result;
 } catch (Exception $e) {
+
     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
