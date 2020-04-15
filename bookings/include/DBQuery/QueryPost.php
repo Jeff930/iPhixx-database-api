@@ -1521,7 +1521,8 @@ class DBQuery
     //$mail->send();
 
     $mail->send();
-    return $result;
+
+    return $row["id"];
 } catch (Exception $e) {
 
     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
