@@ -1515,20 +1515,22 @@ class DBQuery
   
     		$mail->Subject = 'Thank you for choosing iPhixx. Booking Number ';
     			$mail->Body    = "Hi ".$userFirstName."! Thank you for booking in with iPhixx. Your booking reference number is .Once we receive your device in to our repair center, we will contact you with an update on your device. If you have any questions in the mean time, you can contact us via email on ifo@iphixx.com or by calling us on 1.800.938.825";
-    			$mail->AltBody = "Hi ".$userFirstName."! Thank you for booking in with iPhixx. Your booking reference number is .Once we receive your device in to our repair center, we will contact you with an update on your device. If you have any questions in the mean time, you can contact us via email on ifo@iphixx.com or by calling us on 1.800.938.825";
-
-   
+    			$mail->AltBody = "Hi ".$userFirstName."! Thank you for booking in with iPhixx. Your booking reference number is .Once we receive your device in to our repair center, we will contact you with an update on your device. If you have any questions in the mean time, you can contact us via email on ifo@iphixx.com or by calling us on 1.800.938.825";   
     //$mail->send();
 
     $mail->send();
 
-    return $row["id"];
+   	if ($result) {
+    	$row["id"] = mysqli_insert_id($this->db);
+    	return $row["id"];
+	} 
+	else {
+   		 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
+	}
 } catch (Exception $e) {
-
     return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
-		
 	}
 }
 	
