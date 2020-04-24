@@ -48,7 +48,7 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-	$app->get('/', function (Request $request, Response $response, array $args) use($query) {
+	$app->get('/locations/', function (Request $request, Response $response, array $args) use($query) {
 	
 		$params = $request->getQueryParams();
 		if(count($params)){
@@ -61,10 +61,16 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/list-locations/', function (Request $request, Response $response, array $args) use($query) {
+	
+		
+		$result = $query->listLocations($params);		
+		return json_encode($result);
+	});
 
 	$app->get('/tax', function (Request $request, Response $response, array $args) use($query) {
 	
-		 $result = $query->getTax();		
+		$result = $query->getTax();		
 		return json_encode($result);
 	});
 
