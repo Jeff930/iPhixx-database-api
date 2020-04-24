@@ -47,6 +47,21 @@ $app = new \Slim\App;
 		}
 		return json_encode($result);
 	});
+
+	$app->get('/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 $result = $query->getLocationsByPage($params);		
+		}
+		else{	
+	
+		$result = $query->getLocations();	
+		}
+		return json_encode($result);
+	});
+
+
 	$app->get('/tax', function (Request $request, Response $response, array $args) use($query) {
 	
 		 $result = $query->getTax();		
