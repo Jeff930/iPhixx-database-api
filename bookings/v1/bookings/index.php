@@ -511,6 +511,15 @@ $app = new \Slim\App;
 		return false;
 	});
 
+	$app->delete('/delete-location/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];
+		$result = $query->deleteLocation($id);
+		if($result){
+			return json_encode($result);
+		}
+		return false;
+	});
+
 	$app->delete('/delete-tax/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];
 		$result = $query->deleteTax($id);
