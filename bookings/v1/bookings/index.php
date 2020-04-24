@@ -419,6 +419,13 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->put('/edit-location/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->editLocation($id,$body);
+		return json_encode($result);
+	});
+
 	$app->put('/edit-laptop-price/',function(Request $request, Response $response, array $args) use($query){
 		$body = $request->getParsedBody();
 		$result = $query->updateLaptopPrice($body);
