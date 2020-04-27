@@ -61,10 +61,10 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-	$app->get('/list-locations/', function (Request $request, Response $response, array $args) use($query) {
+	$app->get('/list-locations', function (Request $request, Response $response, array $args) use($query) {
 	
 		
-		$result = $query->listLocations();		
+		$result = $query->getLocationList();		
 		return json_encode($result);
 	});
 
