@@ -208,7 +208,7 @@ class DBQuery
 	}
 
 	public function addAgent($body){
-		$sql = "INSERT INTO `agents` (`agent_id`, `agent_fname`, `agent_lname` , `agent_username`, `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`, `location_id`, `agent_status`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["agent_username"]}', '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '{$body["password"]}',CURRENT_TIMESTAMP, 1,1)";
+		$sql = "INSERT INTO `agents` (`agent_id`, `agent_fname`, `agent_lname` , `agent_username`, `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`, `location_id`, `agent_status`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["agent_username"]}', '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '0930',CURRENT_TIMESTAMP, '{$body["location_id"]}',1)";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -393,7 +393,7 @@ class DBQuery
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
 							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
-							LIMIT 15 OFFSET {$offset} WHERE `lead_status` != '3'";
+							WHERE `lead_status` != '3' LIMIT 15 OFFSET {$offset}";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
@@ -407,7 +407,7 @@ class DBQuery
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
 							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
-							LIMIT 15 OFFSET {$offset} WHERE `lead_status` != '3'";
+							WHERE `lead_status` != '3' LIMIT 15 OFFSET {$offset}";
 
 		$result = mysqli_query($this->db,$sql);
 		$row['bookings']=mysqli_fetch_all($result,MYSQLI_ASSOC);
