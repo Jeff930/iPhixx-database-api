@@ -64,7 +64,7 @@ $app = new \Slim\App;
 	$app->get('/list-locations/', function (Request $request, Response $response, array $args) use($query) {
 	
 		
-		$result = $query->listLocations($params);		
+		$result = $query->listLocations();		
 		return json_encode($result);
 	});
 
