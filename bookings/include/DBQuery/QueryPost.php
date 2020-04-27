@@ -437,13 +437,13 @@ class DBQuery
 		return $row;
 	}
 
-	public function getLocationList($params){	
+	public function getLocationList(){	
 
 		$sql = "SELECT `location_id`,`location_name` FROM `locations`";
 
 		$result = mysqli_query($this->db,$sql);
-		// print_r($result);
-		return $result;
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
 	}
 
 	public function getInvoices(){
