@@ -460,6 +460,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getDevtypes(){
+		$sql = "SELECT * FROM `device_type`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
 	public function getInvoicesByPage($params){
 		$page = $params['page'];
 		$limit = 15;
@@ -657,7 +664,7 @@ class DBQuery
 
 		$sql = "SELECT *  FROM `device_type` LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
-		$row['agents']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['devtypes']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
 		// print_r($result);
 		return $row;
