@@ -194,6 +194,17 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/brands/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 	$result = $query->getBrandsByPage($params);		
+		}
+		else{	
+			$result = $query->getBrands();	
+		}
+		return json_encode($result);
+	});
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
