@@ -643,6 +643,26 @@ class DBQuery
 		return $row;
 	}
 
+	public function getDevtypesByPage($params){
+		$page = $params['page'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT *  FROM `device_type`";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total_page"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT *  FROM `device_type` LIMIT 15 OFFSET {$offset}";
+		$result = mysqli_query($this->db,$sql);
+		$row['agents']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
+		// print_r($result);
+		return $row;
+	}
+
 	public function getModelsByPage($params){
 		$model = $params['model'];
 		$limit = 15;
