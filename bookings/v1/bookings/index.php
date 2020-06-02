@@ -174,10 +174,10 @@ $app = new \Slim\App;
 	
 		$params = $request->getQueryParams();
 		if(count($params)){
-		 	$result = $query->getAllNetworksByPage($params);		
+		 	$result = $query->getNetworksByPage($params);		
 		}
 		else{	
-			$result = $query->getAllNetworks();	
+			$result = $query->getNetworks();	
 		}
 		return json_encode($result);
 	});
