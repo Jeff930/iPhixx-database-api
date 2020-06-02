@@ -182,6 +182,17 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/devtypes/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 	$result = $query->getAllDevTypesByPage($params);		
+		}
+		else{	
+			$result = $query->getAllDevtypes();	
+		}
+		return json_encode($result);
+	});
 
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
