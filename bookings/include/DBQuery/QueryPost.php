@@ -284,8 +284,6 @@ class DBQuery
 		return $result;
 	}
 	
-	
-
 	public function getBookings() {
 		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
 				`bookings` 
@@ -460,12 +458,7 @@ class DBQuery
 		return $row;
 	}
 
-	public function getDevtypes(){
-		$sql = "SELECT * FROM `device_type`";
-		$result = mysqli_query($this->db,$sql);
-		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
-		return $row;
-	}
+	
 
 	public function getInvoicesByPage($params){
 		$page = $params['page'];
@@ -650,6 +643,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getDevtypes(){
+		$sql = "SELECT * FROM `device_type`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
 	public function getDevtypesByPage($params){
 		$page = $params['page'];
 		$limit = 15;
@@ -665,6 +665,33 @@ class DBQuery
 		$sql = "SELECT *  FROM `device_type` LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
 		$row['devtypes']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
+		// print_r($result);
+		return $row;
+	}
+
+	public function getBrands(){
+		$sql = "SELECT * FROM `device_brands`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
+	public function getBrandsByPage($params){
+		$page = $params['page'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT *  FROM `device_brands`";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total_page"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT *  FROM `device_brands` LIMIT 15 OFFSET {$offset}";
+		$result = mysqli_query($this->db,$sql);
+		$row['brands']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
 		// print_r($result);
 		return $row;
