@@ -628,6 +628,33 @@ class DBQuery
 		return $row;
 	}
 
+	public function getNetworks(){
+		$sql = "SELECT * FROM `carriers`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
+	public function getNetworksByPage($params){
+		$page = $params['page'];
+		$limit = 15;
+		$offset = ($page - 1)  * $limit;
+		$start = $offset + 1;
+
+		$sql_count = "SELECT *  FROM `carriers`";
+		$result_count = mysqli_query($this->db,$sql_count);
+	  	$total=mysqli_num_rows($result_count);
+		$row["total_page"] = ceil($total / $limit);
+		
+
+		$sql = "SELECT *  FROM `carriers` LIMIT 15 OFFSET {$offset}";
+		$result = mysqli_query($this->db,$sql);
+		$row['networks']=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		$row['page'] = $page;
+		// print_r($result);
+		return $row;
+	}
+
 	public function  updatePaymentStatus($id){
 
 		$sql = "UPDATE `bookings` INNER JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` SET `bookings`.`invoicestatus_no` = 2 , `invoices`.`settled_Timestamp` = CURRENT_TIMESTAMP WHERE `invoices`.`invoice_no` = {$id}";
