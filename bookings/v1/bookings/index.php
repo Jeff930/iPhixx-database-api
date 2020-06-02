@@ -170,6 +170,18 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/networks/', function (Request $request, Response $response, array $args) use($query) {
+	
+		$params = $request->getQueryParams();
+		if(count($params)){
+		 	$result = $query->getAllNetworksByPage($params);		
+		}
+		else{	
+			$result = $query->getAllNetworks();	
+		}
+		return json_encode($result);
+	});
+
 
 
 	$app->post('/',function(Request $request, Response $response, array $args) use($query) {
