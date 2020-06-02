@@ -186,10 +186,10 @@ $app = new \Slim\App;
 	
 		$params = $request->getQueryParams();
 		if(count($params)){
-		 	$result = $query->getAllDevTypesByPage($params);		
+		 	$result = $query->getDevTypesByPage($params);		
 		}
 		else{	
-			$result = $query->getAllDevtypes();	
+			$result = $query->getDevtypes();	
 		}
 		return json_encode($result);
 	});
