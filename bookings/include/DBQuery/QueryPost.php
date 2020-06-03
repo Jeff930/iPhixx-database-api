@@ -436,9 +436,21 @@ class DBQuery
 	}
 
 	public function getLocationList(){	
-
 		$sql = "SELECT `location_id`,`location_name` FROM `locations`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
 
+	public function getBrandList(){	
+		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
+	public function getDevtypeList(){	
+		$sql = "SELECT `devtype_id`,`type` FROM `device_type`";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
