@@ -62,9 +62,17 @@ $app = new \Slim\App;
 	});
 
 	$app->get('/list-locations', function (Request $request, Response $response, array $args) use($query) {
-	
-		
 		$result = $query->getLocationList();		
+		return json_encode($result);
+	});
+
+	$app->get('/list-brands', function (Request $request, Response $response, array $args) use($query) {
+		$result = $query->getBrandList();		
+		return json_encode($result);
+	});
+
+	$app->get('/list-devtypes', function (Request $request, Response $response, array $args) use($query) {
+		$result = $query->getDevtypeList();		
 		return json_encode($result);
 	});
 
