@@ -598,6 +598,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getNetwork($id){
+		$sql = "SELECT `carrier_no`,`carrier_name` FROM `carriers` WHERE `carriers`.`carrier_no` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	// public function getModels($body){
 	// 	$sql = "SELECT * FROM `device_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
 	// 	$result = mysqli_query($this->db,$sql);
