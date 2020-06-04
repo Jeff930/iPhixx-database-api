@@ -231,10 +231,18 @@ class DBQuery
 	}
 
 	public function updateDevtype($id , $body){
-		$sql = "UPDATE `device_type` SET `type` = '{$body["type"]}' WHERE `devtype`.`devtype_id` = {$id}";
+		$sql = "UPDATE `device_type` SET `type` = '{$body["type"]}' WHERE `device_type`.`devtype_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
+
+	public function updateBrand($id , $body){
+		$sql = "UPDATE `device_brands` SET `device_brand` = '{$body["device_brand"]}' WHERE `device_brand`.`devicebrand_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
+	
 
 	public function deactivateAgent($id){
 		$sql = "UPDATE `agents` SET `agent_status` = 0 WHERE `agents`.`agent_id` = {$id}";
