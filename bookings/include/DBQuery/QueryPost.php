@@ -591,6 +591,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getBrand($id){
+		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands` WHERE `device_brands`.`devicebrand_id` = {$id} ";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
 	// public function getModels($body){
 	// 	$sql = "SELECT * FROM `device_models` WHERE `devtype_id` = '{$body['email']}' AND `phonebrand_id` = '{$body['password']}' ";
 	// 	$result = mysqli_query($this->db,$sql);
