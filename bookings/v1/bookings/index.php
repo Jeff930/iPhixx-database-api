@@ -485,10 +485,17 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-		$app->put('/update-devtype/{id}',function(Request $request, Response $response, array $args) use($query){
+	$app->put('/update-devtype/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
 		$result = $query->updateDevtype($id,$body);
+		return json_encode($result);
+	});
+
+	$app->put('/update-brand/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updateBrand($id,$body);
 		return json_encode($result);
 	});
 
