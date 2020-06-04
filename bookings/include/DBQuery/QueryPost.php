@@ -227,14 +227,18 @@ class DBQuery
 	public function updateAgent($id , $body){
 		$sql = "UPDATE `agents` SET `agent_fname` = '{$body["agent_fname"]}', `agent_lname` = '{$body["agent_lname"]}',`agent_username` = '{$body["agent_username"]}', `agent_email` = '{$body["agent_email"]}', `agent_phone` = '{$body["agent_phone"]}', `location_id` = '{$body["location_id"]}' WHERE `agents`.`agent_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 
+	public function updateDevtype($id , $body){
+		$sql = "UPDATE `device_type` SET `type` = '{$body["type"]}' WHERE `devtype`.`devtype_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function deactivateAgent($id){
 		$sql = "UPDATE `agents` SET `agent_status` = 0 WHERE `agents`.`agent_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
-
 		return $result;
 	}
 
