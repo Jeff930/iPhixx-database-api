@@ -332,6 +332,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/brand/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getBrand($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/stock/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getStock($id);
