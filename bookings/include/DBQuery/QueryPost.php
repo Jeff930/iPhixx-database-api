@@ -242,7 +242,11 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function updateNetwork($id , $body){
+		$sql = "UPDATE `carriers` SET `carrier_name` = '{$body["carrier_name"]}' WHERE `carrier_no`.`carrier_no` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 
 	public function deactivateAgent($id){
 		$sql = "UPDATE `agents` SET `agent_status` = 0 WHERE `agents`.`agent_id` = {$id}";
