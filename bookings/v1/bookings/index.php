@@ -324,6 +324,14 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->get('/devtype/{id}', function (Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$result = $query->getDevtype($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->get('/stock/{id}', function (Request $request, Response $response, array $args) use($query) {
 		$id = $args['id'];	
 		$result = $query->getStock($id);
