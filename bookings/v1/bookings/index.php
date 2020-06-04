@@ -485,6 +485,13 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+		$app->put('/update-devtype/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updateDevtype($id,$body);
+		return json_encode($result);
+	});
+
 	$app->put('/edit-location/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
