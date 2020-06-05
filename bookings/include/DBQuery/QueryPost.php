@@ -237,13 +237,13 @@ class DBQuery
 	}
 
 	public function updateBrand($id , $body){
-		$sql = "UPDATE `device_brands` SET `device_brand` = '{$body["device_brand"]}' WHERE `device_brand`.`devicebrand_id` = {$id}";
+		$sql = "UPDATE `device_brands` SET `device_brand` = '{$body["device_brand"]}' WHERE `device_brands`.`devicebrand_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function updateNetwork($id , $body){
-		$sql = "UPDATE `carriers` SET `carrier_name` = '{$body["carrier_name"]}' WHERE `carrier_no`.`carrier_no` = {$id}";
+		$sql = "UPDATE `carriers` SET `carrier_name` = '{$body["carrier_name"]}' WHERE `carriers`.`carrier_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
