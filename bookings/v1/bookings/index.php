@@ -111,6 +111,8 @@ $app = new \Slim\App;
 		}
 	});	
 
+	
+
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getModels();		
 		return json_encode($result);
