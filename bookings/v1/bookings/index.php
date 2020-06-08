@@ -111,7 +111,7 @@ $app = new \Slim\App;
 		}
 	});	
 
-	
+
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getModels();		
@@ -522,6 +522,13 @@ $app = new \Slim\App;
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
 		$result = $query->updateBrand($id,$body);
+		return json_encode($result);
+	});
+
+	$app->put('/update-device/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->updateDevice($id,$body);
 		return json_encode($result);
 	});
 
