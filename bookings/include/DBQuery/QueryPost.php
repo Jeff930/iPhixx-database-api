@@ -242,6 +242,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function updateDevice($id , $body){
+		$sql = "UPDATE `device_models` SET `model_name` = '{$body["model_name"]}', `devicebrand_id` = '{$body["devicebrand_id"]}', `model_number` = '{$body["model_number"]}', `devtype_id` = '{$body["devtype_id"]}' WHERE `device_models`.`devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	public function updateNetwork($id , $body){
 		$sql = "UPDATE `carriers` SET `carrier_name` = '{$body["carrier_name"]}' WHERE `carriers`.`carrier_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
