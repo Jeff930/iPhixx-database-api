@@ -844,7 +844,7 @@ class DBQuery
 
 	public function addModel($body){
 
-		$sql = "INSERT INTO `device_models`(`devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `trackpad_price`, `hdmirep_price`, `harddrive_rep`, `devtype_id`, `devicebrand_id`) VALUES ( '{$body['devicemodel_id']}','{$body['model_name']}','{$body['model_number']}',"; 
+		$sql = "INSERT INTO `device_models`(`devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `trackpad_price`, `hdmirep_price`, `harddrive_rep`, `devtype_id`, `devicebrand_id`) VALUES ( NULL,'{$body['model_name']}','{$body['model_number']}',"; 
 		if ($body['screenrep_price'] != 'null'){
 			$sql = $sql."'{$body['screenrep_price']}',";
 		}
@@ -960,8 +960,8 @@ class DBQuery
 
 		$sql = $sql." '{$body['devtype_id']}','{$body['devicebrand_id']}')";
 		
-		//$result = mysqli_query($this->db,$sql);
-		return $sql;
+		$result = mysqli_query($this->db,$sql);
+		return $result;
 	}
 
 	public function updatePrice($id , $body){
