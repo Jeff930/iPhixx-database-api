@@ -221,12 +221,13 @@ class DBQuery
 	public function addBrand($body){
 		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`) VALUES (NULL, '{$body["brand_name"]}')";
 		$result = mysqli_query($this->db, $sql);
-		if ($result) {
-    		$row["id"] = mysqli_insert_id($this->db);
-			} else {
-   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
-			}
-		return $row;
+		// if ($result) {
+  //   		// $row["id"] = mysqli_insert_id($this->db);
+  //   		return $row;
+		// 	} else {
+  //  				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+		// 	}
+		return $result;
 	}
 
 	public function updateCustomer($id , $body){
