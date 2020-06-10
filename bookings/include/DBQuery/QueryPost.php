@@ -218,6 +218,17 @@ class DBQuery
 		return $row;
 	}
 
+	public function addBrand($body){
+		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`) VALUES (NULL, '{$body["brand_name"]}')";
+		$result = mysqli_query($this->db, $sql);
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
+	}
+
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
