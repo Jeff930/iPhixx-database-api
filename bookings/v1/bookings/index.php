@@ -111,7 +111,13 @@ $app = new \Slim\App;
 		}
 	});	
 
-
+	$app->post('/upload-devtype-image',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->uploadDevtypeImage($body);	
+		if($result){
+			return json_encode($body);
+		}
+	});	
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getModels();		
