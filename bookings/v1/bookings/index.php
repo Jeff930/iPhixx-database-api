@@ -127,8 +127,13 @@ $app = new \Slim\App;
 		}
 	});	
 
-	
-
+	$app->post('/upload-model-image',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->uploadModelImage($body);	
+		if($result){
+			return json_encode($body);
+		}
+	});	
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getModels();		
