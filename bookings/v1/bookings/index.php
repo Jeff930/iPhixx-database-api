@@ -284,6 +284,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/add-network/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addNetwork($body);	
+		return json_encode($result);
+	});
+
 	$app->post('/add-repair-options/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addRepairOptions($body);	
