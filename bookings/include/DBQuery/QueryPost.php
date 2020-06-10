@@ -230,6 +230,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function addDevtype($body){
+		$sql = "INSERT INTO `device_type` (`devtype_id`, `type`) VALUES (NULL, '{$body["devtype_name"]}')";
+		$result = mysqli_query($this->db, $sql);
+		return $result;
+	}
+
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
