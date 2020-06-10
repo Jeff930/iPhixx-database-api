@@ -236,6 +236,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function addNetwork($body){
+		$sql = "INSERT INTO `carriers` (`carrier_no`, `carrier_name`) VALUES (NULL, '{$body["network_name"]}')";
+		$result = mysqli_query($this->db, $sql);
+		return $result;
+	}
+
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
