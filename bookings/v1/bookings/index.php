@@ -119,6 +119,17 @@ $app = new \Slim\App;
 		}
 	});	
 
+	$app->post('/upload-brand-image',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->uploadBrandImage($body);	
+		if($result){
+			return json_encode($body);
+		}
+	});	
+
+	
+
+
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getModels();		
 		return json_encode($result);
