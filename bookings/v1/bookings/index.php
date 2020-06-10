@@ -133,6 +133,14 @@ $app = new \Slim\App;
 		if($result){
 			return json_encode($body);
 		}
+	});
+
+	$app->post('/upload-network-image',function(Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->uploadNetworkImage($body);	
+		if($result){
+			return json_encode($body);
+		}
 	});	
 
 	$app->get('/phone', function (Request $request, Response $response, array $args) use($query) {
