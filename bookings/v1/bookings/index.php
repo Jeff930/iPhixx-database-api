@@ -266,6 +266,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/add-devtype/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addDevtype($body);	
+		return json_encode($result);
+	});
+
 	$app->post('/add-model/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addModel($body);	
