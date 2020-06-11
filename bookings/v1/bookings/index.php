@@ -284,6 +284,13 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/upload-brand-image/', function (Request $request, Response $response, array $args) use($query) {
+		//$imageBody = $request->getUploadedFiles();
+		$body = $request->getParsedBody();
+		$result = $query->addBrandImage($body);	
+		return json_encode($result);
+	});
+
 	$app->post('/add-network/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addNetwork($body);	
