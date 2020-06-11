@@ -264,7 +264,15 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function addNetworkImage($body){
+		$dir = '../../../images/networks';
+		if ( !file_exists($dir) ) {
+     		mkdir ($dir, 0744);
+ 		}
+		$imagePath=$dir.$body['network'].'.jpg';
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
+		return file_put_contents($imagePath,$data);
+	}
 
 	public function updateCustomer($id , $body){
 		$sql = "UPDATE `customers` SET `customer_fname` = '{$body["customer_fname"]}', `customer_lname` = '{$body["customer_lname"]}', `email` = '{$body["email"]}', `phone` = '{$body["phone"]}', `birthdate` = '{$body["birthdate"]}', `location_id` = '{$body["location_id"]}', `smsOption` = '{$body["smsOption"]}' WHERE `customers`.`customer_id` = {$id}";
