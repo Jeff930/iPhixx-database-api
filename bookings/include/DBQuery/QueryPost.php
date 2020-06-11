@@ -221,13 +221,25 @@ class DBQuery
 	public function addBrand($body){
 		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`) VALUES (NULL, '{$body["brand_name"]}')";
 		$result = mysqli_query($this->db, $sql);
-		// if ($result) {
-  //   		// $row["id"] = mysqli_insert_id($this->db);
-  //   		return $row;
-		// 	} else {
-  //  				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
-		// 	}
-		return $result;
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+    		$sql = "SELECT `device_brand`, `devicebrand_id` FROM `device_brands` WHERE `device_brands`.`devicebrand_id` = {$row['id']}";
+			$result = mysqli_query($this->db,$sql);
+			$row=mysqli_fetch_assoc($result);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
+	}
+
+	public function addBrandImage($body){
+		$dir = '../../../images/brands';
+		if ( !file_exists($dir) ) {
+     		mkdir ($dir, 0744);
+ 		}
+		$imagePath=$dir.$body['device_brand'].'.jpg';
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
+		return file_put_contents($imagePath,$data);
 	}
 
 	public function addDevtype($body){
