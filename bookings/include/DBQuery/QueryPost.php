@@ -233,7 +233,7 @@ class DBQuery
 	}
 
 	public function addBrandImage($body){
-		$dir = '../../../images/brands';
+		$dir = '../../../images/brands/';
 		if ( !file_exists($dir) ) {
      		mkdir ($dir, 0744);
  		}
@@ -257,7 +257,7 @@ class DBQuery
 	}
 
 	public function addDevtypeImage($body){
-		$dir = '../../../images/devtypes';
+		$dir = '../../../images/devtypes/';
 		if ( !file_exists($dir) ) {
      		mkdir ($dir, 0744);
  		}
@@ -281,11 +281,11 @@ class DBQuery
 	}
 
 	public function addNetworkImage($body){
-		$dir = '../../../images/networks';
+		$dir = '../../../images/networks/';
 		if ( !file_exists($dir) ) {
      		mkdir ($dir, 0744);
  		}
-		$imagePath=$dir.$body['network'].'.jpg';
+		$imagePath=$dir.$body['carrier_name'].'.jpg';
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
 		return file_put_contents($imagePath,$data);
 	}
