@@ -1039,7 +1039,15 @@ class DBQuery
 		$sql = $sql." '{$body['devtype_id']}','{$body['devicebrand_id']}')";
 		
 		$result = mysqli_query($this->db,$sql);
-		return $result;
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+    		$sql = "SELECT `devicemodel_id`, `model_name` FROM `device_models` WHERE `device_models`.`devicemodel_id` = {$row['id']}";
+			$result = mysqli_query($this->db,$sql);
+			$row=mysqli_fetch_assoc($result);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
 	}
 
 	public function addModelImage($body){
