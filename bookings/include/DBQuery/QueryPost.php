@@ -245,7 +245,15 @@ class DBQuery
 	public function addDevtype($body){
 		$sql = "INSERT INTO `device_type` (`devtype_id`, `type`) VALUES (NULL, '{$body["devtype_name"]}')";
 		$result = mysqli_query($this->db, $sql);
-		return $result;
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+    		$sql = "SELECT `type`, `devtype_id` FROM `device_type` WHERE `device_type`.`devtype_id` = {$row['id']}";
+			$result = mysqli_query($this->db,$sql);
+			$row=mysqli_fetch_assoc($result);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
 	}
 
 	public function addDevtypeImage($body){
