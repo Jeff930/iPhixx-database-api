@@ -269,7 +269,15 @@ class DBQuery
 	public function addNetwork($body){
 		$sql = "INSERT INTO `carriers` (`carrier_no`, `carrier_name`) VALUES (NULL, '{$body["network_name"]}')";
 		$result = mysqli_query($this->db, $sql);
-		return $result;
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+    		$sql = "SELECT `carrier_no`, `carrier_name` FROM `carriers` WHERE `carriers`.`carrier_no` = {$row['id']}";
+			$result = mysqli_query($this->db,$sql);
+			$row=mysqli_fetch_assoc($result);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
 	}
 
 	public function addNetworkImage($body){
