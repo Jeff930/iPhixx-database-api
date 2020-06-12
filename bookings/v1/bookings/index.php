@@ -284,6 +284,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/upload-model-image/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addModelImage($body);	
+		return json_encode($result);
+	});
+
 	$app->post('/add-brand/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addBrand($body);	
