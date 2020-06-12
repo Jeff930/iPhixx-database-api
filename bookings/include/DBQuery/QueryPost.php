@@ -1026,6 +1026,16 @@ class DBQuery
 		return $result;
 	}
 
+	public function addModelImage($body){
+		$dir = '../../../images/models'.$body['device_brand'];
+		if ( !file_exists($dir) ) {
+     		mkdir ($dir, 0744);
+ 		}
+		$imagePath=$dir.$body['model_name'].'.jpg';
+		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
+		return file_put_contents($imagePath,$data);
+	}
+
 	public function updatePrice($id , $body){
 
 		$sql = "UPDATE `device_models` SET "; 
