@@ -219,7 +219,7 @@ class DBQuery
 	}
 
 	public function addBrand($body){
-		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`) VALUES (NULL, '{$body["brand_name"]}')";
+		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`,`active`) VALUES (NULL, '{$body["brand_name"]}','1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -243,7 +243,7 @@ class DBQuery
 	}
 
 	public function addDevtype($body){
-		$sql = "INSERT INTO `device_type` (`devtype_id`, `type`) VALUES (NULL, '{$body["devtype_name"]}')";
+		$sql = "INSERT INTO `device_type` (`devtype_id`, `type`,`active`) VALUES (NULL, '{$body["devtype_name"]}','1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -267,7 +267,7 @@ class DBQuery
 	}
 
 	public function addNetwork($body){
-		$sql = "INSERT INTO `carriers` (`carrier_no`, `carrier_name`) VALUES (NULL, '{$body["network_name"]}')";
+		$sql = "INSERT INTO `carriers` (`carrier_no`, `carrier_name`,`active`) VALUES (NULL, '{$body["network_name"]}','1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -946,7 +946,7 @@ class DBQuery
 
 	public function addModel($body){
 
-		$sql = "INSERT INTO `device_models`(`devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `trackpad_price`, `hdmirep_price`, `harddrive_rep`, `devtype_id`, `devicebrand_id`) VALUES ( NULL,'{$body['model_name']}','{$body['model_number']}',"; 
+		$sql = "INSERT INTO `device_models`(`devicemodel_id`, `model_name`, `model_number`,`active`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `trackpad_price`, `hdmirep_price`, `harddrive_rep`, `devtype_id`, `devicebrand_id`) VALUES ( NULL,'{$body['model_name']}','{$body['model_number']}','1',"; 
 		if ($body['screenrep_price'] != 'null'){
 			$sql = $sql."'{$body['screenrep_price']}',";
 		}
