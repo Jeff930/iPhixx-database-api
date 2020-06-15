@@ -378,7 +378,11 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function disableModel($id){
+		$sql = "UPDATE `device_models` SET `model_status`='2'  WHERE `devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 
 	
 	
