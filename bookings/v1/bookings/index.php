@@ -643,7 +643,6 @@ $app = new \Slim\App;
 		}
 	});
 
-
 	$app->put('/disable-brand/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->disableBrand($id);
@@ -652,7 +651,15 @@ $app = new \Slim\App;
 		}
 	});
 
+	$app->put('/disable-network/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->disableNetwork($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
 
+	
 
 	$app->put('/enable-agent/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
