@@ -384,6 +384,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function disableBrand($id){
+		$sql = "UPDATE `device_brands` SET `brand_status`='2'  WHERE `devicebrand_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	
 	
 	public function getBookings() {
