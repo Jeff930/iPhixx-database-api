@@ -780,7 +780,7 @@ class DBQuery
 	}
 
 	public function getNetworks(){
-		$sql = "SELECT * FROM `carriers`";
+		$sql = "SELECT * FROM `carriers` WHERE `active`= '1'";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -792,13 +792,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT *  FROM `carriers`";
+		$sql_count = "SELECT *  FROM `carriers` WHERE `active`= '1'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT *  FROM `carriers` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT *  FROM `carriers` WHERE `active`= '1' LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
 		$row['networks']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
@@ -822,7 +822,7 @@ class DBQuery
 	}
 
 	public function getDevtypes(){
-		$sql = "SELECT * FROM `device_type`";
+		$sql = "SELECT * FROM `device_type` WHERE `active`= '1'";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -834,13 +834,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT *  FROM `device_type`";
+		$sql_count = "SELECT *  FROM `device_type` WHERE `active`= '1'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT *  FROM `device_type` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT *  FROM `device_type` WHERE `active`= '1' LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
 		$row['devtypes']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
@@ -849,7 +849,7 @@ class DBQuery
 	}
 
 	public function getBrands(){
-		$sql = "SELECT * FROM `device_brands`";
+		$sql = "SELECT * FROM `device_brands` WHERE `active`= '1'";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -861,13 +861,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT *  FROM `device_brands`";
+		$sql_count = "SELECT *  FROM `device_brands` WHERE `active`= '1'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT *  FROM `device_brands` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT *  FROM `device_brands` WHERE `active`= '1' LIMIT 15 OFFSET {$offset}";
 		$result = mysqli_query($this->db,$sql);
 		$row['brands']=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$row['page'] = $page;
@@ -881,13 +881,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}' LIMIT 15 OFFSET {$offset}";
+		$sql_count = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}' AND `active`= '1' LIMIT 15 OFFSET {$offset}";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}'LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `devicemodel_id`, `model_name`, `model_number`, `screenrep_price`, `headrep_price`, `earrep_price`, `powerrep_price`, `rearcamrep_price`, `frontcamrep_price`, `homerep_price`, `microphone_price`, `chargeport_price`, `volumerep_price`, `battrep_price`, `signalrep_price`, `backglass_price`, `devtype_id`, `devicebrand_id` FROM `device_models` WHERE `devtype_id` = '{$params['device_id']}' AND `devicebrand_id`  = '{$params['brand_id']}' AND `active`= '1' LIMIT 15 OFFSET {$offset}";
 							
 		$result = mysqli_query($this->db,$sql);
 		$row['result']=mysqli_fetch_all($result,MYSQLI_ASSOC);
