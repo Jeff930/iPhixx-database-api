@@ -390,6 +390,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function disableNetwork($id){
+		$sql = "UPDATE `carriers` SET `carrier_status`='2'  WHERE `devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	
 	
 	public function getBookings() {
