@@ -377,6 +377,10 @@ class DBQuery
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
+
+	
+
+	
 	
 	public function getBookings() {
 		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
@@ -1051,7 +1055,7 @@ class DBQuery
 	}
 
 	public function addModelImage($body){
-		$dir = '../../../images/models'.$body['device_brand'];
+		$dir = '../../../images/models/'.$body['device_brand'].'/';
 		if ( !file_exists($dir) ) {
      		mkdir ($dir, 0744);
  		}
