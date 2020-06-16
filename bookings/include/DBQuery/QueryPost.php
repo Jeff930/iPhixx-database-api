@@ -378,29 +378,32 @@ class DBQuery
 		return $result;
 	}
 
+	
+
 	public function disableModel($id){
-		$sql = "UPDATE `device_models` SET `model_status`='2'  WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `device_models` SET `active`='2'  WHERE `devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableBrand($id){
-		$sql = "UPDATE `device_brands` SET `brand_status`='2'  WHERE `devicebrand_id` = {$id}";
+		$sql = "UPDATE `device_brands` SET `active`='2'  WHERE `devicebrand_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableNetwork($id){
-		$sql = "UPDATE `carriers` SET `carrier_status`='2'  WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `carriers` SET `active`='2' WHERE `devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableType($id){
-		$sql = "UPDATE `device_type` SET `type_status`='2'  WHERE `devtype_id` = {$id}";
+		$sql = "UPDATE `device_type` SET `active`='2' WHERE `devtype_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
+
 	
 	public function getBookings() {
 		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
