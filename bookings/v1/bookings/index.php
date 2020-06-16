@@ -626,15 +626,6 @@ $app = new \Slim\App;
 		}
 	});
 
-	$app->put('/disable-agent/{id}',function(Request $request, Response $response, array $args) use($query){
-		$id = $args['id'];	
-		$result = $query->disableAgent($id);
-		if($result){
-			return json_encode($result);
-		}
-	});
-
-
 	$app->put('/disable-model/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->disableModel($id);
@@ -662,6 +653,14 @@ $app = new \Slim\App;
 	$app->put('/disable-type/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->disableType($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->put('/enable-model/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->enableModel($id);
 		if($result){
 			return json_encode($result);
 		}
