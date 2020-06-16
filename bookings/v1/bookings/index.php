@@ -682,7 +682,14 @@ $app = new \Slim\App;
 		}
 	});
 
-	
+	$app->put('/enable-type/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->enableType($id);
+		if($result){
+			return json_encode($result);
+		}
+	});
+
 	$app->put('/enable-agent/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$result = $query->enableAgent($id);
