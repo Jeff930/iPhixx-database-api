@@ -396,7 +396,11 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function enableType($id){
+		$sql = "UPDATE `device_type` SET `active`='1' WHERE `devtype_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 
 	public function disableModel($id){
 		$sql = "UPDATE `device_models` SET `active`='2'  WHERE `devicemodel_id` = {$id}";
