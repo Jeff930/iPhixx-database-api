@@ -390,6 +390,13 @@ class DBQuery
 		return $result;
 	}
 
+	public function enableNetwork($id){
+		$sql = "UPDATE `carriers` SET `active`='1'  WHERE `devicemodel_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
+	
 
 	public function disableModel($id){
 		$sql = "UPDATE `device_models` SET `active`='2'  WHERE `devicemodel_id` = {$id}";
