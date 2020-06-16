@@ -384,7 +384,12 @@ class DBQuery
 		return $result;
 	}
 
-	
+	public function enableBrand($id){
+		$sql = "UPDATE `device_brands` SET `active`='1'  WHERE `devicebrand_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 
 	public function disableModel($id){
 		$sql = "UPDATE `device_models` SET `active`='2'  WHERE `devicemodel_id` = {$id}";
