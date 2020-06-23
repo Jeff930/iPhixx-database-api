@@ -585,6 +585,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getTaxList(){	
+		$sql = "SELECT * FROM `tax`";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
 	public function getBrandList(){	
 		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands`";
 		$result = mysqli_query($this->db,$sql);
