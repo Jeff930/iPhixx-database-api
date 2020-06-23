@@ -66,6 +66,11 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->get('/list-taxes', function (Request $request, Response $response, array $args) use($query) {
+		$result = $query->getTaxList();		
+		return json_encode($result);
+	});
+
 	$app->get('/list-brands', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getBrandList();		
 		return json_encode($result);
