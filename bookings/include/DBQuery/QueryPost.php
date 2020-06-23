@@ -50,6 +50,13 @@ class DBQuery
 		return $result;
 	}
 
+	public function applyTax($id , $body){
+		$sql = "UPDATE `invoices` SET `tax_id` = '{$body["tax_id"]}' WHERE `invoices`.`invoice_no` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+
+		return $result;
+	}
+
 	public function deleteTax($id){
 		$sql = "DELETE FROM `tax` WHERE `tax`.`tax_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
@@ -92,7 +99,6 @@ class DBQuery
 	//End of Tax
 
 	public function getCustomers(){
-		
 		$sql = "SELECT * FROM `customers`";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
