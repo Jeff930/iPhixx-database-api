@@ -385,49 +385,49 @@ class DBQuery
 	}
 
 	public function enableModel($id){
-		$sql = "UPDATE `device_models` SET `active`='1'  WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `device_models` SET `active`= 1  WHERE `devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function enableBrand($id){
-		$sql = "UPDATE `device_brands` SET `active`='1'  WHERE `devicebrand_id` = {$id}";
+		$sql = "UPDATE `device_brands` SET `active`= 1  WHERE `devicebrand_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function enableNetwork($id){
-		$sql = "UPDATE `carriers` SET `active`='1'  WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `carriers` SET `active`= 1  WHERE `carrier_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function enableType($id){
-		$sql = "UPDATE `device_type` SET `active`='1' WHERE `devtype_id` = {$id}";
+		$sql = "UPDATE `device_type` SET `active`= 1 WHERE `devtype_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableModel($id){
-		$sql = "UPDATE `device_models` SET `active`='2'  WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `device_models` SET `active`= 0  WHERE `devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableBrand($id){
-		$sql = "UPDATE `device_brands` SET `active`='2'  WHERE `devicebrand_id` = {$id}";
+		$sql = "UPDATE `device_brands` SET `active`= 0  WHERE `devicebrand_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableNetwork($id){
-		$sql = "UPDATE `carriers` SET `active`='2' WHERE `devicemodel_id` = {$id}";
+		$sql = "UPDATE `carriers` SET `active`= 0 WHERE `carrier_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
 
 	public function disableType($id){
-		$sql = "UPDATE `device_type` SET `active`='2' WHERE `devtype_id` = {$id}";
+		$sql = "UPDATE `device_type` SET `active`= 0 WHERE `devtype_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
 	}
