@@ -76,6 +76,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/list-brands-by-device/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->getBrandsByDevice($body);	
+		return json_encode($result);
+	});
+
 	$app->get('/list-devtypes', function (Request $request, Response $response, array $args) use($query) {
 		$result = $query->getDevtypeList();		
 		return json_encode($result);
