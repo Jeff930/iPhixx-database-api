@@ -241,7 +241,7 @@ class DBQuery
 	public function addBrandImage($body){
 		$dir = '../../../images/brands/';
 		if ( !file_exists($dir) ) {
-     		mkdir ($dir, 0744);
+     		mkdir ($dir, 0777);
  		}
 		$imagePath=$dir.$body['device_brand'].'.jpg';
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
@@ -265,7 +265,7 @@ class DBQuery
 	public function addDevtypeImage($body){
 		$dir = '../../../images/devtypes/';
 		if ( !file_exists($dir) ) {
-     		mkdir ($dir, 0744);
+     		mkdir ($dir, 0777);
  		}
 		$imagePath=$dir.$body['type'].'.jpg';
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
@@ -289,7 +289,7 @@ class DBQuery
 	public function addNetworkImage($body){
 		$dir = '../../../images/networks/';
 		if ( !file_exists($dir) ) {
-     		mkdir ($dir, 0744);
+     		mkdir ($dir, 0777);
  		}
 		$imagePath=$dir.$body['carrier_name'].'.jpg';
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
@@ -605,6 +605,13 @@ class DBQuery
 		return $row;
 	}
 
+	public function getBrandsByDevice($body){	
+		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands` WHERE devtype_id = '{$body['devtype_id']}'";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
+		return $row;
+	}
+
 	public function getDevtypeList(){	
 		$sql = "SELECT `devtype_id`,`type` FROM `device_type`";
 		$result = mysqli_query($this->db,$sql);
@@ -853,7 +860,6 @@ class DBQuery
 	}
 
 	public function  updatePaymentStatus($id){
-
 		$sql = "UPDATE `bookings` INNER JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` SET `bookings`.`invoicestatus_no` = 2 , `invoices`.`settled_Timestamp` = CURRENT_TIMESTAMP WHERE `invoices`.`invoice_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		return $result;
@@ -1123,7 +1129,7 @@ class DBQuery
 	public function addModelImage($body){
 		$dir = '../../../images/models/'.$body['device_brand'].'/';
 		if ( !file_exists($dir) ) {
-     		mkdir ($dir, 0744);
+     		mkdir ($dir, 0777);
  		}
 		$imagePath=$dir.$body['model_name'].'.jpg';
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $body['image']));
