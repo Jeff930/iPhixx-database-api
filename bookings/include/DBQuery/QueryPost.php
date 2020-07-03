@@ -286,6 +286,20 @@ class DBQuery
 		return $row;
 	}
 
+	public function addLocation($body){
+		$sql = "INSERT INTO `locations` (`location_id`, `location_name`,`location_email`,`main_contact`,`created_at`,`address`,`active`) VALUES (NULL, '{$body["location_name"]}','{$body["location_email"]}','{$body["main_contact"]}', CURRENT_TIMESTAMP ,'{$body["address"]}','0')";
+		$result = mysqli_query($this->db, $sql);
+		if ($result) {
+    		$row["id"] = mysqli_insert_id($this->db);
+    		$sql = "SELECT * from `locations` WHERE `location_id` = {$row['id']}";
+			$result = mysqli_query($this->db,$sql);
+			$row=mysqli_fetch_assoc($result);
+			} else {
+   				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
+			}
+		return $row;
+	}
+
 	public function addNetworkImage($body){
 		$dir = '../../../images/networks/';
 		if ( !file_exists($dir) ) {
@@ -569,13 +583,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `location_id`,`location_name`,`company_name`,`location_email`, `main_contact`,`created_at` FROM `locations` LIMIT 15 OFFSET {$offset}";
+		$sql_count = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations` LIMIT 15 OFFSET {$offset}";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `location_id`,`location_name`,`company_name`,`location_email`, `main_contact`,`created_at` FROM `locations` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations` LIMIT 15 OFFSET {$offset}";
 
 		$result = mysqli_query($this->db,$sql);
 		$row['locations']=mysqli_fetch_all($result,MYSQLI_ASSOC);
