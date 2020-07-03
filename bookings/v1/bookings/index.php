@@ -296,6 +296,12 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
+	$app->post('/add-location/', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addLocation($body);	
+		return json_encode($result);
+	});	
+
 	$app->post('/add-model/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addModel($body);	
