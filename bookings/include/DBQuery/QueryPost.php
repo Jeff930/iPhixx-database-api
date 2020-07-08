@@ -554,7 +554,7 @@ class DBQuery
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
 							LEFT JOIN  `lead_statuses` ON `bookings`.`leadstatus_no` = `lead_statuses`.`leadstatus_no`
-							WHERE `lead_status` != '3' LIMIT 15 OFFSET {$offset}";
+							WHERE `lead_status` != '3'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
