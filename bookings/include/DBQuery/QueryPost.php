@@ -225,7 +225,7 @@ class DBQuery
 	}
 
 	public function addBrand($body){
-		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`,`active`) VALUES (NULL, '{$body["brand_name"]}','1')";
+		$sql = "INSERT INTO `device_brands` (`devicebrand_id`, `device_brand`, `devtype_id`, `active`) VALUES (NULL, '{$body["brand_name"]}','{$body["devtype_id"]}','1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -478,12 +478,13 @@ class DBQuery
 	}
 
 	public function getInvoice($id) {
-		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone` FROM `bookings` 
+		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone`,`customers`.`altPhone`,`tax`.`tax_value`,`tax`.`tax_name` FROM `bookings` 
 							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
 							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
 							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
 							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
                             LEFT JOIN  `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no`
+                            LEFT JOIN `tax` ON `invoices`.`tax_id` = `tax`.`tax_id`
                             WHERE `invoices`.`invoice_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
@@ -492,11 +493,11 @@ class DBQuery
 
 	public function getLogistic($id) {
 		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`leadstatus_no`,`bookings`.`ticketstatus_no`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`customer_id`,`booking_timestamps`.`created_at`,`booking_timestamps`.`transfer_timestamp`,`booking_timestamps`.`cancelled_timestamp` AS lost_timestamp,`tickets`.`ticket_no`, `tickets`.`created_at` AS ticket_create, `tickets`.`outbound_timestamp`, `tickets`.`ongoing_timestamp`, `tickets`.`inbound_timestamp`, `tickets`.`resolved_timestamp`, `tickets`.`cancelled_timestamp` FROM `bookings` 
-							LEFT JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
-							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
-							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
-							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
-                            LEFT JOIN  `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
+							INNER JOIN `booking_timestamps` ON `bookings`.`timestamp_no` = `booking_timestamps`.`timestamp_no` 
+							INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
+							INNER JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
+							INNER JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
+                           	INNER JOIN  `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no`
                             WHERE `bookings`.`bookings_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
@@ -504,12 +505,15 @@ class DBQuery
 	}
 
 	public function getTicket($id) {
-		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`tickets`.`outbound_timestamp`,`tickets`.`ongoing_timestamp`,`tickets`.`inbound_timestamp`,`tickets`.`resolved_timestamp` FROM `bookings` 
-							LEFT JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` 
-							LEFT JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no` 
-							LEFT JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
-							LEFT JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
-							LEFT JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
+		$sql = "SELECT `bookings`.`bookings_id`,`bookings`.`total_price`,`customers`.`customer_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location_id`, `device_brands`.`device_brand` , `device_models`.`model_name`,`customers`.`email`,`customers`.`customer_id`,`customers`.`phone`,`tickets`.`ticket_no`,`ticket_statuses`.`ticket_status`,`tickets`.`created_at`,`tickets`.`outbound_timestamp`,`tickets`.`ongoing_timestamp`,`tickets`.`inbound_timestamp`,`tickets`.`resolved_timestamp`,`tickets`.`cancelled_timestamp`,`color`.`color_name`,`carriers`.`carrier_name`,`invoices`.`invoice_no` FROM `bookings` 
+							INNER JOIN `tickets` ON `bookings`.`ticket_no` = `tickets`.`ticket_no` 
+							INNER JOIN `ticket_statuses` ON `bookings`.`ticketstatus_no` = `ticket_statuses`.`ticketstatus_no` 
+							INNER JOIN `color` ON `bookings`.`color_no` = `color`.`color_no` 
+							INNER JOIN `carriers` ON `bookings`.`carrier_no` = `carriers`.`carrier_no` 
+							INNER JOIN `invoices` ON `bookings`.`invoice_no` = `invoices`.`invoice_no` 
+							INNER JOIN `customers` ON `bookings`.`customer_id` = `customers`.`customer_id` 
+							INNER JOIN  `device_brands` ON `bookings`.`devicebrand_id` = `device_brands`.`devicebrand_id` 
+							INNER JOIN  `device_models` ON `bookings`.`devicemodel_id` = `device_models`.`devicemodel_id`
                             WHERE `tickets`.`ticket_no` = {$id}";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
@@ -613,14 +617,14 @@ class DBQuery
 	}
 
 	public function getBrandList(){	
-		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands`";
+		$sql = "SELECT `devicebrand_id`,`device_brand`,`devtype_id` FROM `device_brands`";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
 	}
 
 	public function getBrandsByDevice($body){	
-		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands` WHERE devtype_id = '{$body['devtype_id']}'";
+		$sql = "SELECT `devicebrand_id`,`device_brand`,`devtype_id` FROM `device_brands` WHERE devtype_id = '{$body['devtype_id']}'";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_all($result,MYSQLI_ASSOC);
 		return $row;
@@ -761,7 +765,7 @@ class DBQuery
 	}
 
 	public function getBrand($id){
-		$sql = "SELECT `devicebrand_id`,`device_brand` FROM `device_brands` WHERE `device_brands`.`devicebrand_id` = {$id} ";
+		$sql = "SELECT `devicebrand_id`,`device_brand`,`devtype_id` FROM `device_brands` WHERE `device_brands`.`devicebrand_id` = {$id} ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
