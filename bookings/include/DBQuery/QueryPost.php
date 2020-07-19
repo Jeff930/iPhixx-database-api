@@ -422,6 +422,12 @@ class DBQuery
 		return $result;
 	}
 
+	public function enableLocation($id){
+		$sql = "UPDATE `locations` SET `active`= 1 WHERE `location_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	public function disableModel($id){
 		$sql = "UPDATE `device_models` SET `active`= 0  WHERE `devicemodel_id` = {$id}";
 		$result = mysqli_query($this->db,$sql);
@@ -446,6 +452,11 @@ class DBQuery
 		return $result;
 	}
 
+	public function disableLocation($id){
+		$sql = "UPDATE `locations` SET `active`= 0  WHERE `location_id` = {$id}";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
 	
 	public function getBookings() {
 		$sql = "SELECT `bookings`.`bookings_id`,`customers`.`customer_fname`, `customers`.`customer_lname`,`customers`.`location`, `agents`.`agent_lname`,`agents`.`agent_fname`,`agents`.`agent_lname`,`booking_timestamps`.`created_at`, `phone_brands`.`phone_brand` , `device_models`.`model_name`,`lead_statuses`.`lead_status` FROM 
@@ -587,13 +598,13 @@ class DBQuery
 		$offset = ($page - 1)  * $limit;
 		$start = $offset + 1;
 
-		$sql_count = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations`";
+		$sql_count = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations` WHERE `active` = '1'";
 		$result_count = mysqli_query($this->db,$sql_count);
 	  	$total=mysqli_num_rows($result_count);
 		$row["total_page"] = ceil($total / $limit);
 		
 
-		$sql = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations` LIMIT 15 OFFSET {$offset}";
+		$sql = "SELECT `location_id`,`location_name`,`active`,`location_email`, `main_contact`,`address`,`created_at` FROM `locations` WHERE `active` = '1' LIMIT 15 OFFSET {$offset}";
 
 		$result = mysqli_query($this->db,$sql);
 		$row['locations']=mysqli_fetch_all($result,MYSQLI_ASSOC);
