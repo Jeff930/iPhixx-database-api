@@ -27,10 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-
 $query = new DBQuery();
 $app = new \Slim\App;
-
 
 
 //Latest post// Recommended post -- sort post based on previous views // 
@@ -580,10 +578,30 @@ $app = new \Slim\App;
 		return json_encode($body);
 	});
 
+
+	$app->put('/deactivate-location/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->disableLocation($id);
+		return json_encode($body);
+	});
+
+	$app->put('/activate-location/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$result = $query->enableLocation($id);
+		return json_encode($body);
+	});
+
 	$app->put('/update-stock/{id}',function(Request $request, Response $response, array $args) use($query){
 		$id = $args['id'];	
 		$body = $request->getParsedBody();
 		$result = $query->updateStock($id,$body);
+		return json_encode($body);
+	});
+
+	$app->put('/change-password/{id}',function(Request $request, Response $response, array $args) use($query){
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->changePassword($id,$body);
 		return json_encode($body);
 	});
 
