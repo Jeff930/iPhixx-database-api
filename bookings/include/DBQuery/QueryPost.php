@@ -192,10 +192,10 @@ class DBQuery
 
 	public function logInAgent($body){
 		
-		$password = md5($body["password"]);
+		//$password = md5($body["password"]);
 
 		$sql = "SELECT `agent_id`,`agent_username`,`location_id` FROM `agents` where `agent_email` = '{$body["email"]}' 
-		and `agent_password` = '{$password}'";
+		and `agent_password` = '{$body["password"]}'";
 		
 		$result = mysqli_query($this->db,$sql);
 		$row['agent']=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -214,10 +214,67 @@ class DBQuery
 	}
 
 	public function addAgent($body){
-		$sql = "INSERT INTO `agents` (`agent_id`, `agent_fname`, `agent_lname` , `agent_username`, `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`, `location_id`, `agent_status`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["agent_username"]}', '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '0930',CURRENT_TIMESTAMP, '{$body["location_id"]}',1)";
+		$password = mt_rand(100000, 999999);
+		$encrypt = md5($password);
+		$sql = "INSERT INTO `agents` (`agent_id`, `agent_fname`, `agent_lname` , `agent_username`, `agent_email`, `agent_phone`,`agent_address`, `agent_password`, `agent_created_at`, `location_id`, `agent_status`) VALUES (NULL, '{$body["agent_fname"]}', '{$body["agent_lname"]}' , '{$body["agent_username"]}', '{$body["email"]}', '{$body["phone"]}','{$body["address"]}', '{$encrypt}',CURRENT_TIMESTAMP, '{$body["location_id"]}',1)";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
+    		 $mail = new PHPMailer(true);   
+
+    		try{
+
+    			//Server settings
+    			$mail->SMTPDebug = 0;                                 // Enable verbose debug output
+    			$mail->isSMTP();                                      // Set mailer to use SMTP
+    			$mail->Host = 'admin.iphixx.com';  // Specify main and backup SMTP servers
+    			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+    			$mail->Username = 'iphixxmail@admin.iphixx.com';                 // SMTP username
+    			$mail->Password = '{Ae,E$R};!M)';                           // SMTP password
+    			$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+   				$mail->Port =  465;                                    // TCP port to connect to
+    //Recipients
+    $mail->setFrom('iphixxmail@admin.iphixx.com',"iPhixx Phone Repair Services");
+    $mail->addBCC($body["email"]);      // Add a recipient
+    
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    $mail->addReplyTo('iphixxmail@admin.iphixx.com', 'Information');
+   
+
+    // //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    $mail->DKIM_domain = "admin.iphixx.com";
+    $mail->DKIM_private = "admin.iphixx.com.private"; //path to file on the disk.
+    $mail->DKIM_selector = "phpmailer";// change this to whatever you set during step 2
+    $mail->DKIM_passphrase = "";
+    $mail->DKIM_identifier = $mail->From;
+    $mail->DKIM_extraHeaders = ['List-Unsubscribe', 'List-Help'];
+
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+
+    		$mail->Subject = 'iPhixx Agent Confirmation';
+    			$mail->Body    = "Hi ".$body['agent_username']."! This email has been registered for your agent account in iPhixx. Your temporary password is ".$password.". Please change your temporary password immediately.";
+    			$mail->AltBody = "Hi ".$body['agent_username']."! This email has been registered for your agent account in iPhixx. Your temporary password is ".$password.". Please change your temporary password immediately.";   
+    //$mail->send();
+
+    $mail->send();
+
+   	if ($result) {
+    	$row["id"] = mysqli_insert_id($this->db);
+    	return $row["id"];
+	} 
+	else {
+   		 return "Error: " . $sql . "<br>" . mysqli_error($this->db);
+	}
+} catch (Exception $e) {
+    return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+
 			} else {
    				 echo "Error: " . $sql . "<br>" . mysqli_error($this->db);
 			}
@@ -287,7 +344,7 @@ class DBQuery
 	}
 
 	public function addLocation($body){
-		$sql = "INSERT INTO `locations` (`location_id`, `location_name`,`location_email`,`main_contact`,`created_at`,`address`,`active`) VALUES (NULL, '{$body["location_name"]}','{$body["location_email"]}','{$body["main_contact"]}', CURRENT_TIMESTAMP ,'{$body["address"]}','0')";
+		$sql = "INSERT INTO `locations` (`location_id`, `location_name`,`location_email`,`main_contact`,`created_at`,`address`,`active`) VALUES (NULL, '{$body["location_name"]}','{$body["location_email"]}','{$body["main_contact"]}', CURRENT_TIMESTAMP ,'{$body["address"]}','1')";
 		$result = mysqli_query($this->db, $sql);
 		if ($result) {
     		$row["id"] = mysqli_insert_id($this->db);
@@ -733,15 +790,28 @@ class DBQuery
 		return $row;
 	}
 
+	public function checkPassword($id,$body){
+		$sql = "SELECT `agents`.`agent_id` FROM `agents` WHERE `agents`.`agent_id` = '{$id}' AND `agents`.`agent_password` = '{$body['current_password']}'";
+		$result = mysqli_query($this->db,$sql);
+		$row=mysqli_fetch_assoc($result);
+		return $row;
+	}
+
+	public function changePassword($id,$body){
+		$sql = "UPDATE `agents` SET `agent_password` = '{$body['new_password']}' WHERE `agent_id` = '{$id}'";
+		$result = mysqli_query($this->db,$sql);
+		return $result;
+	}
+
 	public function checkLeadStatus($id){
-		$sql = "SELECT `bookings`.`leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$sql = "SELECT `bookings`.`leadstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '{$id}' ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
 	}
 
 	public function checkRepairStatus($id){
-		$sql = "SELECT `bookings`.`repairstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = {$id} ";
+		$sql = "SELECT `bookings`.`repairstatus_no` FROM `bookings` WHERE `bookings`.`bookings_id` = '{$id}' ";
 		$result = mysqli_query($this->db,$sql);
 		$row=mysqli_fetch_assoc($result);
 		return $row;
