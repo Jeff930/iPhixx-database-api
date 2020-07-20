@@ -127,6 +127,15 @@ $app = new \Slim\App;
 		}
 	});	
 
+	$app->post('/add-location', function (Request $request, Response $response, array $args) use($query) {
+		$body = $request->getParsedBody();
+		$result = $query->addLocation($body);	
+		if($result){
+			return json_encode($body);
+		}
+	});	
+
+
 	$app->post('/upload-devtype-image',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->uploadDevtypeImage($body);	
@@ -294,12 +303,7 @@ $app = new \Slim\App;
 		return json_encode($result);
 	});
 
-	$app->post('/add-location/', function (Request $request, Response $response, array $args) use($query) {
-		$body = $request->getParsedBody();
-		$result = $query->addLocation($body);	
-		return json_encode($result);
-	});	
-
+	
 	$app->post('/add-model/', function (Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->addModel($body);	
@@ -521,6 +525,15 @@ $app = new \Slim\App;
 	$app->post('/models/',function(Request $request, Response $response, array $args) use($query) {
 		$body = $request->getParsedBody();
 		$result = $query->getModels($body);	
+		if($result){
+			return json_encode($result);
+		}
+	});
+
+	$app->post('/check-password/{id}',function(Request $request, Response $response, array $args) use($query) {
+		$id = $args['id'];	
+		$body = $request->getParsedBody();
+		$result = $query->checkPassword($id,$body);
 		if($result){
 			return json_encode($result);
 		}
